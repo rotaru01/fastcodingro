@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #18181b;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes bounce-dot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-bounce-1 { animation: bounce-dot 0.6s ease-in-out infinite; }
+.animate-bounce-2 { animation: bounce-dot 0.6s ease-in-out infinite 0.1s; }
+.animate-bounce-3 { animation: bounce-dot 0.6s ease-in-out infinite 0.2s; }
