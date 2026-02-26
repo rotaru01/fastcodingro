@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanbox.ro — Soluții Vizuale Profesionale | Wireframe Variant L</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0D1B2A;
+  color: #FFFFFF;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-hero: #0D1B2A;
+  --bg-alt: #1A2B4A;
+  --accent: #04B494;
+  --accent2: #283868;
+  --grad-hero: linear-gradient(135deg, #0D1B2A 0%, #1A2B4A 50%, #2D4A7A 100%);
+  --grad-accent: linear-gradient(90deg, #04B494, #039B7E);
+  --text: #FFFFFF;
+  --text-sec: #94A3B8;
+  --glow: rgba(4, 180, 148, 0.3);
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.1);
+  --container: 1200px;
+}
+
+/* ===== UTILITY ===== */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.section-sub {
+  color: var(--text-sec);
+  font-size: 1.05rem;
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ===== DECORATIVE PARTICLES ===== */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(4, 180, 148, 0.25);
+  animation: float 8s infinite ease-in-out;
+}
+.particles span:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; animation-duration: 7s; }
+.particles span:nth-child(2) { top: 25%; left: 85%; animation-delay: 1.2s; animation-duration: 9s; width: 4px; height: 4px; }
+.particles span:nth-child(3) { top: 60%; left: 15%; animation-delay: 2.5s; animation-duration: 6s; }
+.particles span:nth-child(4) { top: 75%; left: 70%; animation-delay: 0.8s; animation-duration: 10s; width: 2px; height: 2px; }
+.particles span:nth-child(5) { top: 40%; left: 50%; animation-delay: 3s; animation-duration: 8s; background: rgba(59, 130, 246, 0.2); }
+.particles span:nth-child(6) { top: 88%; left: 30%; animation-delay: 1.8s; animation-duration: 7s; width: 5px; height: 5px; background: rgba(4, 180, 148, 0.15); }
+.particles span:nth-child(7) { top: 10%; left: 60%; animation-delay: 4s; animation-duration: 11s; }
+.particles span:nth-child(8) { top: 50%; left: 92%; animation-delay: 2s; animation-duration: 9s; width: 4px; height: 4px; background: rgba(59, 130, 246, 0.15); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+  25% { transform: translateY(-20px) translateX(10px) scale(1.3); opacity: 0.8; }
+  50% { transform: translateY(-10px) translateX(-15px) scale(0.8); opacity: 0.5; }
+  75% { transform: translateY(-30px) translateX(5px) scale(1.1); opacity: 0.9; }
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+.navbar.scrolled {
+  background: rgba(13, 27, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--glass-border);
+}
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+.nav-logo .logo-accent {
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-sec);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--grad-accent);
+  transition: width 0.3s;
+  border-radius: 2px;
+}
+.nav-links a:hover { color: #fff; }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--grad-accent) !important;
+  color: #fff !important;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--glow);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 1001;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--grad-hero);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  top: 20%;
+  right: 10%;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  padding: 0 24px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease;
+}
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--glow);
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 5px var(--glow); }
+  50% { box-shadow: 0 0 20px var(--glow), 0 0 40px rgba(4, 180, 148, 0.15); }
+}
+.hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+.hero-title .highlight {
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-sec);
+  margin-bottom: 40px;
+  line-height: 1.7;
+  font-weight: 400;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+.hero-subtitle .sep {
+  color: var(--accent);
+  margin: 0 4px;
+  opacity: 0.6;
+}
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+.btn-primary {
+  background: var(--grad-accent);
+  color: #fff;
+  padding: 16px 36px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px var(--glow);
+}
+.btn-outline {
+  color: #fff;
+  padding: 16px 36px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2px solid var(--glass-border);
+  background: var(--glass-bg);
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  animation: bounce 2s infinite;
+  opacity: 0.6;
+}
+.scroll-indicator svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--text-sec);
+  stroke-width: 2;
+  fill: none;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-8px); }
+  60% { transform: translateX(-50%) translateY(-4px); }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== STATS BAR ===== */
+.stats {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 48px 0;
+  position: relative;
+}
+.stats .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.stat-item {
+  text-align: center;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 50px;
+  background: var(--glass-border);
+}
+.stat-number {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  color: var(--text-sec);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== SERVICII ===== */
+.servicii {
+  background: var(--bg-hero);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.servicii .section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.servicii .section-sub {
+  margin: 0 auto;
+}
+.servicii-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.servicii-grid .serv-card:nth-child(4),
+.servicii-grid .serv-card:nth-child(5) {
+  /* These two will center in row 2 */
+}
+/* Center the last row (2 items in a 3-col grid) */
+.servicii-grid {
+  justify-items: center;
+}
+/* For 3+2 centering */
+.servicii-row-2 {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+.servicii-row-2 .serv-card {
+  flex: 0 1 calc(33.333% - 16px);
+  max-width: 400px;
+}
+
+.serv-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 36px 28px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.serv-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(4,180,148,0) 0%, rgba(4,180,148,0.3) 50%, rgba(40,56,104,0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.serv-card:hover::before { opacity: 1; }
+.serv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(4, 180, 148, 0.12);
+  background: rgba(255,255,255,0.08);
+}
+.serv-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(4, 180, 148, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  transition: all 0.3s;
+}
+.serv-card:hover .serv-icon {
+  background: var(--grad-accent);
+  box-shadow: 0 8px 20px var(--glow);
+}
+.serv-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+  transition: stroke 0.3s;
+}
+.serv-card:hover .serv-icon svg { stroke: #fff; }
+.serv-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.serv-desc {
+  color: var(--text-sec);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.serv-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.3s;
+}
+.serv-link:hover { gap: 12px; }
+
+/* ===== PORTOFOLIU ===== */
+.portofoliu {
+  background: var(--bg-alt);
+  padding: 100px 0;
+  position: relative;
+}
+.portofoliu .section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.portofoliu .section-sub {
+  margin: 0 auto;
+}
+.porto-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.porto-card {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #1a2744 0%, #243656 100%);
+  cursor: pointer;
+  group: true;
+}
+.porto-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  opacity: 0.15;
+}
+.porto-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0.3) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  transition: all 0.4s;
+}
+.porto-card:hover .porto-overlay {
+  background: linear-gradient(to top, rgba(13,27,42,0.98) 0%, rgba(13,27,42,0.6) 50%, rgba(13,27,42,0.3) 100%);
+}
+.porto-tag {
+  display: inline-block;
+  background: rgba(4, 180, 148, 0.2);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+.porto-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.porto-meta {
+  color: var(--text-sec);
+  font-size: 0.85rem;
+}
+.porto-btn {
+  margin-top: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s;
+}
+.porto-card:hover .porto-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+.porto-btn a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== CLIENTI ===== */
+.clienti {
+  background: var(--bg-hero);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+.clienti .section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.clienti .section-sub {
+  margin: 0 auto;
+}
+.logo-strip {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 0;
+  margin-bottom: 48px;
+}
+.logo-strip::before,
+.logo-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+}
+.logo-strip::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-hero), transparent);
+}
+.logo-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-hero), transparent);
+}
+.logo-track {
+  display: flex;
+  gap: 60px;
+  animation: scroll-logos 25s linear infinite;
+  width: fit-content;
+}
+.logo-track:hover { animation-play-state: paused; }
+.logo-item {
+  flex-shrink: 0;
+  width: 140px;
+  height: 60px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-sec);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.logo-item:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+}
+@keyframes scroll-logos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-140px * 6 - 60px * 6)); }
+}
+.badges-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.badge-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.badge-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(4,180,148,0.1);
+}
+.badge-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(4,180,148,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.badge-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+.badge-text {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* ===== TESTIMONIAL ===== */
+.testimonial {
+  background: var(--bg-alt);
+  padding: 100px 0;
+  position: relative;
+}
+.testimonial-card {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 52px 48px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+}
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(4,180,148,0.2) 0%, transparent 50%, rgba(40,56,104,0.2) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.quote-mark {
+  font-size: 4rem;
+  line-height: 1;
+  background: var(--grad-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  font-family: Georgia, serif;
+}
+.quote-text {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.quote-stars {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.quote-stars svg {
+  width: 20px;
+  height: 20px;
+  fill: #039B7E;
+}
+.quote-author {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.quote-role {
+  color: var(--text-sec);
+  font-size: 0.85rem;
+}
+
+/* ===== CTA BANNER ===== */
+.cta-banner {
+  position: relative;
+  padding: 80px 0;
+  background: var(--grad-accent);
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  top: -200px;
+  right: -100px;
+  pointer-events: none;
+}
+.cta-banner::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  bottom: -150px;
+  left: -50px;
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.cta-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.cta-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 36px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+.btn-dark {
+  background: var(--bg-hero);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+.btn-dark:hover {
+  background: #0a1525;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #070f1a;
+  padding: 80px 0 0;
+  border-top: 1px solid var(--glass-border);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand .nav-logo {
+  margin-bottom: 16px;
+  display: block;
+}
+.footer-brand p {
+  color: var(--text-sec);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.footer-socials a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.footer-socials a svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-sec);
+  transition: fill 0.3s;
+}
+.footer-socials a:hover svg { fill: #fff; }
+.footer-col h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+.footer-col ul a {
+  color: var(--text-sec);
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-col ul a:hover {
+  color: var(--accent);
+  padding-left: 4px;
+}
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--text-sec);
+  font-size: 0.9rem;
+}
+.footer-contact-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.footer-bottom {
+  border-top: 1px solid var(--glass-border);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-bottom p {
+  color: var(--text-sec);
+  font-size: 0.82rem;
+}
+.footer-bottom-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-bottom-links a {
+  color: var(--text-sec);
+  font-size: 0.82rem;
+  transition: color 0.3s;
+}
+.footer-bottom-links a:hover { color: var(--accent); }
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: rgba(13, 27, 42, 0.98);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  z-index: 999;
+  padding: 80px 32px 32px;
+  transition: right 0.4s ease;
+  border-left: 1px solid var(--glass-border);
+}
+.mobile-menu.active { right: 0; }
+.mobile-menu a {
+  display: block;
+  padding: 14px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-sec);
+  border-bottom: 1px solid var(--glass-border);
+  transition: color 0.3s, padding-left 0.3s;
+}
+.mobile-menu a:hover {
+  color: var(--accent);
+  padding-left: 8px;
+}
+.mobile-menu .nav-cta {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 12px;
+}
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
+}
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .servicii-grid { grid-template-columns: repeat(2, 1fr); }
+  .servicii-row-2 { flex-direction: column; align-items: center; }
+  .servicii-row-2 .serv-card { flex: 0 1 100%; max-width: 100%; width: 100%; }
+  .porto-grid { grid-template-columns: repeat(2, 1fr); }
+  .porto-grid .porto-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-title { font-size: clamp(2rem, 7vw, 3rem); }
+  .hero-badge { font-size: 0.7rem; padding: 6px 14px; }
+  .stats .container { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .stat-item:nth-child(2)::after { display: none; }
+  .servicii-grid { grid-template-columns: 1fr; }
+  .servicii-row-2 .serv-card { max-width: 100%; }
+  .porto-grid { grid-template-columns: 1fr; }
+  .porto-grid .porto-card:last-child { max-width: 100%; }
+  .testimonial-card { padding: 36px 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .badges-row { flex-direction: column; align-items: stretch; }
+  .badge-item { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+  .stats .container { grid-template-columns: 1fr; }
+  .stat-item::after { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">scan<span class="logo-accent">box</span></a>
+    <div class="nav-links">
+      <a href="#servicii">Servicii</a>
+      <a href="#portofoliu">Portofoliu</a>
+      <a href="#clienti">Clienți</a>
+      <a href="#testimonial">Recenzii</a>
+      <a href="#contact" class="nav-cta">Cere Ofertă</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Meniu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicii">Servicii</a>
+  <a href="#portofoliu">Portofoliu</a>
+  <a href="#clienti">Clienți</a>
+  <a href="#testimonial">Recenzii</a>
+  <a href="#contact" class="nav-cta">Cere Ofertă</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Reseller Oficial Matterport Romania</div>
+    <h1 class="hero-title">
+      Soluții Vizuale <span class="highlight">Profesionale</span> pentru Afacerea Ta
+    </h1>
+    <p class="hero-subtitle">
+      Tur Virtual 3D Matterport <span class="sep">|</span> Fotografie <span class="sep">|</span> Videografie <span class="sep">|</span> Social Media Management
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">
+        Cere Ofertă Gratuită
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#servicii" class="btn-outline">
+        Vezi Serviciile
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<!-- ===== STATS BAR ===== -->
+<section class="stats">
+  <div class="container">
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="547">0</div>
+      <div class="stat-label">Proiecte Vizuale</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="358">0</div>
+      <div class="stat-label">Tururi Virtuale 3D</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="102000" data-suffix="" data-prefix="">0</div>
+      <div class="stat-label">mp Scanați</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="5">0</div>
+      <div class="stat-label">Ani Experiență</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICII ===== -->
+<section class="servicii" id="servicii">
+  <div class="particles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Servicii</div>
+      <h2 class="section-title">Soluții Complete pentru Prezență Vizuală</h2>
+      <p class="section-sub">De la tururi virtuale 3D la conținut social media, oferim tot ce ai nevoie pentru a-ți prezenta afacerea la un alt nivel.</p>
+    </div>
+
+    <div class="servicii-grid">
+      <!-- Card 1 -->
+      <div class="serv-card reveal">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3 class="serv-title">Tur Virtual 3D Matterport</h3>
+        <p class="serv-desc">Scanări profesionale cu camera Matterport Pro3. Tururi virtuale imersive 360° pentru imobiliare, HoReCa, retail și spații comerciale.</p>
+        <a href="#" class="serv-link">Află mai mult <span>&rarr;</span></a>
+      </div>
+      <!-- Card 2 -->
+      <div class="serv-card reveal">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <h3 class="serv-title">Fotografie Profesională</h3>
+        <p class="serv-desc">Fotografie de interior, exterior, aeriană și de produs. Echipament profesional și editare avansată pentru rezultate impecabile.</p>
+        <a href="#" class="serv-link">Află mai mult <span>&rarr;</span></a>
+      </div>
+      <!-- Card 3 -->
+      <div class="serv-card reveal">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <h3 class="serv-title">Videografie & Drone</h3>
+        <p class="serv-desc">Producție video profesională, filmări aeriene cu drone DJI, clipuri de prezentare și conținut video pentru social media.</p>
+        <a href="#" class="serv-link">Află mai mult <span>&rarr;</span></a>
+      </div>
+    </div>
+    <div class="servicii-row-2">
+      <!-- Card 4 -->
+      <div class="serv-card reveal">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <h3 class="serv-title">Randare 3D & Plan Izometric</h3>
+        <p class="serv-desc">Planuri de etaj interactive, randări 3D fotorealistice și modele izometrice pentru proiecte imobiliare și arhitecturale.</p>
+        <a href="#" class="serv-link">Află mai mult <span>&rarr;</span></a>
+      </div>
+      <!-- Card 5 -->
+      <div class="serv-card reveal">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3 class="serv-title">Social Media Management</h3>
+        <p class="serv-desc">Strategie de conținut, creare postări, gestionare comunitate și campanii publicitare pe Facebook, Instagram și TikTok.</p>
+        <a href="#" class="serv-link">Află mai mult <span>&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTOFOLIU ===== -->
+<section class="portofoliu" id="portofoliu">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Portofoliu</div>
+      <h2 class="section-title">Proiecte Recente</h2>
+      <p class="section-sub">Descoperă cum am transformat spațiile clienților noștri în experiențe vizuale memorabile.</p>
+    </div>
+
+    <div class="porto-grid">
+      <!-- Project 1 -->
+      <div class="porto-card reveal">
+        <div class="porto-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="porto-overlay">
+          <span class="porto-tag">Tur Virtual 3D</span>
+          <h3 class="porto-title">Hotel Boutique</h3>
+          <p class="porto-meta">Matterport Pro3 &bull; 42 camere &bull; 3.200 mp</p>
+          <div class="porto-btn">
+            <a href="#">Vezi proiectul <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 2 -->
+      <div class="porto-card reveal">
+        <div class="porto-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="porto-overlay">
+          <span class="porto-tag">Fotografie & Video</span>
+          <h3 class="porto-title">Showroom Auto</h3>
+          <p class="porto-meta">Foto + Drone &bull; Prezentare Premium &bull; 1.800 mp</p>
+          <div class="porto-btn">
+            <a href="#">Vezi proiectul <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 3 -->
+      <div class="porto-card reveal">
+        <div class="porto-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="porto-overlay">
+          <span class="porto-tag">Tur Virtual + Randare</span>
+          <h3 class="porto-title">Ansamblu Rezidențial</h3>
+          <p class="porto-meta">Scanare 3D &bull; Plan Izometric &bull; 12.000 mp</p>
+          <div class="porto-btn">
+            <a href="#">Vezi proiectul <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLIENTI ===== -->
+<section class="clienti" id="clienti">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Clienți & Parteneri</div>
+      <h2 class="section-title">Alături de Branduri de Încredere</h2>
+      <p class="section-sub">Colaborăm cu companii din diverse industrii pentru a livra rezultate vizuale excepționale.</p>
+    </div>
+
+    <div class="logo-strip">
+      <div class="logo-track">
+        <div class="logo-item">Hilton</div>
+        <div class="logo-item">Coldwell Banker</div>
+        <div class="logo-item">RE/MAX</div>
+        <div class="logo-item">Novotel</div>
+        <div class="logo-item">IHG Hotels</div>
+        <div class="logo-item">Nord Gold</div>
+        <!-- Duplicated for seamless loop -->
+        <div class="logo-item">Hilton</div>
+        <div class="logo-item">Coldwell Banker</div>
+        <div class="logo-item">RE/MAX</div>
+        <div class="logo-item">Novotel</div>
+        <div class="logo-item">IHG Hotels</div>
+        <div class="logo-item">Nord Gold</div>
+      </div>
+    </div>
+
+    <div class="badges-row reveal">
+      <div class="badge-item">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="badge-text">Matterport Partner</span>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <span class="badge-text">AACR</span>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <span class="badge-text">FIHR</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="testimonial" id="testimonial">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Testimoniale</div>
+      <h2 class="section-title">Ce Spun Clienții Noștri</h2>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">&ldquo;</div>
+      <p class="quote-text">Colaborarea cu echipa Scanbox a fost excepțională. Turul virtual 3D realizat pentru hotelul nostru a crescut rata de rezervări online cu peste 35%. Profesionalism, atenție la detalii și rezultate care vorbesc de la sine.</p>
+      <div class="quote-stars">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="quote-author">Ana Maria Cioclei</div>
+      <div class="quote-role">Director General, Hotel Boutique București</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-banner" id="contact">
+  <div class="container cta-inner">
+    <h2 class="cta-title">Ai un proiect? Hai să vorbim!</h2>
+    <p class="cta-sub">Solicită o ofertă personalizată și descoperă cum putem transforma spațiul tău într-o experiență vizuală memorabilă.</p>
+    <a href="mailto:office@scanbox.ro" class="btn-dark">
+      Contactează-ne
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">scan<span class="logo-accent">box</span></a>
+        <p>Soluții vizuale profesionale pentru afacerea ta. Reseller Oficial Matterport pentru România și Republica Moldova. Parte din Trivit Services SRL.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Linkuri Rapide -->
+      <div class="footer-col">
+        <h4>Linkuri Rapide</h4>
+        <ul>
+          <li><a href="#">Acasă</a></li>
+          <li><a href="#servicii">Servicii</a></li>
+          <li><a href="#portofoliu">Portofoliu</a></li>
+          <li><a href="#">Despre Noi</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Servicii -->
+      <div class="footer-col">
+        <h4>Servicii</h4>
+        <ul>
+          <li><a href="#">Tur Virtual 3D</a></li>
+          <li><a href="#">Fotografie</a></li>
+          <li><a href="#">Videografie</a></li>
+          <li><a href="#">Randare 3D</a></li>
+          <li><a href="#">Social Media</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>office@scanbox.ro</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>București, România</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>+40 7XX XXX XXX</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Scanbox.ro &mdash; Trivit Services SRL. Toate drepturile rezervate.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Politica de Confidențialitate</a>
+        <a href="#">Termeni și Condiții</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileOverlay = document.getElementById('mobileOverlay');
+
+function toggleMenu() {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  mobileOverlay.classList.toggle('active');
+  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+mobileOverlay.addEventListener('click', toggleMenu);
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+
+// Scroll reveal
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Counter animation
+function animateCounters() {
+  document.querySelectorAll('.stat-number').forEach(counter => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000;
+    const startTime = performance.now();
+
+    function updateCounter(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeOut * target);
+
+      if (target >= 1000) {
+        counter.textContent = current.toLocaleString('ro-RO') + '+';
+      } else {
+        counter.textContent = current + '+';
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    }
+
+    requestAnimationFrame(updateCounter);
+  });
+}
+
+// Trigger counters when stats section is visible
+const statsSection = document.querySelector('.stats');
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+statsObserver.observe(statsSection);
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

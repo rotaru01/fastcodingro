@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanbox.ro — Soluții Vizuale Profesionale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===================== RESET & BASE ===================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0D1B2A;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===================== UTILITY ===================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #04B494;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: #94A3B8;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* ===================== GLASS PANELS ===================== */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .glass-sm {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* ===================== NAVBAR ===================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(13, 27, 42, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: background 0.3s ease;
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-logo .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #04B494, #039B7E);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-logo .logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #94A3B8;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .navbar-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 22px;
+            background: #04B494;
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .navbar-cta:hover {
+            background: #039B7E;
+            transform: translateY(-1px);
+        }
+
+        .navbar-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .navbar-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #FFFFFF;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* ===================== HERO ===================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0D1B2A 0%, #1A2B4A 50%, #2D4A7A 100%);
+            overflow: hidden;
+            padding: 100px 24px 60px;
+        }
+
+        /* Decorative glow orbs */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(4, 180, 148, 0.3) 0%, rgba(4, 180, 148, 0.08) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulseOrb 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(40, 56, 104, 0.25) 0%, rgba(40, 56, 104, 0.06) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulseOrb 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulseOrb {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.12); opacity: 0.8; }
+        }
+
+        .hero-glass {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            width: 100%;
+            padding: 56px 48px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(4, 180, 148, 0.15);
+            border: 1px solid rgba(4, 180, 148, 0.3);
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #04B494;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+        }
+
+        .hero-heading {
+            font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #94A3B8;
+            line-height: 1.65;
+            max-width: 560px;
+            margin: 0 auto 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: #04B494;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(4, 180, 148, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: #039B7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(4, 180, 148, 0.45);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            transform: translateY(-2px);
+        }
+
+        /* ===================== STATS ===================== */
+        .stats {
+            padding: 80px 24px;
+            background: #0D1B2A;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            padding: 32px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #04B494;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        /* ===================== SERVICII ===================== */
+        .servicii {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, #0D1B2A 0%, #1A2B4A 100%);
+            position: relative;
+        }
+
+        .servicii-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .servicii-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .servicii-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .servicii-grid .service-card:nth-child(4),
+        .servicii-grid .service-card:nth-child(5) {
+            /* Center the last 2 cards */
+        }
+
+        .service-card {
+            padding: 36px 28px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(4, 180, 148, 0.3);
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(4, 180, 148, 0.12);
+            border: 1px solid rgba(4, 180, 148, 0.2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: #04B494;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: #94A3B8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .service-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #04B494;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 10px;
+        }
+
+        /* Center last two cards in a 3-column layout */
+        .servicii-bottom-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 740px;
+            margin: 24px auto 0;
+        }
+
+        /* ===================== PORTOFOLIU ===================== */
+        .portofoliu {
+            padding: 100px 24px;
+            background: #0D1B2A;
+            position: relative;
+        }
+
+        .portofoliu-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .portofoliu-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .portofoliu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .portfolio-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-thumb {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1A2B4A 0%, #2D4A7A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-thumb svg {
+            width: 48px;
+            height: 48px;
+            stroke: rgba(255, 255, 255, 0.2);
+            fill: none;
+            stroke-width: 1;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 28px 24px;
+            background: linear-gradient(0deg, rgba(13, 27, 42, 0.95) 0%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-card:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #04B494;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        /* ===================== TESTIMONIAL ===================== */
+        .testimonial {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, #0D1B2A 0%, #1A2B4A 100%);
+            position: relative;
+        }
+
+        .testimonial-card {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 48px 44px;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-quote-mark {
+            font-size: 5rem;
+            line-height: 1;
+            color: #04B494;
+            font-family: Georgia, serif;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .testimonial-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 28px;
+        }
+
+        .testimonial-author {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        /* ===================== CTA BANNER ===================== */
+        .cta-banner {
+            padding: 80px 24px;
+            background: linear-gradient(90deg, #04B494, #039B7E);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            right: -5%;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-banner-title {
+            font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-banner-sub {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: #FFFFFF;
+            color: #04B494;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===================== FOOTER ===================== */
+        .footer {
+            padding: 72px 24px 32px;
+            background: #080F1A;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+            gap: 48px;
+            max-width: 1200px;
+            margin: 0 auto 48px;
+        }
+
+        .footer-brand-desc {
+            font-size: 0.875rem;
+            color: #94A3B8;
+            line-height: 1.7;
+            margin-top: 16px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-logo .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #04B494, #039B7E);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo .logo-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: #fff;
+        }
+
+        .footer-heading {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: #94A3B8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #04B494;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+            font-size: 0.875rem;
+            color: #94A3B8;
+        }
+
+        .footer-contact-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: #04B494;
+            fill: none;
+            stroke-width: 1.5;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #64748B;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: #64748B;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #94A3B8;
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 1024px) {
+            .servicii-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .servicii-bottom-row {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+            }
+
+            .portofoliu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .navbar-hamburger {
+                display: flex;
+            }
+
+            .hero-glass {
+                padding: 40px 28px;
+            }
+
+            .hero-heading {
+                font-size: 1.6rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .servicii-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .servicii-bottom-row {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .portofoliu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-overlay {
+                transform: translateY(0);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .testimonial-card {
+                padding: 36px 24px;
+            }
+
+            .testimonial-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stat-card {
+                padding: 24px 16px;
+            }
+
+            .stat-number {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="navbar-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="white"/><circle cx="12" cy="12" r="4" fill="#04B494"/></svg>
+                </div>
+                <span>scanbox</span>
+            </a>
+
+            <ul class="navbar-links">
+                <li><a href="#servicii">Servicii</a></li>
+                <li><a href="#portofoliu">Portofoliu</a></li>
+                <li><a href="#testimoniale">Testimoniale</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="navbar-cta">Solicită Ofertă</a></li>
+            </ul>
+
+            <button class="navbar-hamburger" aria-label="Meniu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="hero-glass">
+            <div class="hero-badge">Reseller Oficial Matterport Romania</div>
+            <h1 class="hero-heading">Solutii Vizuale Profesionale pentru Afacerea Ta</h1>
+            <p class="hero-subtitle">Tururi virtuale 3D, fotografie, videografie si randari care transforma spatiile tale in experiente digitale captivante.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">
+                    Solicita Oferta
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#portofoliu" class="btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Vezi Portofoliu
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STATS ==================== -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card glass-sm">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Proiecte Finalizate</div>
+            </div>
+            <div class="stat-card glass-sm">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Clienti Multumiti</div>
+            </div>
+            <div class="stat-card glass-sm">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Ani Experienta</div>
+            </div>
+            <div class="stat-card glass-sm">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Tururi Virtuale 3D</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICII ==================== -->
+    <section class="servicii" id="servicii">
+        <div class="servicii-header">
+            <span class="section-label">Ce Facem</span>
+            <h2 class="section-title">Serviciile Noastre</h2>
+            <p class="section-subtitle">Oferim o gama completa de servicii vizuale profesionale pentru a-ti duce afacerea la nivelul urmator.</p>
+        </div>
+
+        <!-- Top row: 3 cards -->
+        <div class="servicii-grid">
+            <div class="service-card glass">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <h3 class="service-title">Tur Virtual 3D Matterport</h3>
+                <p class="service-desc">Capturam spatiile tale cu tehnologie Matterport de ultima generatie pentru tururi virtuale 3D imersive si interactive.</p>
+                <a href="#" class="service-link">Afla mai mult <span>&rarr;</span></a>
+            </div>
+
+            <div class="service-card glass">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <h3 class="service-title">Fotografie Profesionala</h3>
+                <p class="service-desc">Fotografii de inalta calitate pentru imobiliare, HoReCa, spatii comerciale si evenimente corporate.</p>
+                <a href="#" class="service-link">Afla mai mult <span>&rarr;</span></a>
+            </div>
+
+            <div class="service-card glass">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                </div>
+                <h3 class="service-title">Videografie &amp; Drone</h3>
+                <p class="service-desc">Productie video profesionala si filmari aeriene cu drone pentru prezentari impactante ale proiectelor tale.</p>
+                <a href="#" class="service-link">Afla mai mult <span>&rarr;</span></a>
+            </div>
+        </div>
+
+        <!-- Bottom row: 2 cards centered -->
+        <div class="servicii-bottom-row">
+            <div class="service-card glass">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3 class="service-title">Randare 3D &amp; Plan Izometric</h3>
+                <p class="service-desc">Vizualizari 3D fotorealiste si planuri izometrice detaliate pentru proiecte imobiliare si de design interior.</p>
+                <a href="#" class="service-link">Afla mai mult <span>&rarr;</span></a>
+            </div>
+
+            <div class="service-card glass">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </div>
+                <h3 class="service-title">Social Media Management</h3>
+                <p class="service-desc">Strategie de continut, creare de materiale vizuale si administrare profesionala a conturilor de social media.</p>
+                <a href="#" class="service-link">Afla mai mult <span>&rarr;</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTOFOLIU ==================== -->
+    <section class="portofoliu" id="portofoliu">
+        <div class="portofoliu-header">
+            <span class="section-label">Lucrarile Noastre</span>
+            <h2 class="section-title">Portofoliu</h2>
+            <p class="section-subtitle">Descopera o selectie din proiectele noastre recente si vezi cum transformam spatiile in experiente digitale.</p>
+        </div>
+
+        <div class="portofoliu-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-thumb">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-category">Tur Virtual 3D</div>
+                    <div class="portfolio-title">Park 20 by Cordia</div>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-thumb">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-category">Fotografie</div>
+                    <div class="portfolio-title">Hotel Noblesse Palace</div>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-thumb">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-category">Videografie Drone</div>
+                    <div class="portfolio-title">One Herastrau Towers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIAL ==================== -->
+    <section class="testimonial" id="testimoniale">
+        <div class="testimonial-card glass">
+            <div class="testimonial-quote-mark">&ldquo;</div>
+            <p class="testimonial-text">Echipa Scanbox a reusit sa surprinda esenta proiectului nostru intr-un mod cu adevarat exceptional. Turul virtual 3D si materialele foto-video au depasit toate asteptarile noastre si au contribuit semnificativ la vanzarile proiectului.</p>
+            <div class="testimonial-author">Ana Maria Cioclei</div>
+            <div class="testimonial-role">Park 20 by Cordia</div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA BANNER ==================== -->
+    <section class="cta-banner" id="contact">
+        <h2 class="cta-banner-title">Ai un proiect? Hai sa vorbim!</h2>
+        <p class="cta-banner-sub">Suntem gata sa transformam viziunea ta in realitate digitala.</p>
+        <a href="mailto:office@scanbox.ro" class="btn-white">
+            Contacteaza-ne
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <!-- Brand -->
+            <div>
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="white"/><circle cx="12" cy="12" r="4" fill="#04B494"/></svg>
+                    </div>
+                    <span>scanbox</span>
+                </div>
+                <p class="footer-brand-desc">Solutii vizuale profesionale pentru afaceri. Tururi virtuale 3D, fotografie, videografie si randari 3D de inalta calitate.</p>
+            </div>
+
+            <!-- Servicii -->
+            <div>
+                <h4 class="footer-heading">Servicii</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Tur Virtual 3D</a></li>
+                    <li><a href="#">Fotografie</a></li>
+                    <li><a href="#">Videografie & Drone</a></li>
+                    <li><a href="#">Randare 3D</a></li>
+                    <li><a href="#">Social Media</a></li>
+                </ul>
+            </div>
+
+            <!-- Companie -->
+            <div>
+                <h4 class="footer-heading">Companie</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Despre Noi</a></li>
+                    <li><a href="#">Portofoliu</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Cariere</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="footer-heading">Contact</h4>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>office@scanbox.ro</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Bucuresti, Romania</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>+40 7XX XXX XXX</span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>L-V 09:00-18:00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2018-2026 Trivit Services SRL. Toate drepturile rezervate.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Politica de Confidentialitate</a>
+                <a href="#">Termeni si Conditii</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

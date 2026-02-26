@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanbox.ro — Soluții Vizuale Profesionale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --off-white: #f8f8f8;
+            --light-gray: #e5e5e5;
+            --mid-gray: #999999;
+            --dark-gray: #555555;
+            --black: #111111;
+            --accent: #e8553d;
+            --accent-hover: #d44a34;
+            --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font);
+            font-weight: 300;
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* ========================================
+           UTILITIES
+           ======================================== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .container--narrow {
+            max-width: 800px;
+        }
+
+        .section {
+            padding: 120px 0;
+        }
+
+        .section--light {
+            background: var(--off-white);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           NAVBAR
+           ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .navbar.is-scrolled {
+            border-bottom-color: var(--light-gray);
+        }
+
+        .navbar__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .navbar__logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+
+        .navbar__logo span {
+            color: var(--accent);
+        }
+
+        .navbar__links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .navbar__link {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--dark-gray);
+            transition: color 0.2s ease;
+        }
+
+        .navbar__link:hover {
+            color: var(--black);
+        }
+
+        .navbar__cta {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--white);
+            background: var(--accent);
+            padding: 10px 24px;
+            border-radius: 100px;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .navbar__cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .navbar__toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+
+        .navbar__toggle span {
+            display: block;
+            width: 20px;
+            height: 1.5px;
+            background: var(--black);
+            position: absolute;
+            left: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar__toggle span:nth-child(1) { top: 10px; }
+        .navbar__toggle span:nth-child(2) { top: 15px; }
+        .navbar__toggle span:nth-child(3) { top: 20px; }
+
+        /* ========================================
+           HERO
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 100px;
+            background: var(--white);
+        }
+
+        .hero__inner {
+            max-width: 860px;
+        }
+
+        .hero__badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 40px;
+        }
+
+        .hero__title {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 28px;
+        }
+
+        .hero__subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 300;
+            color: var(--mid-gray);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 56px;
+        }
+
+        .hero__actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 16px 36px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn--primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .btn--primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(232, 85, 61, 0.25);
+        }
+
+        .btn--secondary {
+            background: transparent;
+            color: var(--black);
+            border: 1.5px solid var(--black);
+        }
+
+        .btn--secondary:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn--white {
+            background: var(--white);
+            color: var(--accent);
+        }
+
+        .btn--white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ========================================
+           TRUSTED BY
+           ======================================== */
+        .trusted {
+            padding: 60px 0;
+            border-top: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .trusted__label {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .trusted__logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 56px;
+            flex-wrap: wrap;
+        }
+
+        .trusted__logo {
+            height: 24px;
+            display: flex;
+            align-items: center;
+            user-select: none;
+        }
+
+        /* Placeholder logos as gray boxes */
+        .logo-placeholder {
+            width: 100px;
+            height: 28px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           SERVICES
+           ======================================== */
+        .services__header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--black);
+        }
+
+        .services__list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 36px 0;
+            border-top: 1px solid var(--light-gray);
+            gap: 24px;
+            transition: padding 0.3s ease;
+        }
+
+        .service-item:last-child {
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .service-item:hover {
+            padding-left: 8px;
+        }
+
+        .service-item__number {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--mid-gray);
+            min-width: 32px;
+        }
+
+        .service-item__content {
+            flex: 1;
+        }
+
+        .service-item__title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .service-item__desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--mid-gray);
+        }
+
+        .service-item__arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .service-item__arrow svg {
+            width: 16px;
+            height: 16px;
+            color: var(--mid-gray);
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .service-item:hover .service-item__arrow {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .service-item:hover .service-item__arrow svg {
+            color: var(--white);
+            transform: translateX(2px);
+        }
+
+        /* ========================================
+           FEATURED WORK
+           ======================================== */
+        .work__header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .work__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .work-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .work-card__image {
+            aspect-ratio: 16 / 9;
+            background: var(--off-white);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            border: 1px solid var(--light-gray);
+        }
+
+        .work-card__image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(232, 85, 61, 0.04) 100%);
+        }
+
+        .work-card__image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-card__image-placeholder svg {
+            width: 48px;
+            height: 48px;
+            color: var(--light-gray);
+        }
+
+        .work-card__category {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 6px;
+        }
+
+        .work-card__title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+
+        /* ========================================
+           STATS
+           ======================================== */
+        .stats {
+            padding: 100px 0;
+        }
+
+        .stats__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+
+        .stat {
+            padding: 20px;
+        }
+
+        .stat__number {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat__number span {
+            color: var(--accent);
+        }
+
+        .stat__label {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--mid-gray);
+        }
+
+        /* ========================================
+           TESTIMONIAL
+           ======================================== */
+        .testimonial {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .testimonial__quote-mark {
+            font-size: 72px;
+            line-height: 1;
+            color: var(--accent);
+            margin-bottom: 24px;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial__text {
+            font-size: clamp(22px, 3vw, 32px);
+            font-weight: 300;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            color: var(--black);
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .testimonial__author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .testimonial__name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .testimonial__role {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--mid-gray);
+        }
+
+        /* ========================================
+           CTA SECTION
+           ======================================== */
+        .cta-section {
+            background: var(--accent);
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .cta-section__title {
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .cta-section__subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 48px;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 80px;
+        }
+
+        .footer__brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+
+        .footer__brand-name span {
+            color: var(--accent);
+        }
+
+        .footer__brand-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--mid-gray);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer__col-title {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 24px;
+        }
+
+        .footer__links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer__link {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--dark-gray);
+            transition: color 0.2s ease;
+        }
+
+        .footer__link:hover {
+            color: var(--accent);
+        }
+
+        .footer__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 32px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .footer__copyright {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--mid-gray);
+        }
+
+        .footer__legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer__legal a {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--mid-gray);
+            transition: color 0.2s ease;
+        }
+
+        .footer__legal a:hover {
+            color: var(--black);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .section {
+                padding: 100px 0;
+            }
+
+            .work__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+
+            .navbar__links {
+                display: none;
+            }
+
+            .navbar__toggle {
+                display: block;
+            }
+
+            .navbar__links.is-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 32px 24px;
+                gap: 24px;
+                border-bottom: 1px solid var(--light-gray);
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding: 120px 24px 80px;
+            }
+
+            .hero__badge {
+                margin-bottom: 28px;
+            }
+
+            .hero__subtitle {
+                margin-bottom: 40px;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 32px;
+            }
+
+            .trusted__logos {
+                gap: 32px;
+            }
+
+            .service-item {
+                padding: 28px 0;
+            }
+
+            .service-item__number {
+                display: none;
+            }
+
+            .service-item__title {
+                font-size: 19px;
+            }
+
+            .work__grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats {
+                padding: 80px 0;
+            }
+
+            .stats__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px 16px;
+            }
+
+            .testimonial {
+                padding: 80px 0;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 85vh;
+            }
+
+            .trusted__logos {
+                gap: 24px;
+            }
+
+            .logo-placeholder {
+                width: 72px;
+                height: 22px;
+            }
+
+            .stats__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar__inner">
+                <a href="#" class="navbar__logo">scan<span>box</span>.ro</a>
+
+                <ul class="navbar__links" id="navLinks">
+                    <li><a href="#servicii" class="navbar__link">Servicii</a></li>
+                    <li><a href="#proiecte" class="navbar__link">Proiecte</a></li>
+                    <li><a href="#despre" class="navbar__link">Despre</a></li>
+                    <li><a href="#contact" class="navbar__cta">Contacteaz&#259;-ne</a></li>
+                </ul>
+
+                <button class="navbar__toggle" id="navToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ============================================
+         HERO — Full viewport, centered, pure white
+         ============================================ -->
+    <section class="hero">
+        <div class="hero__inner">
+            <div class="hero__badge">Reseller Oficial Matterport Rom&#226;nia</div>
+            <h1 class="hero__title">Solu&#539;ii Vizuale Profesionale<br>pentru Afacerea Ta</h1>
+            <p class="hero__subtitle">Tur Virtual 3D Matterport &nbsp;|&nbsp; Fotografie &nbsp;|&nbsp; Videografie &nbsp;|&nbsp; Social Media Management</p>
+            <div class="hero__actions">
+                <a href="#contact" class="btn btn--primary">Cere Ofert&#259; Gratuit&#259;</a>
+                <a href="#servicii" class="btn btn--secondary">Vezi Serviciile</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         TRUSTED BY
+         ============================================ -->
+    <section class="trusted reveal">
+        <div class="container">
+            <div class="trusted__label">Au avut &#238;ncredere &#238;n noi</div>
+            <div class="trusted__logos">
+                <div class="trusted__logo"><div class="logo-placeholder"></div></div>
+                <div class="trusted__logo"><div class="logo-placeholder"></div></div>
+                <div class="trusted__logo"><div class="logo-placeholder"></div></div>
+                <div class="trusted__logo"><div class="logo-placeholder"></div></div>
+                <div class="trusted__logo"><div class="logo-placeholder"></div></div>
+                <div class="trusted__logo"><div class="logo-placeholder"></div></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         SERVICES
+         ============================================ -->
+    <section class="section" id="servicii">
+        <div class="container">
+            <div class="services__header reveal">
+                <div class="section-label">Servicii</div>
+                <h2 class="section-title">Tot ce ai nevoie,<br>&#238;ntr-un singur loc.</h2>
+            </div>
+
+            <div class="services__list">
+                <a href="#" class="service-item reveal">
+                    <span class="service-item__number">01</span>
+                    <div class="service-item__content">
+                        <div class="service-item__title">Tur Virtual 3D Matterport</div>
+                        <div class="service-item__desc">Scanare complet&#259; a spa&#539;iilor cu tehnologie Matterport Pro3 &#8212; experien&#539;&#259; imersiv&#259;, compatibil&#259; web &#537;i VR.</div>
+                    </div>
+                    <div class="service-item__arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg>
+                    </div>
+                </a>
+
+                <a href="#" class="service-item reveal">
+                    <span class="service-item__number">02</span>
+                    <div class="service-item__content">
+                        <div class="service-item__title">Fotografie Profesional&#259;</div>
+                        <div class="service-item__desc">Fotografii de produs, imobiliare, corporate &#537;i eveniment &#8212; editare profesional&#259; inclus&#259;.</div>
+                    </div>
+                    <div class="service-item__arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg>
+                    </div>
+                </a>
+
+                <a href="#" class="service-item reveal">
+                    <span class="service-item__number">03</span>
+                    <div class="service-item__content">
+                        <div class="service-item__title">Videografie &amp; Dron&#259;</div>
+                        <div class="service-item__desc">Produc&#539;ie video complet&#259; pentru prezentare, social media &#537;i publicitate &#8212; filmare aerian&#259; cu dron&#259; inclus&#259;.</div>
+                    </div>
+                    <div class="service-item__arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg>
+                    </div>
+                </a>
+
+                <a href="#" class="service-item reveal">
+                    <span class="service-item__number">04</span>
+                    <div class="service-item__content">
+                        <div class="service-item__title">Social Media Management</div>
+                        <div class="service-item__desc">Strategie, creare de con&#539;inut vizual &#537;i gestionare complet&#259; a conturilor de social media.</div>
+                    </div>
+                    <div class="service-item__arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg>
+                    </div>
+                </a>
+
+                <a href="#" class="service-item reveal">
+                    <span class="service-item__number">05</span>
+                    <div class="service-item__content">
+                        <div class="service-item__title">Planuri de Etaj 2D/3D</div>
+                        <div class="service-item__desc">Generare automat&#259; de planuri schematice din scanarea Matterport &#8212; ideale pentru imobiliare &#537;i arhitectur&#259;.</div>
+                    </div>
+                    <div class="service-item__arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         FEATURED WORK
+         ============================================ -->
+    <section class="section section--light" id="proiecte">
+        <div class="container">
+            <div class="work__header reveal">
+                <div class="section-label">Proiecte Recente</div>
+                <h2 class="section-title">Lucr&#259;ri selectate.</h2>
+            </div>
+
+            <div class="work__grid">
+                <div class="work-card reveal">
+                    <div class="work-card__image">
+                        <div class="work-card__image-placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" /></svg>
+                        </div>
+                    </div>
+                    <div class="work-card__category">Tur Virtual 3D</div>
+                    <div class="work-card__title">Showroom Premium Auto</div>
+                </div>
+
+                <div class="work-card reveal">
+                    <div class="work-card__image">
+                        <div class="work-card__image-placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" /></svg>
+                        </div>
+                    </div>
+                    <div class="work-card__category">Fotografie &amp; Video</div>
+                    <div class="work-card__title">Complex Reziden&#539;ial Nord</div>
+                </div>
+
+                <div class="work-card reveal">
+                    <div class="work-card__image">
+                        <div class="work-card__image-placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" /></svg>
+                        </div>
+                    </div>
+                    <div class="work-card__category">Social Media</div>
+                    <div class="work-card__title">Hotel Boutique Bucure&#537;ti</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         STATS
+         ============================================ -->
+    <section class="stats" id="despre">
+        <div class="container">
+            <div class="stats__grid">
+                <div class="stat reveal">
+                    <div class="stat__number">547<span>+</span></div>
+                    <div class="stat__label">Proiecte Vizuale</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat__number">358<span>+</span></div>
+                    <div class="stat__label">Tururi Virtuale 3D</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat__number">102k<span>+</span></div>
+                    <div class="stat__label">mp Scana&#539;i</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat__number">5<span>+</span></div>
+                    <div class="stat__label">Ani Experien&#539;&#259;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         TESTIMONIAL
+         ============================================ -->
+    <section class="testimonial section--light">
+        <div class="container container--narrow reveal">
+            <div class="testimonial__quote-mark">&#8220;</div>
+            <p class="testimonial__text">Colaborarea cu Scanbox a transformat complet modul &#238;n care ne prezent&#259;m propriet&#259;&#539;ile. Tururile virtuale 3D au crescut rata de conversie cu peste 40%.</p>
+            <div class="testimonial__author">
+                <div class="testimonial__name">Alexandru Ionescu</div>
+                <div class="testimonial__role">Director Marketing, Reziden&#539;ial Plus</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="cta-section" id="contact">
+        <div class="container container--narrow reveal">
+            <h2 class="cta-section__title">Hai s&#259; cre&#259;m ceva vizual remarcabil.</h2>
+            <p class="cta-section__subtitle">Discut&#259; cu noi despre proiectul t&#259;u &#8212; oferta ini&#539;ial&#259; e gratuit&#259;.</p>
+            <a href="mailto:contact@scanbox.ro" class="btn btn--white">Cere Ofert&#259; Gratuit&#259;</a>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <div class="footer__brand-name">scan<span>box</span>.ro</div>
+                    <p class="footer__brand-desc">Trivit Services SRL &#8212; Reseller Oficial Matterport Rom&#226;nia. Solu&#539;ii vizuale profesionale pentru afaceri din Bucure&#537;ti &#537;i din toat&#259; &#539;ara.</p>
+                </div>
+
+                <div>
+                    <div class="footer__col-title">Servicii</div>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Tur Virtual 3D</a></li>
+                        <li><a href="#" class="footer__link">Fotografie</a></li>
+                        <li><a href="#" class="footer__link">Videografie</a></li>
+                        <li><a href="#" class="footer__link">Social Media</a></li>
+                        <li><a href="#" class="footer__link">Planuri de Etaj</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer__col-title">Contact</div>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@scanbox.ro" class="footer__link">contact@scanbox.ro</a></li>
+                        <li><a href="tel:+40700000000" class="footer__link">+40 7XX XXX XXX</a></li>
+                        <li><a href="#" class="footer__link">Bucure&#537;ti, Rom&#226;nia</a></li>
+                        <li><a href="#" class="footer__link">LinkedIn</a></li>
+                        <li><a href="#" class="footer__link">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="footer__copyright">&#169; 2026 Trivit Services SRL. Toate drepturile rezervate.</div>
+                <div class="footer__legal">
+                    <a href="#">Politica de Confiden&#539;ialitate</a>
+                    <a href="#">Termeni &#537;i Condi&#539;ii</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    <script>
+        // Navbar scroll effect — thin border appears on scroll
+        const navbar = document.getElementById('navbar');
+
+        const handleScroll = () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('is-scrolled');
+            } else {
+                navbar.classList.remove('is-scrolled');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('is-open');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('is-open');
+            });
+        });
+
+        // Scroll reveal with IntersectionObserver
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -60px 0px'
+        });
+
+        revealElements.forEach((el) => {
+            // Stagger delay for sibling .reveal elements
+            const parent = el.parentElement;
+            const siblings = parent.querySelectorAll(':scope > .reveal');
+            if (siblings.length > 1) {
+                const siblingIndex = Array.from(siblings).indexOf(el);
+                el.dataset.delay = siblingIndex * 80;
+            }
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
