@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanbox.ro — Admin Blog Editor Wireframe</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F0F2F5; color: #333; line-height: 1.6; display: flex; min-height: 100vh; }
+  .page-label { background: #202020; color: #fff; text-align: center; padding: 12px 24px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+  .section-label { display: inline-block; background: #04B494; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 8px; }
+  .annotation { font-size: 11px; color: #BBB; font-style: italic; margin-top: 4px; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 260px;
+    background: #0D1B2A;
+    min-height: 100vh;
+    padding-top: 48px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-logo {
+    padding: 24px 24px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+  }
+  .sidebar-logo-box {
+    width: 120px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .sidebar-nav { flex: 1; padding: 12px 0; }
+  .sidebar-section { padding: 0 16px; margin-bottom: 8px; }
+  .sidebar-section-title { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px; padding: 8px 12px; }
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    margin-bottom: 2px;
+  }
+  .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); }
+  .sidebar-item.active { background: rgba(232,112,42,0.15); color: #04B494; }
+  .sidebar-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .sidebar-item.active .sidebar-icon { background: rgba(232,112,42,0.2); }
+
+  /* Main Content */
+  .main { flex: 1; margin-left: 260px; padding-top: 48px; }
+
+  /* Top Bar */
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid #E8E8E8;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 48px;
+    z-index: 100;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .topbar-title { font-size: 20px; font-weight: 700; color: #202020; }
+  .topbar-breadcrumb { font-size: 12px; color: #BBB; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .btn-save {
+    background: #04B494;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-save:hover { background: #d4631f; }
+  .btn-draft {
+    background: #fff;
+    color: #777;
+    border: 1px solid #E0E0E0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-preview {
+    background: #fff;
+    color: #202020;
+    border: 1px solid #E0E0E0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Content Area */
+  .content { padding: 32px; }
+  .editor-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* Card */
+  .card {
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #202020;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  /* Title Input */
+  .title-input {
+    width: 100%;
+    padding: 18px 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    color: #202020;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .title-input:focus { border-color: #04B494; }
+  .title-input::placeholder { color: #CCC; }
+
+  /* Slug */
+  .slug-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #BBB;
+  }
+  .slug-row span { color: #999; }
+  .slug-input {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #E8E8E8;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    color: #777;
+    outline: none;
+  }
+
+  /* WYSIWYG Editor */
+  .editor-toolbar {
+    display: flex;
+    gap: 4px;
+    padding: 10px 12px;
+    background: #FAFAFA;
+    border: 1px solid #E0E0E0;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    flex-wrap: wrap;
+  }
+  .toolbar-btn {
+    width: 34px;
+    height: 34px;
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .toolbar-btn:hover { background: #F0F0F0; border-color: #CCC; }
+  .toolbar-divider {
+    width: 1px;
+    height: 34px;
+    background: #E0E0E0;
+    margin: 0 4px;
+  }
+  .editor-content {
+    border: 1px solid #E0E0E0;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    min-height: 400px;
+    padding: 24px;
+    background: #fff;
+  }
+  .editor-placeholder {
+    color: #CCC;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .editor-placeholder p { margin-bottom: 12px; }
+  .editor-placeholder h2 { font-size: 20px; color: #DDD; margin-bottom: 8px; }
+
+  /* Featured Image */
+  .featured-image-upload {
+    border: 2px dashed #E0E0E0;
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #FAFAFA;
+  }
+  .featured-image-upload:hover { border-color: #04B494; background: #FFF; }
+  .upload-icon {
+    width: 52px;
+    height: 52px;
+    background: #F0F0F0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 11px;
+    color: #BBB;
+    font-weight: 700;
+  }
+  .upload-text { font-size: 13px; color: #999; margin-bottom: 4px; }
+  .upload-hint { font-size: 11px; color: #CCC; }
+
+  /* Form Fields */
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: #04B494; }
+  .form-input::placeholder { color: #CCC; }
+  textarea.form-input { resize: vertical; min-height: 80px; }
+  select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23999' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+  .char-count { font-size: 11px; color: #CCC; text-align: right; margin-top: 4px; }
+
+  /* Publish Controls */
+  .publish-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #F8F8F8;
+  }
+  .publish-row:last-child { border-bottom: none; }
+  .publish-label { font-size: 13px; color: #777; }
+  .publish-value { font-size: 13px; color: #202020; font-weight: 600; }
+  .status-select {
+    padding: 6px 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* Tags Input */
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    min-height: 44px;
+    align-items: center;
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F0F0F0;
+    color: #555;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .tag-remove {
+    width: 16px;
+    height: 16px;
+    background: #DDD;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    color: #999;
+    cursor: pointer;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .editor-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .topbar { padding: 12px 16px; }
+    .content { padding: 16px; }
+    .topbar-title { font-size: 16px; }
+    .title-input { font-size: 18px; padding: 14px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">WIREFRAME — Admin Blog Editor — scanbox.ro</div>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-box">SCANBOX ADMIN</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Principal</div>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">DASH</div>
+        Dashboard
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">MSG</div>
+        Mesaje
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Conținut</div>
+      <a class="sidebar-item active" href="#">
+        <div class="sidebar-icon">BLOG</div>
+        Articole Blog
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">GAL</div>
+        Galerie Foto
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">PORT</div>
+        Portofoliu
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">TEST</div>
+        Testimoniale
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Setări</div>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">SEO</div>
+        SEO & Meta
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">SET</div>
+        Configurare
+      </a>
+    </div>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div>
+        <div class="topbar-title">Editor Articol</div>
+        <div class="topbar-breadcrumb">Admin / Blog / Articol Nou</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-preview">Previzualizare</button>
+      <button class="btn-draft">Salvează Draft</button>
+      <button class="btn-save">Publică</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="editor-grid">
+      <!-- Left Column: Editor -->
+      <div>
+        <!-- Title -->
+        <div class="card">
+          <div class="section-label">Titlu Articol</div>
+          <input type="text" class="title-input" placeholder="Titlul articolului...">
+          <div class="slug-row">
+            <span>URL:</span> scanbox.ro/blog/
+            <input type="text" class="slug-input" placeholder="titlul-articolului" value="ghid-matterport-2026">
+          </div>
+        </div>
+
+        <!-- WYSIWYG Editor -->
+        <div class="card">
+          <div class="section-label">Conținut Articol</div>
+          <div class="card-title">Editor WYSIWYG</div>
+          <div class="editor-toolbar">
+            <button class="toolbar-btn"><b>B</b></button>
+            <button class="toolbar-btn"><i>I</i></button>
+            <button class="toolbar-btn"><u>U</u></button>
+            <button class="toolbar-btn">S</button>
+            <div class="toolbar-divider"></div>
+            <button class="toolbar-btn">H1</button>
+            <button class="toolbar-btn">H2</button>
+            <button class="toolbar-btn">H3</button>
+            <div class="toolbar-divider"></div>
+            <button class="toolbar-btn">UL</button>
+            <button class="toolbar-btn">OL</button>
+            <button class="toolbar-btn">"</button>
+            <div class="toolbar-divider"></div>
+            <button class="toolbar-btn">IMG</button>
+            <button class="toolbar-btn">LINK</button>
+            <button class="toolbar-btn">VID</button>
+            <div class="toolbar-divider"></div>
+            <button class="toolbar-btn">CODE</button>
+            <button class="toolbar-btn">TBL</button>
+            <button class="toolbar-btn">HR</button>
+          </div>
+          <div class="editor-content">
+            <div class="editor-placeholder">
+              <h2>Introducere (H2)</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation...</p>
+              <h2>De ce Matterport? (H2)</h2>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident...</p>
+              <p style="color:#E0E0E0; border:1px dashed #E0E0E0; padding:16px; border-radius:8px; text-align:center; margin:16px 0;">[ Imagine inserată aici — drag & drop sau click ]</p>
+              <h2>Concluzii (H2)</h2>
+              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...</p>
+            </div>
+          </div>
+          <p class="annotation">Editor TinyMCE sau Quill.js. Suportă drag-drop imagini, embed video, tabel, code blocks.</p>
+        </div>
+
+        <!-- SEO Fields -->
+        <div class="card">
+          <div class="section-label">SEO & Meta</div>
+          <div class="card-title">Optimizare Motoare de Căutare</div>
+          <div class="form-group">
+            <label>Meta Title</label>
+            <input type="text" class="form-input" placeholder="Titlul care apare în Google (max 60 caractere)" value="Ghid Complet Matterport 2026 | Scanbox.ro">
+            <div class="char-count">42 / 60 caractere</div>
+          </div>
+          <div class="form-group">
+            <label>Meta Description</label>
+            <textarea class="form-input" placeholder="Descrierea din rezultatele Google (max 155 caractere)">Descoperă cum să folosești Matterport pentru tururi virtuale 3D profesionale. Ghid complet cu sfaturi practice și exemple reale.</textarea>
+            <div class="char-count">128 / 155 caractere</div>
+          </div>
+          <div class="form-group">
+            <label>Cuvinte Cheie (Focus Keyword)</label>
+            <input type="text" class="form-input" placeholder="ex: tur virtual matterport" value="matterport, tur virtual 3D, ghid">
+          </div>
+          <p class="annotation">Previzualizare Google snippet sub aceste câmpuri (render dinamic).</p>
+        </div>
+      </div>
+
+      <!-- Right Column: Settings -->
+      <div>
+        <!-- Featured Image -->
+        <div class="card">
+          <div class="section-label">Imagine Featured</div>
+          <div class="card-title">Imagine Principală</div>
+          <div class="featured-image-upload">
+            <div class="upload-icon">IMG</div>
+            <div class="upload-text">Click pentru a încărca sau drag & drop</div>
+            <div class="upload-hint">JPG, PNG, WebP — max 5MB — recomandat 1200×630px</div>
+          </div>
+          <div class="form-group" style="margin-top:12px;">
+            <label>Alt Text</label>
+            <input type="text" class="form-input" placeholder="Descriere imagine pentru SEO">
+          </div>
+        </div>
+
+        <!-- Publish Controls -->
+        <div class="card">
+          <div class="section-label">Publicare</div>
+          <div class="card-title">Setări Publicare</div>
+          <div class="publish-row">
+            <span class="publish-label">Status</span>
+            <select class="status-select">
+              <option>Draft</option>
+              <option>Publicat</option>
+              <option>Programat</option>
+              <option>Arhivat</option>
+            </select>
+          </div>
+          <div class="publish-row">
+            <span class="publish-label">Data publicării</span>
+            <input type="date" class="form-input" style="width:auto; padding:6px 10px; font-size:12px;" value="2026-02-25">
+          </div>
+          <div class="publish-row">
+            <span class="publish-label">Autor</span>
+            <span class="publish-value">Admin</span>
+          </div>
+          <div class="publish-row">
+            <span class="publish-label">URL</span>
+            <span class="publish-value" style="font-size:11px; color:#04B494;">/blog/ghid-matterport-2026</span>
+          </div>
+        </div>
+
+        <!-- Category -->
+        <div class="card">
+          <div class="card-title">Categorie & Tags</div>
+          <div class="form-group">
+            <label>Categorie</label>
+            <select class="form-input">
+              <option>Selectează categoria</option>
+              <option selected>Tur Virtual 3D</option>
+              <option>Fotografie</option>
+              <option>Videografie</option>
+              <option>Marketing</option>
+              <option>Randare 3D</option>
+              <option>Noutăți</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tags</label>
+            <div class="tags-container">
+              <div class="tag">matterport <span class="tag-remove">x</span></div>
+              <div class="tag">tur virtual <span class="tag-remove">x</span></div>
+              <div class="tag">3D <span class="tag-remove">x</span></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Timp de citire (min)</label>
+            <input type="number" class="form-input" value="8" style="width:80px;">
+          </div>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="card">
+          <div class="card-title">Extras (Excerpt)</div>
+          <div class="form-group">
+            <label>Descriere scurtă pentru listing</label>
+            <textarea class="form-input" style="min-height:100px;" placeholder="Rezumatul articolului care apare pe pagina de blog..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanbox.ro — Admin Gallery Manager Wireframe</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F0F2F5; color: #333; line-height: 1.6; display: flex; min-height: 100vh; }
+  .page-label { background: #202020; color: #fff; text-align: center; padding: 12px 24px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+  .section-label { display: inline-block; background: #04B494; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 8px; }
+  .annotation { font-size: 11px; color: #BBB; font-style: italic; margin-top: 4px; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 260px;
+    background: #0D1B2A;
+    min-height: 100vh;
+    padding-top: 48px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-logo {
+    padding: 24px 24px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+  }
+  .sidebar-logo-box {
+    width: 120px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .sidebar-nav { flex: 1; padding: 12px 0; }
+  .sidebar-section { padding: 0 16px; margin-bottom: 8px; }
+  .sidebar-section-title { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px; padding: 8px 12px; }
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    margin-bottom: 2px;
+  }
+  .sidebar-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); }
+  .sidebar-item.active { background: rgba(232,112,42,0.15); color: #04B494; }
+  .sidebar-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .sidebar-item.active .sidebar-icon { background: rgba(232,112,42,0.2); }
+
+  /* Main */
+  .main { flex: 1; margin-left: 260px; padding-top: 48px; }
+
+  /* Top Bar */
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid #E8E8E8;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 48px;
+    z-index: 100;
+  }
+  .topbar-left {}
+  .topbar-title { font-size: 20px; font-weight: 700; color: #202020; }
+  .topbar-breadcrumb { font-size: 12px; color: #BBB; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .btn-upload {
+    background: #04B494;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-upload:hover { background: #d4631f; }
+  .btn-new-gallery {
+    background: #202020;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Content */
+  .content { padding: 32px; }
+
+  /* Gallery Selector */
+  .gallery-selector {
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .gallery-selector label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #202020;
+  }
+  .gallery-dropdown {
+    padding: 10px 40px 10px 14px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23999' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+    outline: none;
+    min-width: 250px;
+  }
+  .gallery-dropdown:focus { border-color: #04B494; }
+  .gallery-stats {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: #999;
+  }
+  .gallery-stats strong { color: #202020; }
+
+  /* Drag Drop Zone */
+  .drop-zone {
+    border: 2px dashed #E0E0E0;
+    border-radius: 16px;
+    padding: 60px 24px;
+    text-align: center;
+    background: #FAFAFA;
+    margin-bottom: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .drop-zone:hover { border-color: #04B494; background: #FFF; }
+  .drop-icon {
+    width: 64px;
+    height: 64px;
+    background: #F0F0F0;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 14px;
+    color: #BBB;
+    font-weight: 700;
+  }
+  .drop-title { font-size: 16px; font-weight: 700; color: #202020; margin-bottom: 6px; }
+  .drop-text { font-size: 13px; color: #999; margin-bottom: 16px; }
+  .drop-btn {
+    background: #04B494;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .drop-formats { font-size: 11px; color: #CCC; margin-top: 12px; }
+
+  /* Image Grid */
+  .images-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .images-header h3 { font-size: 16px; font-weight: 700; color: #202020; }
+  .view-toggle { display: flex; gap: 4px; }
+  .view-btn {
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .view-btn.active { background: #202020; border-color: #202020; color: #fff; }
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .image-card {
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .image-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .image-card.selected { border: 2px solid #04B494; }
+  .image-thumb {
+    height: 160px;
+    background: #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 11px;
+    font-weight: 600;
+    position: relative;
+    border: 1px dashed #CCC;
+  }
+  .image-select {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    background: rgba(255,255,255,0.9);
+    border: 2px solid #DDD;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .image-card.selected .image-select { background: #04B494; border-color: #04B494; color: #fff; }
+  .image-info { padding: 12px; }
+  .image-name { font-size: 12px; font-weight: 600; color: #202020; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .image-meta { font-size: 11px; color: #BBB; display: flex; gap: 8px; margin-bottom: 8px; }
+  .image-actions { display: flex; gap: 6px; }
+  .img-action-btn {
+    padding: 5px 10px;
+    border: 1px solid #E8E8E8;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .img-action-btn:hover { border-color: #CCC; }
+  .img-action-btn.delete { color: #E74C3C; }
+  .img-action-btn.delete:hover { background: #FDE8E8; border-color: #E74C3C; }
+
+  /* Bulk Actions Bar */
+  .bulk-bar {
+    background: #202020;
+    border-radius: 12px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .bulk-bar-left { display: flex; align-items: center; gap: 12px; color: #fff; font-size: 13px; font-weight: 500; }
+  .bulk-count { background: #04B494; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 6px; }
+  .bulk-bar-right { display: flex; gap: 8px; }
+  .bulk-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .bulk-btn.move { background: rgba(255,255,255,0.15); color: #fff; }
+  .bulk-btn.delete { background: #E74C3C; color: #fff; }
+
+  /* Pagination */
+  .pagination {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .page-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #777;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .page-btn.active { background: #202020; border-color: #202020; color: #fff; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .images-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .topbar { padding: 12px 16px; }
+    .content { padding: 16px; }
+    .images-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-selector { flex-direction: column; align-items: flex-start; }
+    .gallery-stats { margin-left: 0; }
+    .bulk-bar { flex-direction: column; gap: 12px; text-align: center; }
+    .bulk-bar-right { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">WIREFRAME — Admin Gallery Manager — scanbox.ro</div>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-box">SCANBOX ADMIN</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Principal</div>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">DASH</div>
+        Dashboard
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">MSG</div>
+        Mesaje
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Conținut</div>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">BLOG</div>
+        Articole Blog
+      </a>
+      <a class="sidebar-item active" href="#">
+        <div class="sidebar-icon">GAL</div>
+        Galerie Foto
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">PORT</div>
+        Portofoliu
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">TEST</div>
+        Testimoniale
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Setări</div>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">SEO</div>
+        SEO & Meta
+      </a>
+      <a class="sidebar-item" href="#">
+        <div class="sidebar-icon">SET</div>
+        Configurare
+      </a>
+    </div>
+  </nav>
+</aside>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div>
+        <div class="topbar-title">Galerie Foto</div>
+        <div class="topbar-breadcrumb">Admin / Galerie / Hotel Boutique</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-new-gallery">+ Galerie Nouă</button>
+      <button class="btn-upload">Încarcă Imagini</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Gallery Selector -->
+    <div class="gallery-selector">
+      <div class="section-label">Secțiune: Selector Galerie</div>
+      <label>Galerie:</label>
+      <select class="gallery-dropdown">
+        <option>Hotel Boutique — Tur Virtual (24 imagini)</option>
+        <option>Penthouse Herăstrău — Fotografie (18 imagini)</option>
+        <option>Restaurant La Veranda (32 imagini)</option>
+        <option>Showroom Auto Premium (15 imagini)</option>
+        <option>Complex Rezidențial Nord (8 imagini)</option>
+      </select>
+      <div class="gallery-stats">
+        <span><strong>24</strong> imagini</span>
+        <span><strong>48.2</strong> MB</span>
+        <span>Creat: 15 Feb 2026</span>
+      </div>
+    </div>
+
+    <!-- Drag & Drop Zone -->
+    <div class="drop-zone">
+      <div class="drop-icon">UPLOAD</div>
+      <div class="drop-title">Trage imaginile aici</div>
+      <div class="drop-text">sau click pentru a selecta din calculator</div>
+      <button class="drop-btn">Selectează Fișiere</button>
+      <div class="drop-formats">Format acceptat: JPG, PNG, WebP — Max 10MB per imagine</div>
+    </div>
+
+    <!-- Bulk Actions Bar -->
+    <div class="bulk-bar">
+      <div class="bulk-bar-left">
+        <span class="bulk-count">3</span>
+        <span>imagini selectate</span>
+      </div>
+      <div class="bulk-bar-right">
+        <button class="bulk-btn move">Mută în altă galerie</button>
+        <button class="bulk-btn delete">Șterge selectate</button>
+      </div>
+    </div>
+
+    <!-- Images Header -->
+    <div class="images-header">
+      <h3>Imagini — Hotel Boutique</h3>
+      <div class="view-toggle">
+        <button class="view-btn active">GRID</button>
+        <button class="view-btn">LIST</button>
+      </div>
+    </div>
+
+    <!-- Images Grid -->
+    <div class="images-grid">
+      <div class="image-card selected">
+        <div class="image-thumb">
+          <div class="image-select">✓</div>
+          IMG
+        </div>
+        <div class="image-info">
+          <div class="image-name">lobby-panoramic-01.jpg</div>
+          <div class="image-meta">
+            <span>2.4 MB</span>
+            <span>4000×3000</span>
+          </div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card selected">
+        <div class="image-thumb">
+          <div class="image-select">✓</div>
+          IMG
+        </div>
+        <div class="image-info">
+          <div class="image-name">camera-suite-02.jpg</div>
+          <div class="image-meta">
+            <span>1.8 MB</span>
+            <span>4000×3000</span>
+          </div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card selected">
+        <div class="image-thumb">
+          <div class="image-select">✓</div>
+          IMG
+        </div>
+        <div class="image-info">
+          <div class="image-name">restaurant-interior-03.jpg</div>
+          <div class="image-meta">
+            <span>2.1 MB</span>
+            <span>4000×3000</span>
+          </div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="image-thumb">
+          <div class="image-select"></div>
+          IMG
+        </div>
+        <div class="image-info">
+          <div class="image-name">piscina-exterior-04.jpg</div>
+          <div class="image-meta">
+            <span>3.2 MB</span>
+            <span>4000×3000</span>
+          </div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="image-thumb"><div class="image-select"></div>IMG</div>
+        <div class="image-info">
+          <div class="image-name">bar-detaliu-05.jpg</div>
+          <div class="image-meta"><span>1.5 MB</span><span>4000×3000</span></div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="image-thumb"><div class="image-select"></div>IMG</div>
+        <div class="image-info">
+          <div class="image-name">terasa-noapte-06.jpg</div>
+          <div class="image-meta"><span>2.8 MB</span><span>4000×3000</span></div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="image-thumb"><div class="image-select"></div>IMG</div>
+        <div class="image-info">
+          <div class="image-name">spa-wellness-07.jpg</div>
+          <div class="image-meta"><span>2.0 MB</span><span>4000×3000</span></div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="image-thumb"><div class="image-select"></div>IMG</div>
+        <div class="image-info">
+          <div class="image-name">receptie-panoramic-08.jpg</div>
+          <div class="image-meta"><span>2.3 MB</span><span>4000×3000</span></div>
+          <div class="image-actions">
+            <button class="img-action-btn">Edit</button>
+            <button class="img-action-btn">Download</button>
+            <button class="img-action-btn delete">Șterge</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button class="page-btn">←</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">→</button>
+    </div>
+
+    <p class="annotation" style="text-align:center; margin-top:16px;">Galeria suportă drag-and-drop reordering. Imagini cu lazy-load. Selectare multiplă cu Shift+Click.</p>
+  </div>
+</div>
+
+</body>
+</html>
