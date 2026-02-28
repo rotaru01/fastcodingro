@@ -13,6 +13,62 @@ RewriteEngine On
 RewriteBase /
 
 # =============================================================================
+# PERMITERE EXPLICITA CRAWLERE AI (override server-level blocking)
+# =============================================================================
+
+# Permite GPTBot (OpenAI/ChatGPT Search)
+RewriteCond %{HTTP_USER_AGENT} GPTBot [NC]
+RewriteRule .* - [L]
+
+# Permite ChatGPT-User (ChatGPT browsing)
+RewriteCond %{HTTP_USER_AGENT} ChatGPT-User [NC]
+RewriteRule .* - [L]
+
+# Permite ClaudeBot (Anthropic/Claude)
+RewriteCond %{HTTP_USER_AGENT} ClaudeBot [NC]
+RewriteRule .* - [L]
+
+# Permite Claude-Web
+RewriteCond %{HTTP_USER_AGENT} Claude-Web [NC]
+RewriteRule .* - [L]
+
+# Permite anthropic-ai
+RewriteCond %{HTTP_USER_AGENT} anthropic-ai [NC]
+RewriteRule .* - [L]
+
+# Permite PerplexityBot
+RewriteCond %{HTTP_USER_AGENT} PerplexityBot [NC]
+RewriteRule .* - [L]
+
+# Permite Meta-ExternalAgent (Meta AI)
+RewriteCond %{HTTP_USER_AGENT} Meta-ExternalAgent [NC]
+RewriteRule .* - [L]
+
+# Permite Google-Extended (Gemini/Bard)
+RewriteCond %{HTTP_USER_AGENT} Google-Extended [NC]
+RewriteRule .* - [L]
+
+# Permite Applebot-Extended (Apple Intelligence)
+RewriteCond %{HTTP_USER_AGENT} Applebot-Extended [NC]
+RewriteRule .* - [L]
+
+# Permite cohere-ai
+RewriteCond %{HTTP_USER_AGENT} cohere-ai [NC]
+RewriteRule .* - [L]
+
+# Permite YouBot (You.com)
+RewriteCond %{HTTP_USER_AGENT} YouBot [NC]
+RewriteRule .* - [L]
+
+# Permite Googlebot
+RewriteCond %{HTTP_USER_AGENT} Googlebot [NC]
+RewriteRule .* - [L]
+
+# Permite Bingbot
+RewriteCond %{HTTP_USER_AGENT} bingbot [NC]
+RewriteRule .* - [L]
+
+# =============================================================================
 # SECURITATE - Blocare acces la fisiere si directoare sensibile
 # =============================================================================
 
