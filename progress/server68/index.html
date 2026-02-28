@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scanbox.ro — Soluții Vizuale Profesionale</title>
+<title>Scanbox.ro — Soluții Vizuale Profesionale | Tur Virtual 3D Matterport</title>
+<meta name="description" content="Scanbox.ro - Reseller Oficial Matterport România. Tur Virtual 3D, Servicii Foto & Video B2B, Social Media, Sport Content, Randare 3D. WE ARE YOUR CONTENT CREATORS.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after {
@@ -45,7 +47,7 @@ img { max-width: 100%; display: block; }
   padding: 0 24px;
 }
 
-/* ===== ANIMATED BLOBS (global decorative) ===== */
+/* ===== ANIMATED BLOBS ===== */
 @keyframes blobMorph1 {
   0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(0, 0) scale(1); }
   25% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; transform: translate(20px, -30px) scale(1.05); }
@@ -88,6 +90,16 @@ img { max-width: 100%; display: block; }
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 20px rgba(4, 180, 148, 0.3); }
   50% { box-shadow: 0 0 40px rgba(4, 180, 148, 0.6); }
+}
+
+@keyframes scrollLogos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 /* ===== NAVBAR ===== */
@@ -138,10 +150,11 @@ img { max-width: 100%; display: block; }
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
-.navbar-links a {
+.navbar-links > a,
+.navbar-links > .nav-dropdown > a {
   font-size: 14px;
   font-weight: 500;
   color: #94A3B8;
@@ -149,7 +162,8 @@ img { max-width: 100%; display: block; }
   position: relative;
 }
 
-.navbar-links a::after {
+.navbar-links > a::after,
+.navbar-links > .nav-dropdown > a::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -161,17 +175,95 @@ img { max-width: 100%; display: block; }
   transition: width 0.3s ease;
 }
 
-.navbar-links a:hover {
+.navbar-links > a:hover,
+.navbar-links > .nav-dropdown:hover > a {
   color: #FFFFFF;
 }
 
-.navbar-links a:hover::after {
+.navbar-links > a:hover::after,
+.navbar-links > .nav-dropdown:hover > a::after {
   width: 100%;
+}
+
+/* Dropdown */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nav-dropdown > a svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover > a svg {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  background: rgba(13, 27, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #94A3B8;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.nav-dropdown-menu a:hover {
+  background: rgba(4, 180, 148, 0.1);
+  color: #FFFFFF;
+}
+
+.nav-dropdown-menu a::after {
+  display: none;
+}
+
+.nav-dropdown-menu svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.6;
 }
 
 .navbar-cta {
   background: linear-gradient(90deg, #04B494, #039B7E);
   color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 600;
   padding: 10px 22px;
@@ -234,14 +326,16 @@ img { max-width: 100%; display: block; }
   border-radius: 20px;
   padding: 24px;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 .mobile-menu.active {
   display: flex;
 }
 
-.mobile-menu a {
+.mobile-menu > a {
   font-size: 16px;
   font-weight: 500;
   color: #94A3B8;
@@ -250,13 +344,58 @@ img { max-width: 100%; display: block; }
   transition: color 0.3s ease;
 }
 
-.mobile-menu a:hover {
+.mobile-menu > a:hover {
   color: #FFFFFF;
+}
+
+.mobile-menu .mobile-dropdown-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #94A3B8;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu .mobile-dropdown-label:hover {
+  color: #FFFFFF;
+}
+
+.mobile-menu .mobile-dropdown-label svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu .mobile-dropdown-items {
+  display: none;
+  flex-direction: column;
+  padding-left: 16px;
+}
+
+.mobile-menu .mobile-dropdown-items.active {
+  display: flex;
+}
+
+.mobile-menu .mobile-dropdown-items a {
+  font-size: 14px;
+  color: #64748B;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: color 0.3s ease;
+}
+
+.mobile-menu .mobile-dropdown-items a:hover {
+  color: #04B494;
 }
 
 .mobile-menu .navbar-cta {
   text-align: center;
-  margin-top: 8px;
+  margin-top: 12px;
   display: block;
 }
 
@@ -269,7 +408,6 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  /* Mesh gradient background */
   background:
     radial-gradient(ellipse 60% 50% at 75% 20%, rgba(4, 180, 148, 0.15) 0%, transparent 60%),
     radial-gradient(ellipse 50% 60% at 20% 80%, rgba(40, 56, 104, 0.12) 0%, transparent 60%),
@@ -277,7 +415,6 @@ img { max-width: 100%; display: block; }
     linear-gradient(135deg, #0D1B2A 0%, #1A2B4A 50%, #0D1B2A 100%);
 }
 
-/* Animated mesh overlay */
 .hero::before {
   content: '';
   position: absolute;
@@ -289,7 +426,6 @@ img { max-width: 100%; display: block; }
   background-size: 200% 200%;
 }
 
-/* Floating blobs */
 .hero-blob {
   position: absolute;
   pointer-events: none;
@@ -335,7 +471,7 @@ img { max-width: 100%; display: block; }
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 820px;
+  max-width: 860px;
   padding: 0 24px;
   animation: fadeInUp 1s ease forwards;
 }
@@ -350,7 +486,7 @@ img { max-width: 100%; display: block; }
   padding: 8px 20px;
   font-size: 13px;
   font-weight: 500;
-  color: #039B7E;
+  color: #04B494;
   margin-bottom: 32px;
   backdrop-filter: blur(10px);
 }
@@ -358,7 +494,7 @@ img { max-width: 100%; display: block; }
 .hero-badge svg {
   width: 16px;
   height: 16px;
-  fill: #039B7E;
+  fill: #04B494;
 }
 
 .hero h1 {
@@ -366,25 +502,39 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -2px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.hero-subtitle {
-  font-size: clamp(16px, 1.8vw, 20px);
-  color: #94A3B8;
-  font-weight: 400;
-  line-height: 1.6;
+.hero-services {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 0;
   margin-bottom: 40px;
-  letter-spacing: 0.5px;
 }
 
-.hero-subtitle span {
-  color: rgba(255, 255, 255, 0.4);
-  margin: 0 4px;
+.hero-services a {
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: #94A3B8;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  padding: 4px 2px;
+}
+
+.hero-services a:hover {
+  color: #04B494;
+}
+
+.hero-services .sep {
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 8px;
+  font-weight: 300;
+  user-select: none;
 }
 
 .hero-buttons {
@@ -546,6 +696,8 @@ img { max-width: 100%; display: block; }
   padding: 36px 28px;
   transition: all 0.5s ease;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card::before {
@@ -590,7 +742,7 @@ img { max-width: 100%; display: block; }
 }
 
 .service-icon.blue {
-  background: linear-gradient(135deg, rgba(40, 56, 104, 0.2), rgba(45, 74, 122, 0.1));
+  background: linear-gradient(135deg, rgba(40, 56, 104, 0.3), rgba(45, 74, 122, 0.15));
 }
 
 .service-icon.mixed {
@@ -608,6 +760,7 @@ img { max-width: 100%; display: block; }
   font-size: 14px;
   color: #94A3B8;
   line-height: 1.7;
+  flex: 1;
 }
 
 .service-card .service-link {
@@ -625,25 +778,57 @@ img { max-width: 100%; display: block; }
   gap: 10px;
 }
 
-/* Bottom row centering for 2 cards */
-.services-grid .service-card:nth-child(4) {
-  grid-column: 1 / 2;
-  margin-left: auto;
+/* ===== LOGOS CAROUSEL ===== */
+.logos-section {
+  position: relative;
+  padding: 80px 0;
+  background: linear-gradient(180deg, #1d3155 0%, #1A2B4A 100%);
+  overflow: hidden;
 }
 
-.services-bottom-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  max-width: calc((100% - 24px) * 2 / 3 + 24px);
-  margin: 24px auto 0;
+.logos-track-wrapper {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.logos-track {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  animation: scrollLogos 30s linear infinite;
+  width: max-content;
+}
+
+.logo-placeholder {
+  width: 140px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.logo-placeholder:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(4, 180, 148, 0.2);
+  color: #94A3B8;
 }
 
 /* ===== HOW IT WORKS ===== */
 .how-section {
   position: relative;
   padding: 100px 0 120px;
-  background: linear-gradient(180deg, #1d3155 0%, #1A2B4A 50%, #172e52 100%);
+  background: linear-gradient(180deg, #1A2B4A 0%, #172e52 50%, #152540 100%);
 }
 
 .steps-wrapper {
@@ -686,7 +871,6 @@ img { max-width: 100%; display: block; }
   background-clip: text;
 }
 
-/* Curved connecting line */
 .step-connector {
   position: absolute;
   top: 36px;
@@ -715,89 +899,92 @@ img { max-width: 100%; display: block; }
   line-height: 1.7;
 }
 
-/* ===== PORTFOLIO ===== */
-.portfolio-section {
+/* ===== SPECIAL PROJECTS ===== */
+.special-section {
   position: relative;
   padding: 100px 0 120px;
-  background: linear-gradient(180deg, #172e52 0%, #152540 50%, #13213b 100%);
+  background: linear-gradient(180deg, #152540 0%, #13213b 50%, #162744 100%);
 }
 
-.portfolio-grid {
+.special-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
 }
 
-.portfolio-card {
+.special-card {
   position: relative;
-  border-radius: 24px;
-  overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 28px;
+  overflow: hidden;
   transition: all 0.5s ease;
-  cursor: pointer;
 }
 
-.portfolio-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(4, 180, 148, 0.3);
+.special-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(4, 180, 148, 0.2);
 }
 
-.portfolio-thumb {
-  width: 100%;
+.special-card-visual {
   height: 220px;
-  background: linear-gradient(135deg, #1A2B4A, #2D4A7A);
   position: relative;
   overflow: hidden;
-}
-
-.portfolio-thumb::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(13, 27, 42, 0.8) 100%);
-}
-
-.portfolio-thumb-inner {
-  position: absolute;
-  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
-  opacity: 0.3;
 }
 
-.portfolio-info {
-  padding: 24px;
+.special-card-visual.romania {
+  background: linear-gradient(135deg, #1A2B4A 0%, #2D4A7A 40%, #04B494 100%);
 }
 
-.portfolio-info h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
+.special-card-visual.pestera {
+  background: linear-gradient(135deg, #283868 0%, #1A2B4A 40%, #039B7E 100%);
 }
 
-.portfolio-info p {
-  font-size: 13px;
-  color: #94A3B8;
+.special-card-visual svg {
+  opacity: 0.2;
 }
 
-.portfolio-tag {
-  display: inline-block;
+.special-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(4, 180, 148, 0.2);
+  border: 1px solid rgba(4, 180, 148, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
+  padding: 6px 14px;
   font-size: 11px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   color: #04B494;
-  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* ===== TESTIMONIAL ===== */
+.special-card-body {
+  padding: 32px;
+}
+
+.special-card-body h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+
+.special-card-body p {
+  font-size: 14px;
+  color: #94A3B8;
+  line-height: 1.7;
+}
+
+/* ===== TESTIMONIALS SLIDER ===== */
 .testimonial-section {
   position: relative;
   padding: 120px 0;
-  background: linear-gradient(180deg, #13213b 0%, #162744 50%, #1A2B4A 100%);
+  background: linear-gradient(180deg, #162744 0%, #1A2B4A 50%, #152540 100%);
   overflow: hidden;
 }
 
@@ -813,11 +1000,20 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
-.testimonial-content {
-  text-align: center;
+.testimonial-slider {
+  position: relative;
   max-width: 720px;
   margin: 0 auto;
-  position: relative;
+}
+
+.testimonial-slide {
+  display: none;
+  text-align: center;
+}
+
+.testimonial-slide.active {
+  display: block;
+  animation: fadeInUp 0.5s ease;
 }
 
 .testimonial-quote-mark {
@@ -831,6 +1027,19 @@ img { max-width: 100%; display: block; }
   margin-bottom: 16px;
   display: block;
   opacity: 0.5;
+}
+
+.testimonial-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.testimonial-stars svg {
+  width: 20px;
+  height: 20px;
+  fill: #04B494;
 }
 
 .testimonial-text {
@@ -873,24 +1082,156 @@ img { max-width: 100%; display: block; }
   color: #94A3B8;
 }
 
-.testimonial-stars {
+.testimonial-dots {
   display: flex;
   justify-content: center;
-  gap: 4px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-top: 40px;
 }
 
-.testimonial-stars svg {
-  width: 20px;
-  height: 20px;
-  fill: #039B7E;
+.testimonial-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.testimonial-dot.active {
+  background: #04B494;
+  box-shadow: 0 0 12px rgba(4, 180, 148, 0.5);
+  transform: scale(1.2);
+}
+
+/* ===== BLOG PREVIEW ===== */
+.blog-section {
+  position: relative;
+  padding: 100px 0 120px;
+  background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #1d3155 100%);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.blog-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(4, 180, 148, 0.2);
+}
+
+.blog-card-thumb {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card-thumb.thumb-1 {
+  background: linear-gradient(135deg, #1A2B4A, #04B494);
+}
+
+.blog-card-thumb.thumb-2 {
+  background: linear-gradient(135deg, #283868, #2D4A7A);
+}
+
+.blog-card-thumb.thumb-3 {
+  background: linear-gradient(135deg, #2D4A7A, #039B7E);
+}
+
+.blog-card-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(13, 27, 42, 0.7) 100%);
+}
+
+.blog-card-thumb-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-card-thumb-icon svg {
+  opacity: 0.2;
+}
+
+.blog-card-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: rgba(4, 180, 148, 0.2);
+  border: 1px solid rgba(4, 180, 148, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #04B494;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.blog-card-body {
+  padding: 24px;
+}
+
+.blog-card-date {
+  font-size: 12px;
+  color: #64748B;
+  margin-bottom: 8px;
+}
+
+.blog-card-body h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.blog-card-body p {
+  font-size: 14px;
+  color: #94A3B8;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.blog-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #04B494;
+  transition: gap 0.3s ease;
+}
+
+.blog-card:hover .blog-card-link {
+  gap: 10px;
 }
 
 /* ===== CTA BANNER ===== */
 .cta-section {
   position: relative;
   padding: 40px 0 120px;
-  background: linear-gradient(180deg, #1A2B4A 0%, #152540 100%);
+  background: linear-gradient(180deg, #1d3155 0%, #152540 100%);
 }
 
 .cta-banner {
@@ -1049,6 +1390,15 @@ img { max-width: 100%; display: block; }
   line-height: 1.5;
 }
 
+.footer-contact-item a {
+  color: #94A3B8;
+  transition: color 0.3s ease;
+}
+
+.footer-contact-item a:hover {
+  color: #04B494;
+}
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 24px 0;
@@ -1079,17 +1429,46 @@ img { max-width: 100%; display: block; }
   color: #94A3B8;
 }
 
+/* ===== SLOGAN BANNER ===== */
+.slogan-banner {
+  padding: 48px 0;
+  text-align: center;
+  background: linear-gradient(180deg, #0D1B2A 0%, #111f36 100%);
+}
+
+.slogan-text {
+  font-size: clamp(16px, 2.5vw, 28px);
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #04B494, #039B7E, #283868, #04B494);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .services-bottom-row {
-    grid-template-columns: 1fr;
-    max-width: 100%;
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .blog-grid .blog-card:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin: 0 auto;
   }
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .special-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 
@@ -1107,9 +1486,6 @@ img { max-width: 100%; display: block; }
   .services-grid {
     grid-template-columns: 1fr;
   }
-  .services-bottom-row {
-    grid-template-columns: 1fr;
-  }
   .steps-wrapper {
     flex-direction: column;
     align-items: center;
@@ -1121,10 +1497,13 @@ img { max-width: 100%; display: block; }
   .step-item {
     max-width: 400px;
   }
-  .portfolio-grid {
+  .blog-grid {
     grid-template-columns: 1fr;
     max-width: 500px;
     margin: 0 auto;
+  }
+  .blog-grid .blog-card:nth-child(3) {
+    max-width: 100%;
   }
   .footer-grid {
     grid-template-columns: 1fr;
@@ -1156,6 +1535,16 @@ img { max-width: 100%; display: block; }
     left: 12px;
     right: 12px;
   }
+  .hero-services .sep {
+    display: none;
+  }
+  .hero-services {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-services a {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1164,6 +1553,9 @@ img { max-width: 100%; display: block; }
   }
   .hero h1 {
     letter-spacing: -1px;
+  }
+  .slogan-text {
+    letter-spacing: 3px;
   }
 }
 </style>
@@ -1177,11 +1569,43 @@ img { max-width: 100%; display: block; }
     scanbox
   </a>
   <div class="navbar-links">
-    <a href="#servicii">Servicii</a>
-    <a href="#portofoliu">Portofoliu</a>
-    <a href="#cum-functioneaza">Cum Funcționează</a>
+    <a href="#">Acasă</a>
+    <div class="nav-dropdown">
+      <a href="#servicii">
+        Servicii
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+      <div class="nav-dropdown-menu">
+        <a href="tur-virtual-3d.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          Tur Virtual 3D
+        </a>
+        <a href="servicii-foto.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Servicii Foto
+        </a>
+        <a href="servicii-video.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Servicii Video
+        </a>
+        <a href="sport-content.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          Sport Content
+        </a>
+        <a href="social-media.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Social Media
+        </a>
+        <a href="randare-3d.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Randare 3D
+        </a>
+      </div>
+    </div>
+    <a href="portofoliu.html">Portofoliu</a>
+    <a href="blog.html">Blog</a>
     <a href="#contact">Contact</a>
-    <button class="navbar-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Cere Ofertă</button>
+    <a href="#cta" class="navbar-cta">Cere Ofertă</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span>
@@ -1192,9 +1616,21 @@ img { max-width: 100%; display: block; }
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#servicii">Servicii</a>
-  <a href="#portofoliu">Portofoliu</a>
-  <a href="#cum-functioneaza">Cum Funcționează</a>
+  <a href="#">Acasă</a>
+  <div class="mobile-dropdown-label" id="mobileDropdownToggle">
+    Servicii
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="mobile-dropdown-items" id="mobileDropdownItems">
+    <a href="tur-virtual-3d.html">Tur Virtual 3D</a>
+    <a href="servicii-foto.html">Servicii Foto</a>
+    <a href="servicii-video.html">Servicii Video</a>
+    <a href="sport-content.html">Sport Content</a>
+    <a href="social-media.html">Social Media</a>
+    <a href="randare-3d.html">Randare 3D</a>
+  </div>
+  <a href="portofoliu.html">Portofoliu</a>
+  <a href="blog.html">Blog</a>
   <a href="#contact">Contact</a>
   <a href="#cta" class="navbar-cta">Cere Ofertă</a>
 </div>
@@ -1211,10 +1647,20 @@ img { max-width: 100%; display: block; }
       <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
       Reseller Oficial Matterport România
     </span>
-    <h1>Soluții Vizuale Profesionale pentru Afacerea Ta</h1>
-    <p class="hero-subtitle">
-      Tur Virtual 3D Matterport <span>|</span> Fotografie <span>|</span> Videografie <span>|</span> Social Media Management
-    </p>
+    <h1>Soluții Vizuale pentru Afacerea Ta</h1>
+    <div class="hero-services">
+      <a href="tur-virtual-3d.html">Tur Virtual 3D Matterport</a>
+      <span class="sep">|</span>
+      <a href="servicii-foto.html">Foto B2B</a>
+      <span class="sep">|</span>
+      <a href="servicii-video.html">Video B2B</a>
+      <span class="sep">|</span>
+      <a href="social-media.html">Social Media</a>
+      <span class="sep">|</span>
+      <a href="sport-content.html">Sport Content</a>
+      <span class="sep">|</span>
+      <a href="randare-3d.html">Randare 3D</a>
+    </div>
     <div class="hero-buttons">
       <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
         Cere Ofertă Gratuită
@@ -1228,24 +1674,29 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
+<!-- ===== SLOGAN ===== -->
+<div class="slogan-banner">
+  <p class="slogan-text">WE ARE YOUR CONTENT CREATORS</p>
+</div>
+
 <!-- ===== STATS ===== -->
 <section class="stats-section">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-number">500+</div>
+        <div class="stat-number" data-count="500">0</div>
         <div class="stat-label">Proiecte Livrate</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">150+</div>
+        <div class="stat-number" data-count="150">0</div>
         <div class="stat-label">Clienți Mulțumiți</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">7+</div>
+        <div class="stat-number" data-count="7">0</div>
         <div class="stat-label">Ani de Experiență</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">98%</div>
+        <div class="stat-number" data-count="98">0</div>
         <div class="stat-label">Rată de Satisfacție</div>
       </div>
     </div>
@@ -1256,71 +1707,120 @@ img { max-width: 100%; display: block; }
 <section class="services-section" id="servicii">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Ce Facem</span>
-      <h2 class="section-title">Serviciile Noastre</h2>
+      <span class="section-tag">Servicii</span>
+      <h2 class="section-title">Ce Facem pentru Afacerea Ta</h2>
       <p class="section-subtitle">Soluții complete de conținut vizual, de la scanări 3D la strategii de social media.</p>
     </div>
 
     <div class="services-grid">
-      <!-- Card 1 -->
-      <div class="service-card">
+      <!-- Card 1: Tur Virtual 3D Matterport -->
+      <a href="tur-virtual-3d.html" class="service-card">
         <div class="service-icon teal">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         </div>
         <h3>Tur Virtual 3D Matterport</h3>
         <p>Scanări 3D imersive care permit vizitatorilor să exploreze spații ca și cum ar fi acolo. Ideal pentru imobiliare, HoReCa și retail.</p>
         <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </div>
-      <!-- Card 2 -->
-      <div class="service-card">
+      </a>
+
+      <!-- Card 2: Servicii Foto B2B -->
+      <a href="servicii-foto.html" class="service-card">
         <div class="service-icon blue">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#283868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5B7FBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </div>
-        <h3>Fotografie Profesională</h3>
-        <p>Fotografii de înaltă calitate pentru imobiliare, produse, evenimente corporate și orice alt context vizual.</p>
+        <h3>Servicii Foto B2B</h3>
+        <p>Fotografii profesionale de înaltă calitate pentru imobiliare, produse, evenimente corporate și orice alt context vizual B2B.</p>
         <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </div>
-      <!-- Card 3 -->
-      <div class="service-card">
+      </a>
+
+      <!-- Card 3: Servicii Video B2B -->
+      <a href="servicii-video.html" class="service-card">
         <div class="service-icon teal">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
         </div>
-        <h3>Videografie & Drone</h3>
-        <p>Conținut video cinematic și filmare aeriană cu drone pentru prezentări immersive ale proiectelor tale.</p>
+        <h3>Servicii Video B2B</h3>
+        <p>Conținut video cinematic, filmare aeriană cu drone și editare profesională pentru prezentări de impact ale afacerii tale.</p>
         <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </div>
-    </div>
+      </a>
 
-    <!-- Bottom row — 2 cards centered -->
-    <div class="services-bottom-row">
-      <!-- Card 4 -->
-      <div class="service-card">
+      <!-- Card 4: Social Media -->
+      <a href="social-media.html" class="service-card">
         <div class="service-icon mixed">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3>Social Media</h3>
+        <p>Strategie completă de social media: creare conținut, programare postări, community management și raportare lunară detaliată.</p>
+        <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <!-- Card 5: Sport Content -->
+      <a href="sport-content.html" class="service-card">
+        <div class="service-icon blue">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5B7FBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <h3>Sport Content</h3>
+        <p>Conținut vizual dinamic pentru evenimente sportive, cluburi și federații. Foto, video și social media specializate pe sport.</p>
+        <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <!-- Card 6: Randare 3D -->
+      <a href="randare-3d.html" class="service-card">
+        <div class="service-icon teal">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <h3>Randare 3D & Plan Izometric</h3>
-        <p>Vizualizări 3D fotorealiste și planuri izometrice pentru arhitectură, design interior și dezvoltări imobiliare.</p>
+        <h3>Randare 3D</h3>
+        <p>Vizualizări 3D fotorealiste și planuri izometrice pentru arhitectură, design interior și dezvoltări imobiliare de top.</p>
         <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </div>
-      <!-- Card 5 -->
-      <div class="service-card">
-        <div class="service-icon blue">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#283868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
-        </div>
-        <h3>Social Media Management</h3>
-        <p>Strategie completă de social media: creare conținut, programare postări, community management și raportare lunară.</p>
-        <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOGOS CAROUSEL ===== -->
+<section class="logos-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Parteneri</span>
+      <h2 class="section-title">Am Colaborat cu Branduri de Top</h2>
+    </div>
+  </div>
+  <div class="logos-track-wrapper">
+    <div class="logos-track" id="logosTrack">
+      <div class="logo-placeholder">Cordia</div>
+      <div class="logo-placeholder">Lidl</div>
+      <div class="logo-placeholder">Kaufland</div>
+      <div class="logo-placeholder">Dedeman</div>
+      <div class="logo-placeholder">Renault</div>
+      <div class="logo-placeholder">Carrefour</div>
+      <div class="logo-placeholder">Orange</div>
+      <div class="logo-placeholder">Vodafone</div>
+      <div class="logo-placeholder">ING Bank</div>
+      <div class="logo-placeholder">BCR</div>
+      <div class="logo-placeholder">Mega Image</div>
+      <div class="logo-placeholder">Decathlon</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="logo-placeholder">Cordia</div>
+      <div class="logo-placeholder">Lidl</div>
+      <div class="logo-placeholder">Kaufland</div>
+      <div class="logo-placeholder">Dedeman</div>
+      <div class="logo-placeholder">Renault</div>
+      <div class="logo-placeholder">Carrefour</div>
+      <div class="logo-placeholder">Orange</div>
+      <div class="logo-placeholder">Vodafone</div>
+      <div class="logo-placeholder">ING Bank</div>
+      <div class="logo-placeholder">BCR</div>
+      <div class="logo-placeholder">Mega Image</div>
+      <div class="logo-placeholder">Decathlon</div>
     </div>
   </div>
 </section>
 
 <!-- ===== HOW IT WORKS ===== -->
-<section class="how-section" id="cum-functioneaza">
+<section class="how-section" id="cum-lucram">
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Proces Simplu</span>
-      <h2 class="section-title">Cum Funcționează</h2>
+      <h2 class="section-title">Cum Lucrăm</h2>
       <p class="section-subtitle">Trei pași simpli pentru rezultate vizuale excepționale.</p>
     </div>
 
@@ -1359,79 +1859,179 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
-<section class="portfolio-section" id="portofoliu">
+<!-- ===== SPECIAL PROJECTS ===== -->
+<section class="special-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Portofoliu</span>
-      <h2 class="section-title">Proiecte Recente</h2>
-      <p class="section-subtitle">O selecție din proiectele noastre cele mai recente și apreciate.</p>
+      <span class="section-tag">Proiecte Speciale</span>
+      <h2 class="section-title">Proiecte Unice</h2>
+      <p class="section-subtitle">Proiecte care depășesc limitele conținutului vizual tradițional.</p>
     </div>
 
-    <div class="portfolio-grid">
-      <!-- Project 1 -->
-      <div class="portfolio-card">
-        <div class="portfolio-thumb">
-          <div class="portfolio-thumb-inner">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-          </div>
+    <div class="special-grid">
+      <!-- Project 1: România Atractivă -->
+      <div class="special-card">
+        <div class="special-card-visual romania">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="special-card-badge">Proiect Național</div>
         </div>
-        <div class="portfolio-info">
-          <span class="portfolio-tag">Tur Virtual 3D</span>
-          <h3>Park 20 by Cordia</h3>
-          <p>Scanare completă Matterport pentru complex rezidențial premium din București.</p>
+        <div class="special-card-body">
+          <h3>Aplicația România Atractivă</h3>
+          <p>Peste 100 de tururi virtuale 3D pentru obiective turistice din România. Un proiect ambițios care aduce patrimoniul cultural și turistic al țării mai aproape de toți prin tehnologia Matterport.</p>
         </div>
       </div>
-      <!-- Project 2 -->
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #2D4A7A, #283868);">
-          <div class="portfolio-thumb-inner">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          </div>
+
+      <!-- Project 2: Peșteră -->
+      <div class="special-card">
+        <div class="special-card-visual pestera">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <div class="special-card-badge">Premieră Națională</div>
         </div>
-        <div class="portfolio-info">
-          <span class="portfolio-tag">Fotografie</span>
-          <h3>Spațiu de Birouri Modern</h3>
-          <p>Sesiune foto completă pentru un hub de coworking din centrul Bucureștiului.</p>
-        </div>
-      </div>
-      <!-- Project 3 -->
-      <div class="portfolio-card">
-        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #1A2B4A, #04B494);">
-          <div class="portfolio-thumb-inner">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          </div>
-        </div>
-        <div class="portfolio-info">
-          <span class="portfolio-tag">Videografie Drone</span>
-          <h3>Dezvoltare Imobiliară Nord</h3>
-          <p>Filmare aeriană cu drone și video de prezentare pentru proiect rezidențial nou.</p>
+        <div class="special-card-body">
+          <h3>Primul Tur Virtual 3D într-o Peșteră</h3>
+          <p>Proiectul Rural Karst by Exploratorii.org — o premieră națională în care am scanat 3D o peșteră din România, aducând mediul subteran în lumea digitală prin realitate virtuală imersivă.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== TESTIMONIAL ===== -->
+<!-- ===== TESTIMONIALS ===== -->
 <section class="testimonial-section">
   <div class="container">
-    <div class="testimonial-content">
-      <span class="testimonial-quote-mark">"</span>
-      <div class="testimonial-stars">
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+    <div class="section-header">
+      <span class="section-tag">Testimoniale</span>
+      <h2 class="section-title">Ce Spun Clienții Noștri</h2>
+    </div>
+
+    <div class="testimonial-slider" id="testimonialSlider">
+      <!-- Slide 1 -->
+      <div class="testimonial-slide active" data-slide="0">
+        <span class="testimonial-quote-mark">&ldquo;</span>
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          &bdquo;Colaborarea cu Scanbox a fost impecabilă. Turul virtual 3D realizat pentru proiectul nostru rezidențial a crescut semnificativ rata de conversie a vizitelor online în vizionări reale. Recomand cu încredere!&rdquo;
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AC</div>
+          <span class="testimonial-author-name">Ana Maria Cioclei</span>
+          <span class="testimonial-author-role">Director Marketing, Park 20 by Cordia</span>
+        </div>
       </div>
-      <p class="testimonial-text">
-        „Colaborarea cu Scanbox a fost impecabilă. Turul virtual 3D realizat pentru proiectul nostru rezidențial a crescut semnificativ rata de conversie a vizitelor online în vizionări reale. Recomand cu încredere!"
-      </p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">AC</div>
-        <span class="testimonial-author-name">Ana Maria Cioclei</span>
-        <span class="testimonial-author-role">Park 20 by Cordia</span>
+
+      <!-- Slide 2 -->
+      <div class="testimonial-slide" data-slide="1">
+        <span class="testimonial-quote-mark">&ldquo;</span>
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          &bdquo;Echipa Scanbox a livrat un conținut video excepțional pentru evenimentele noastre sportive. Profesionalismul și atenția la detalii ne-au impresionat de fiecare dată. Partenerul ideal pentru sport content!&rdquo;
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MP</div>
+          <span class="testimonial-author-name">Mihai Popescu</span>
+          <span class="testimonial-author-role">Manager Evenimente Sportive</span>
+        </div>
       </div>
+
+      <!-- Slide 3 -->
+      <div class="testimonial-slide" data-slide="2">
+        <span class="testimonial-quote-mark">&ldquo;</span>
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        </div>
+        <p class="testimonial-text">
+          &bdquo;De când colaborăm cu Scanbox pentru social media, engagement-ul pe paginile noastre a crescut cu peste 200%. Strategia lor e bine gândită și conținutul vizual e mereu de calitate superioară.&rdquo;
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">ED</div>
+          <span class="testimonial-author-name">Elena Dumitrescu</span>
+          <span class="testimonial-author-role">CEO, Boutique Hotel București</span>
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="testimonial-dots">
+        <button class="testimonial-dot active" data-index="0" aria-label="Testimonial 1"></button>
+        <button class="testimonial-dot" data-index="1" aria-label="Testimonial 2"></button>
+        <button class="testimonial-dot" data-index="2" aria-label="Testimonial 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG PREVIEW ===== -->
+<section class="blog-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Blog</span>
+      <h2 class="section-title">Ultimele Articole</h2>
+      <p class="section-subtitle">Noutăți, sfaturi și studii de caz din lumea conținutului vizual.</p>
+    </div>
+
+    <div class="blog-grid">
+      <!-- Blog Card 1 -->
+      <a href="blog.html" class="blog-card">
+        <div class="blog-card-thumb thumb-1">
+          <div class="blog-card-thumb-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <span class="blog-card-category">Tur Virtual 3D</span>
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-date">15 Februarie 2026</span>
+          <h3>Cum Tururile Virtuale 3D Transformă Industria Imobiliară</h3>
+          <p>Descoperă cum tehnologia Matterport revoluționează modul în care proprietățile sunt prezentate și vândute.</p>
+          <span class="blog-card-link">Citește mai mult <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Blog Card 2 -->
+      <a href="blog.html" class="blog-card">
+        <div class="blog-card-thumb thumb-2">
+          <div class="blog-card-thumb-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <span class="blog-card-category">Fotografie</span>
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-date">28 Ianuarie 2026</span>
+          <h3>5 Tipuri de Fotografii Esențiale pentru Orice Afacere</h3>
+          <p>De la fotografii de produs la imagini corporate, află care sunt cele mai importante tipuri de conținut foto B2B.</p>
+          <span class="blog-card-link">Citește mai mult <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Blog Card 3 -->
+      <a href="blog.html" class="blog-card">
+        <div class="blog-card-thumb thumb-3">
+          <div class="blog-card-thumb-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <span class="blog-card-category">Social Media</span>
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-date">10 Ianuarie 2026</span>
+          <h3>Tendințe Social Media 2026: Ce Trebuie Să Știi</h3>
+          <p>Cele mai importante tendințe în social media pentru anul 2026 și cum le poți integra în strategia ta de marketing.</p>
+          <span class="blog-card-link">Citește mai mult <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1442,10 +2042,10 @@ img { max-width: 100%; display: block; }
     <div class="cta-banner">
       <h2>Ai un proiect? Hai să vorbim!</h2>
       <p>Solicită o ofertă personalizată și descoperă cum putem transforma vizual afacerea ta.</p>
-      <button class="btn-white">
+      <a href="mailto:office@scanbox.ro" class="btn-white">
         Contactează-ne Acum
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      </a>
     </div>
   </div>
 </section>
@@ -1460,19 +2060,27 @@ img { max-width: 100%; display: block; }
           <div class="logo-icon">S</div>
           scanbox
         </a>
-        <p>Soluții vizuale profesionale care transformă modul în care clienții tăi experimentează spațiile și produsele tale.</p>
+        <p>Soluții vizuale profesionale care transformă modul în care clienții tăi experimentează spațiile și produsele tale. WE ARE YOUR CONTENT CREATORS.</p>
         <div class="footer-socials">
           <!-- Instagram -->
-          <a href="#" aria-label="Instagram">
+          <a href="https://www.instagram.com/scanbox.ro/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
-          <!-- LinkedIn -->
-          <a href="#" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
           <!-- Facebook -->
-          <a href="#" aria-label="Facebook">
+          <a href="https://www.facebook.com/scanbox.ro" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@scanbox.ro" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@scanbox" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/scanbox-ro/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
         </div>
       </div>
@@ -1481,11 +2089,12 @@ img { max-width: 100%; display: block; }
       <div class="footer-col">
         <h4>Servicii</h4>
         <ul>
-          <li><a href="#">Tur Virtual 3D</a></li>
-          <li><a href="#">Fotografie Profesională</a></li>
-          <li><a href="#">Videografie & Drone</a></li>
-          <li><a href="#">Randare 3D</a></li>
-          <li><a href="#">Social Media</a></li>
+          <li><a href="tur-virtual-3d.html">Tur Virtual 3D</a></li>
+          <li><a href="servicii-foto.html">Servicii Foto B2B</a></li>
+          <li><a href="servicii-video.html">Servicii Video B2B</a></li>
+          <li><a href="social-media.html">Social Media</a></li>
+          <li><a href="sport-content.html">Sport Content</a></li>
+          <li><a href="randare-3d.html">Randare 3D</a></li>
         </ul>
       </div>
 
@@ -1494,8 +2103,8 @@ img { max-width: 100%; display: block; }
         <h4>Companie</h4>
         <ul>
           <li><a href="#">Despre Noi</a></li>
-          <li><a href="#">Portofoliu</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="portofoliu.html">Portofoliu</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="#">Cariere</a></li>
           <li><a href="#">Politica de Confidențialitate</a></li>
         </ul>
@@ -1506,15 +2115,15 @@ img { max-width: 100%; display: block; }
         <h4>Contact</h4>
         <div class="footer-contact-item">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" fill="none" stroke="#04B494" stroke-width="2"/></svg>
-          <span>office@scanbox.ro</span>
-        </div>
-        <div class="footer-contact-item">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="none" stroke="#0D1B2A" stroke-width="2"/></svg>
-          <span>București, România</span>
+          <span><a href="mailto:office@scanbox.ro">office@scanbox.ro</a></span>
         </div>
         <div class="footer-contact-item">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          <span>+40 7XX XXX XXX</span>
+          <span><a href="tel:+40740233353">0740 233 353</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="none" stroke="#0D1B2A" stroke-width="2"/></svg>
+          <span>Str. Moroeni 60D, Sector 2, București</span>
         </div>
         <div class="footer-contact-item">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14" fill="none" stroke="#0D1B2A" stroke-width="2"/></svg>
@@ -1527,6 +2136,7 @@ img { max-width: 100%; display: block; }
       <p>&copy; 2018-2026 Trivit Services SRL. Toate drepturile rezervate.</p>
       <div class="footer-bottom-links">
         <a href="#">Termeni și Condiții</a>
+        <a href="#">Politica de Confidențialitate</a>
         <a href="#">GDPR</a>
         <a href="#">Cookies</a>
       </div>
@@ -1563,6 +2173,73 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
+// Mobile dropdown toggle
+const mobileDropdownToggle = document.getElementById('mobileDropdownToggle');
+const mobileDropdownItems = document.getElementById('mobileDropdownItems');
+
+mobileDropdownToggle.addEventListener('click', () => {
+  mobileDropdownItems.classList.toggle('active');
+  const svg = mobileDropdownToggle.querySelector('svg');
+  if (mobileDropdownItems.classList.contains('active')) {
+    svg.style.transform = 'rotate(180deg)';
+  } else {
+    svg.style.transform = 'rotate(0deg)';
+  }
+});
+
+// Testimonial slider
+const slides = document.querySelectorAll('.testimonial-slide');
+const dots = document.querySelectorAll('.testimonial-dot');
+let currentSlide = 0;
+let slideInterval;
+
+function goToSlide(index) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = index;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+function nextSlide() {
+  goToSlide((currentSlide + 1) % slides.length);
+}
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    clearInterval(slideInterval);
+    goToSlide(parseInt(dot.dataset.index));
+    slideInterval = setInterval(nextSlide, 6000);
+  });
+});
+
+slideInterval = setInterval(nextSlide, 6000);
+
+// Counter animation
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-count]');
+  counters.forEach(counter => {
+    const target = parseInt(counter.dataset.count);
+    const duration = 2000;
+    const startTime = performance.now();
+    const suffix = target === 98 ? '%' : '+';
+
+    function updateCounter(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeOut * target);
+      counter.textContent = current + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    }
+
+    requestAnimationFrame(updateCounter);
+  });
+}
+
 // Intersection Observer for fade-in animations
 const observerOptions = {
   threshold: 0.15,
@@ -1579,14 +2256,14 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Apply fade-in to key elements
-document.querySelectorAll('.stat-item, .service-card, .step-item, .portfolio-card, .testimonial-content, .cta-banner').forEach(el => {
+document.querySelectorAll('.stat-item, .service-card, .step-item, .special-card, .testimonial-slider, .blog-card, .cta-banner').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
   observer.observe(el);
 });
 
-// Stagger the animation delays for grid items
+// Stagger animation delays for grid items
 document.querySelectorAll('.stats-grid .stat-item').forEach((el, i) => {
   el.style.transitionDelay = `${i * 0.1}s`;
 });
@@ -1595,29 +2272,49 @@ document.querySelectorAll('.services-grid .service-card').forEach((el, i) => {
   el.style.transitionDelay = `${i * 0.1}s`;
 });
 
-document.querySelectorAll('.services-bottom-row .service-card').forEach((el, i) => {
-  el.style.transitionDelay = `${(i + 3) * 0.1}s`;
-});
-
 document.querySelectorAll('.steps-wrapper .step-item').forEach((el, i) => {
   el.style.transitionDelay = `${i * 0.15}s`;
 });
 
-document.querySelectorAll('.portfolio-grid .portfolio-card').forEach((el, i) => {
+document.querySelectorAll('.special-grid .special-card').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.15}s`;
+});
+
+document.querySelectorAll('.blog-grid .blog-card').forEach((el, i) => {
   el.style.transitionDelay = `${i * 0.1}s`;
 });
+
+// Counter observer
+const statsSection = document.querySelector('.stats-section');
+let counterAnimated = false;
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !counterAnimated) {
+      counterAnimated = true;
+      animateCounters();
+    }
+  });
+}, { threshold: 0.3 });
+
+if (statsSection) {
+  counterObserver.observe(statsSection);
+}
 
 // Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 </script>
+
+<script src="js/main.js"></script>
 
 </body>
 </html>

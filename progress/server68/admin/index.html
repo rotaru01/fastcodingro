@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanbox Admin — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0D1B2A;color:#fff;min-height:100vh;display:flex}
+a{text-decoration:none;color:inherit}
+
+/* Login */
+.login-screen{position:fixed;inset:0;background:#0D1B2A;display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:48px;max-width:400px;width:100%;text-align:center}
+.login-box h1{font-size:28px;margin-bottom:8px}
+.login-box p{color:#94A3B8;font-size:14px;margin-bottom:32px}
+.login-box input{width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;margin-bottom:16px}
+.login-box input:focus{outline:none;border-color:rgba(4,180,148,0.5)}
+.login-box button{width:100%;padding:14px;background:linear-gradient(90deg,#04B494,#039B7E);color:#fff;border:none;border-radius:14px;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;cursor:pointer}
+.login-box .error{color:#ef4444;font-size:13px;margin-top:8px;display:none}
+
+/* Sidebar */
+.sidebar{width:260px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.06);padding:24px 16px;flex-shrink:0;display:flex;flex-direction:column}
+.sidebar-logo{font-size:20px;font-weight:800;padding:8px 12px;margin-bottom:32px;display:flex;align-items:center;gap:8px}
+.sidebar-logo span{width:32px;height:32px;background:linear-gradient(135deg,#04B494,#039B7E);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.sidebar nav a{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:500;color:#94A3B8;transition:all 0.2s;margin-bottom:4px}
+.sidebar nav a:hover,.sidebar nav a.active{background:rgba(4,180,148,0.1);color:#fff}
+.sidebar nav a.active{border-left:3px solid #04B494}
+.sidebar nav a svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.sidebar-footer{margin-top:auto;padding:16px;border-top:1px solid rgba(255,255,255,0.06)}
+.sidebar-footer a{font-size:13px;color:#94A3B8;display:flex;align-items:center;gap:8px}
+
+/* Main */
+.main{flex:1;padding:32px;overflow-y:auto}
+.main h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.main .subtitle{color:#94A3B8;font-size:15px;margin-bottom:32px}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:40px}
+.stat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:24px}
+.stat-card .label{font-size:13px;color:#94A3B8;margin-bottom:8px}
+.stat-card .value{font-size:32px;font-weight:800;background:linear-gradient(90deg,#04B494,#039B7E);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* Table */
+.table-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:24px;margin-bottom:24px}
+.table-card h3{font-size:18px;font-weight:700;margin-bottom:16px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#94A3B8;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06)}
+td{padding:12px 16px;font-size:14px;color:#E2E8F0;border-bottom:1px solid rgba(255,255,255,0.03)}
+tr:hover td{background:rgba(255,255,255,0.02)}
+
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-green{background:rgba(4,180,148,0.15);color:#04B494}
+.badge-yellow{background:rgba(234,179,8,0.15);color:#eab308}
+.badge-gray{background:rgba(148,163,184,0.15);color:#94A3B8}
+
+/* Quick actions */
+.actions-row{display:flex;gap:12px;margin-bottom:32px}
+.action-btn{padding:10px 24px;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s;border:none}
+.action-btn.primary{background:linear-gradient(90deg,#04B494,#039B7E);color:#fff}
+.action-btn.secondary{background:rgba(255,255,255,0.05);color:#fff;border:1px solid rgba(255,255,255,0.1)}
+.action-btn:hover{transform:translateY(-2px)}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1>Scanbox Admin</h1>
+    <p>Introdu parola pentru a accesa panoul de administrare</p>
+    <input type="password" id="loginPass" placeholder="Parola" autofocus>
+    <button onclick="doLogin()">Autentificare</button>
+    <div class="error" id="loginError">Parolă incorectă</div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo"><span>S</span> Admin</div>
+  <nav>
+    <a href="index.html" class="active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Dashboard</a>
+    <a href="blog-editor.html"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Articole Blog</a>
+    <a href="gallery.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Galerie & Conținut</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="../">← Înapoi la site</a>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="main" id="mainContent">
+  <h1>Dashboard</h1>
+  <p class="subtitle">Bun venit în panoul de administrare Scanbox.ro</p>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="label">Articole Blog</div><div class="value" id="countPosts">0</div></div>
+    <div class="stat-card"><div class="label">Imagini Galerie</div><div class="value" id="countGallery">0</div></div>
+    <div class="stat-card"><div class="label">Testimoniale</div><div class="value" id="countTestimonials">0</div></div>
+    <div class="stat-card"><div class="label">Logo-uri Clienți</div><div class="value" id="countLogos">0</div></div>
+  </div>
+
+  <div class="actions-row">
+    <a href="blog-editor.html" class="action-btn primary">+ Articol Nou</a>
+    <a href="gallery.html" class="action-btn secondary">+ Adaugă în Galerie</a>
+    <a href="gallery.html#testimoniale" class="action-btn secondary">+ Testimonial Nou</a>
+  </div>
+
+  <div class="table-card">
+    <h3>Articole Recente</h3>
+    <table>
+      <thead><tr><th>Titlu</th><th>Categorie</th><th>Dată</th><th>Status</th></tr></thead>
+      <tbody id="recentPosts"><tr><td colspan="4" style="color:#94A3B8;text-align:center">Niciun articol încă</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="table-card">
+    <h3>Testimoniale Recente</h3>
+    <table>
+      <thead><tr><th>Nume</th><th>Companie</th><th>Rating</th></tr></thead>
+      <tbody id="recentTestimonials"><tr><td colspan="3" style="color:#94A3B8;text-align:center">Niciun testimonial încă</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const PASS_KEY='scanbox_admin_pass';
+const DEFAULT_PASS='scanbox2026';
+
+function doLogin(){
+  const pass=document.getElementById('loginPass').value;
+  const stored=localStorage.getItem(PASS_KEY)||DEFAULT_PASS;
+  if(pass===stored){
+    sessionStorage.setItem('scanbox_auth','1');
+    document.getElementById('loginScreen').style.display='none';
+  } else {
+    document.getElementById('loginError').style.display='block';
+  }
+}
+
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+
+if(sessionStorage.getItem('scanbox_auth')==='1'){
+  document.getElementById('loginScreen').style.display='none';
+}
+
+function loadDashboard(){
+  const posts=JSON.parse(localStorage.getItem('scanbox_blog_posts')||'[]');
+  const gallery=JSON.parse(localStorage.getItem('scanbox_gallery')||'[]');
+  const testimonials=JSON.parse(localStorage.getItem('scanbox_testimonials')||'[]');
+  const logos=JSON.parse(localStorage.getItem('scanbox_logos')||'[]');
+
+  document.getElementById('countPosts').textContent=posts.length;
+  document.getElementById('countGallery').textContent=gallery.length;
+  document.getElementById('countTestimonials').textContent=testimonials.length;
+  document.getElementById('countLogos').textContent=logos.length;
+
+  const tbody=document.getElementById('recentPosts');
+  if(posts.length){
+    tbody.innerHTML=posts.slice(-5).reverse().map(p=>`<tr><td>${p.title}</td><td>${p.category||'-'}</td><td>${p.date||'-'}</td><td><span class="badge ${p.status==='published'?'badge-green':'badge-yellow'}">${p.status==='published'?'Publicat':'Ciornă'}</span></td></tr>`).join('');
+  }
+
+  const tbody2=document.getElementById('recentTestimonials');
+  if(testimonials.length){
+    tbody2.innerHTML=testimonials.slice(-5).reverse().map(t=>`<tr><td>${t.name}</td><td>${t.company||'-'}</td><td>${'★'.repeat(t.rating||5)}</td></tr>`).join('');
+  }
+}
+
+loadDashboard();
+</script>
+</body>
+</html>

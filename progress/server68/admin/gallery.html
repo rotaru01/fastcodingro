@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanbox Admin — Galerie & Conținut</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0D1B2A;color:#fff;min-height:100vh;display:flex}
+a{text-decoration:none;color:inherit}
+.sidebar{width:260px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.06);padding:24px 16px;flex-shrink:0;display:flex;flex-direction:column}
+.sidebar-logo{font-size:20px;font-weight:800;padding:8px 12px;margin-bottom:32px;display:flex;align-items:center;gap:8px}
+.sidebar-logo span{width:32px;height:32px;background:linear-gradient(135deg,#04B494,#039B7E);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.sidebar nav a{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:500;color:#94A3B8;transition:all 0.2s;margin-bottom:4px}
+.sidebar nav a:hover,.sidebar nav a.active{background:rgba(4,180,148,0.1);color:#fff}
+.sidebar nav a.active{border-left:3px solid #04B494}
+.sidebar nav a svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.sidebar-footer{margin-top:auto;padding:16px;border-top:1px solid rgba(255,255,255,0.06)}
+.sidebar-footer a{font-size:13px;color:#94A3B8}
+.main{flex:1;padding:32px;overflow-y:auto}
+.main h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.subtitle{color:#94A3B8;font-size:15px;margin-bottom:24px}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;margin-bottom:24px;background:rgba(255,255,255,0.03);border-radius:14px;padding:4px}
+.tab{padding:10px 24px;border-radius:12px;font-size:14px;font-weight:500;color:#94A3B8;cursor:pointer;transition:all 0.2s;border:none;background:none;font-family:'Inter',sans-serif}
+.tab.active{background:linear-gradient(90deg,#04B494,#039B7E);color:#fff}
+.tab:hover:not(.active){color:#fff}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:24px;margin-bottom:24px}
+
+.btn{padding:10px 24px;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s}
+.btn-primary{background:linear-gradient(90deg,#04B494,#039B7E);color:#fff}
+.btn-secondary{background:rgba(255,255,255,0.05);color:#fff;border:1px solid rgba(255,255,255,0.1)}
+.btn-danger{background:rgba(239,68,68,0.1);color:#ef4444;font-size:12px;padding:6px 12px}
+.btn-sm{font-size:12px;padding:6px 16px}
+.btn:hover{transform:translateY(-1px)}
+
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:#94A3B8;margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-size:14px}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:rgba(4,180,148,0.5)}
+.form-group select option{background:#1A2B4A}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-inline{display:flex;gap:12px;align-items:flex-end}
+.form-inline .form-group{flex:1}
+
+/* Grid items */
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:20px}
+.grid-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;position:relative}
+.grid-item img{width:100%;height:140px;object-fit:cover;display:block}
+.grid-item .no-img{height:140px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1A2B4A,#2D4A7A);font-size:32px;opacity:0.3}
+.grid-item-info{padding:12px}
+.grid-item-info p{font-size:13px;font-weight:600;margin-bottom:4px}
+.grid-item-info small{font-size:11px;color:#94A3B8}
+.grid-item .delete-btn{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,0.8);color:#fff;border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s}
+.grid-item:hover .delete-btn{opacity:1}
+
+/* Testimonials list */
+.testimonial-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:16px;padding:20px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:flex-start}
+.testimonial-item .text{font-size:14px;color:#E2E8F0;line-height:1.6;font-style:italic;margin-bottom:8px}
+.testimonial-item .author{font-size:13px;color:#94A3B8}
+.testimonial-item .stars{color:#04B494;margin-bottom:4px}
+
+/* Logos */
+.logos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-top:20px}
+.logo-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center;position:relative}
+.logo-item img{max-height:50px;max-width:100%;margin:0 auto 8px;display:block}
+.logo-item .no-img{height:50px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#94A3B8;margin-bottom:8px}
+.logo-item p{font-size:12px;color:#94A3B8}
+.logo-item .delete-btn{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;background:rgba(239,68,68,0.8);color:#fff;border:none;cursor:pointer;font-size:12px;opacity:0;transition:opacity 0.2s}
+.logo-item:hover .delete-btn{opacity:1}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+
+@media(max-width:768px){.sidebar{display:none}.form-row,.form-inline{grid-template-columns:1fr;flex-direction:column}.items-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo"><span>S</span> Admin</div>
+  <nav>
+    <a href="index.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Dashboard</a>
+    <a href="blog-editor.html"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Articole Blog</a>
+    <a href="gallery.html" class="active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Galerie & Conținut</a>
+  </nav>
+  <div class="sidebar-footer"><a href="../">← Înapoi la site</a></div>
+</aside>
+
+<div class="main">
+  <h1>Galerie & Conținut</h1>
+  <p class="subtitle">Gestionează galeria foto, testimonialele și logo-urile clienților</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('gallery')">Galerie Foto</button>
+    <button class="tab" onclick="switchTab('testimonials')">Testimoniale</button>
+    <button class="tab" onclick="switchTab('logos')">Logo-uri Clienți</button>
+  </div>
+
+  <!-- GALLERY TAB -->
+  <div class="tab-content active" id="tab-gallery">
+    <div class="card">
+      <h3 style="margin-bottom:16px">Adaugă imagine</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Titlu</label><input type="text" id="galTitle" placeholder="Titlu imagine"></div>
+        <div class="form-group"><label>Categorie</label>
+          <select id="galCategory"><option value="corporate">Corporate & Brand</option><option value="comercial">Comercială & Industrială</option><option value="culinar">Culinară & Produs</option><option value="imobiliar">Imobiliară & Arhitectură</option><option value="sport">Sport</option><option value="general">General</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>URL imagine</label><input type="text" id="galUrl" placeholder="https://..."></div>
+        <div class="form-group"><label>Text alternativ</label><input type="text" id="galAlt" placeholder="Descriere pentru SEO"></div>
+      </div>
+      <button class="btn btn-primary" onclick="addGalleryItem()">Adaugă în galerie</button>
+    </div>
+    <div class="toolbar"><span id="galCount" style="color:#94A3B8;font-size:14px">0 imagini</span></div>
+    <div class="items-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- TESTIMONIALS TAB -->
+  <div class="tab-content" id="tab-testimonials">
+    <div class="card">
+      <h3 style="margin-bottom:16px">Adaugă testimonial</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Nume</label><input type="text" id="testName" placeholder="Nume client"></div>
+        <div class="form-group"><label>Companie / Rol</label><input type="text" id="testCompany" placeholder="Compania sau rolul"></div>
+      </div>
+      <div class="form-group"><label>Testimonial</label><textarea id="testText" rows="3" placeholder="Ce a spus clientul..." style="min-height:80px"></textarea></div>
+      <div class="form-inline">
+        <div class="form-group"><label>Rating (1-5)</label>
+          <select id="testRating"><option value="5">★★★★★ (5)</option><option value="4">★★★★☆ (4)</option><option value="3">★★★☆☆ (3)</option></select>
+        </div>
+        <button class="btn btn-primary" onclick="addTestimonial()" style="margin-bottom:16px;flex-shrink:0">Adaugă</button>
+      </div>
+    </div>
+    <div id="testimonialsList"></div>
+  </div>
+
+  <!-- LOGOS TAB -->
+  <div class="tab-content" id="tab-logos">
+    <div class="card">
+      <h3 style="margin-bottom:16px">Adaugă logo client</h3>
+      <p style="font-size:13px;color:#94A3B8;margin-bottom:16px">Aceste logo-uri vor apărea pe pagina principală și pe pagina Sport Content</p>
+      <div class="form-row">
+        <div class="form-group"><label>Nume companie</label><input type="text" id="logoName" placeholder="Numele companiei"></div>
+        <div class="form-group"><label>URL logo</label><input type="text" id="logoUrl" placeholder="https://..."></div>
+      </div>
+      <div class="form-group"><label>Link website (opțional)</label><input type="text" id="logoLink" placeholder="https://..."></div>
+      <button class="btn btn-primary" onclick="addLogo()">Adaugă logo</button>
+    </div>
+    <div class="logos-grid" id="logosGrid"></div>
+  </div>
+</div>
+
+<script>
+if(!sessionStorage.getItem('scanbox_auth')){window.location.href='index.html'}
+
+function switchTab(tab){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+// Check URL hash for direct tab
+if(window.location.hash==='#testimoniale')switchTab('testimonials');
+if(window.location.hash==='#logos')switchTab('logos');
+
+// === GALLERY ===
+function getGallery(){return JSON.parse(localStorage.getItem('scanbox_gallery')||'[]')}
+function saveGallery(d){localStorage.setItem('scanbox_gallery',JSON.stringify(d))}
+
+function addGalleryItem(){
+  const title=document.getElementById('galTitle').value.trim();
+  const url=document.getElementById('galUrl').value.trim();
+  if(!title||!url){alert('Titlu și URL sunt obligatorii');return}
+  const items=getGallery();
+  items.push({title,url,category:document.getElementById('galCategory').value,alt:document.getElementById('galAlt').value.trim(),addedAt:new Date().toISOString()});
+  saveGallery(items);
+  document.getElementById('galTitle').value='';document.getElementById('galUrl').value='';document.getElementById('galAlt').value='';
+  renderGallery();
+}
+
+function deleteGalleryItem(i){
+  const items=getGallery();items.splice(i,1);saveGallery(items);renderGallery();
+}
+
+function renderGallery(){
+  const items=getGallery();
+  document.getElementById('galCount').textContent=items.length+' imagini';
+  document.getElementById('galleryGrid').innerHTML=items.map((item,i)=>`
+    <div class="grid-item">
+      <button class="delete-btn" onclick="deleteGalleryItem(${i})">×</button>
+      ${item.url?`<img src="${item.url}" alt="${item.alt||item.title}" onerror="this.parentElement.innerHTML='<div class=no-img>📷</div><div class=grid-item-info><p>${item.title}</p><small>${item.category}</small></div>'">`:`<div class="no-img">📷</div>`}
+      <div class="grid-item-info"><p>${item.title}</p><small>${item.category}</small></div>
+    </div>
+  `).join('')||'<p style="color:#94A3B8;grid-column:1/-1;text-align:center;padding:32px">Nicio imagine în galerie</p>';
+}
+
+// === TESTIMONIALS ===
+function getTestimonials(){return JSON.parse(localStorage.getItem('scanbox_testimonials')||'[]')}
+function saveTestimonials(d){localStorage.setItem('scanbox_testimonials',JSON.stringify(d))}
+
+function addTestimonial(){
+  const name=document.getElementById('testName').value.trim();
+  const text=document.getElementById('testText').value.trim();
+  if(!name||!text){alert('Nume și testimonial sunt obligatorii');return}
+  const items=getTestimonials();
+  items.push({name,company:document.getElementById('testCompany').value.trim(),text,rating:parseInt(document.getElementById('testRating').value)});
+  saveTestimonials(items);
+  document.getElementById('testName').value='';document.getElementById('testCompany').value='';document.getElementById('testText').value='';
+  renderTestimonials();
+}
+
+function deleteTestimonial(i){
+  const items=getTestimonials();items.splice(i,1);saveTestimonials(items);renderTestimonials();
+}
+
+function renderTestimonials(){
+  const items=getTestimonials();
+  document.getElementById('testimonialsList').innerHTML=items.map((t,i)=>`
+    <div class="testimonial-item">
+      <div style="flex:1">
+        <div class="stars">${'★'.repeat(t.rating||5)}${'☆'.repeat(5-(t.rating||5))}</div>
+        <div class="text">„${t.text}"</div>
+        <div class="author"><strong>${t.name}</strong>${t.company?' · '+t.company:''}</div>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="deleteTestimonial(${i})">Șterge</button>
+    </div>
+  `).join('')||'<p style="color:#94A3B8;text-align:center;padding:32px">Niciun testimonial încă</p>';
+}
+
+// === LOGOS ===
+function getLogos(){return JSON.parse(localStorage.getItem('scanbox_logos')||'[]')}
+function saveLogos(d){localStorage.setItem('scanbox_logos',JSON.stringify(d))}
+
+function addLogo(){
+  const name=document.getElementById('logoName').value.trim();
+  if(!name){alert('Numele este obligatoriu');return}
+  const items=getLogos();
+  items.push({name,url:document.getElementById('logoUrl').value.trim(),link:document.getElementById('logoLink').value.trim()});
+  saveLogos(items);
+  document.getElementById('logoName').value='';document.getElementById('logoUrl').value='';document.getElementById('logoLink').value='';
+  renderLogos();
+}
+
+function deleteLogo(i){
+  const items=getLogos();items.splice(i,1);saveLogos(items);renderLogos();
+}
+
+function renderLogos(){
+  const items=getLogos();
+  document.getElementById('logosGrid').innerHTML=items.map((l,i)=>`
+    <div class="logo-item">
+      <button class="delete-btn" onclick="deleteLogo(${i})">×</button>
+      ${l.url?`<img src="${l.url}" alt="${l.name}" onerror="this.outerHTML='<div class=no-img>${l.name.substring(0,2).toUpperCase()}</div>'">`:`<div class="no-img">${l.name.substring(0,2).toUpperCase()}</div>`}
+      <p>${l.name}</p>
+    </div>
+  `).join('')||'<p style="color:#94A3B8;grid-column:1/-1;text-align:center;padding:32px">Niciun logo încă</p>';
+}
+
+renderGallery();renderTestimonials();renderLogos();
+</script>
+</body>
+</html>
