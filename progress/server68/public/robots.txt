@@ -1,0 +1,60 @@
+# Scanbox.ro — Robots.txt
+# Permite indexarea de catre motoarele de cautare si crawlerele AI
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /src/
+Disallow: /logs/
+Disallow: /database/
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# AI Crawlers — Permisi explicit
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Sitemap
+Sitemap: https://scanbox.ro/sitemap.xml
+
+# LLMs.txt
+# https://scanbox.ro/llms.txt
+# https://scanbox.ro/llms-full.txt

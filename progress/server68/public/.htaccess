@@ -1,0 +1,238 @@
+# =============================================================================
+# Scanbox.ro - Configurare Apache (.htaccess)
+#
+# Toate cererile sunt directionate catre public/index.php (Front Controller).
+# Include: reguli de rescriere URL, headere de securitate, compresie gzip,
+# cache pentru resurse statice, protectie fisiere sensibile si redirectari.
+# =============================================================================
+
+# Activam motorul de rescriere URL
+RewriteEngine On
+
+# Setam directorul de baza
+RewriteBase /
+
+# =============================================================================
+# SECURITATE - Blocare acces la fisiere si directoare sensibile
+# =============================================================================
+
+# Blocam accesul la fisierele ascunse (ex: .env, .git)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Blocam accesul la fisiere de configurare si log
+<FilesMatch "\.(ini|log|conf|sql|sh|bak|swp|dist)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Blocam accesul direct la fisierele PHP din src/, config/, logs/
+RewriteRule ^(src|config|logs|database|vendor)/ - [F,L]
+
+# Blocam accesul la composer.json, composer.lock, package.json
+RewriteRule ^(composer\.(json|lock)|package\.json|package-lock\.json)$ - [F,L]
+
+# =============================================================================
+# HEADERE DE SECURITATE
+# =============================================================================
+
+<IfModule mod_headers.c>
+    # Previne sniffing-ul tipului de continut
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Previne incadrarea in iframe (clickjacking)
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Activeaza protectia XSS a browserului
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Politica referrer - trimite doar originea
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Politica de permisiuni - restrictii functionalitati browser
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+
+    # Strict Transport Security - forteaza HTTPS timp de 1 an
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.googletagmanager.com https://my.matterport.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://my.matterport.com https://www.youtube.com https://player.vimeo.com; connect-src 'self' https://www.google-analytics.com;"
+
+    # Eliminam headerul X-Powered-By
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>
+
+# =============================================================================
+# COMPRESIE GZIP
+# =============================================================================
+
+<IfModule mod_deflate.c>
+    # Compresie pentru tipurile de continut text
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# =============================================================================
+# CACHE RESURSE STATICE
+# =============================================================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Imagini - cache 1 luna
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Fonturi - cache 1 an
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+
+    # CSS si JS - cache 1 saptamana
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+
+    # Video - cache 1 luna
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
+
+    # HTML si date - fara cache
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# Cache-Control headers pentru resurse statice
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpg|jpeg|png|gif|webp|svg|woff|woff2|ttf|otf)$">
+        Header set Cache-Control "public, max-age=2592000, immutable"
+    </FilesMatch>
+
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+
+    <FilesMatch "\.(html|php)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>
+
+# =============================================================================
+# REDIRECTARI 301 DE LA URL-URI VECHI WIX
+# =============================================================================
+
+# Redirectari de la structura Wix la noile URL-uri
+RewriteRule ^tur-virtual-3d/?$ /servicii/tur-virtual-3d [R=301,L]
+RewriteRule ^fotografie-imobiliara/?$ /servicii/fotografie [R=301,L]
+RewriteRule ^fotografie/?$ /servicii/fotografie [R=301,L]
+RewriteRule ^videografie/?$ /servicii/videografie-drone [R=301,L]
+RewriteRule ^videografie-drone/?$ /servicii/videografie-drone [R=301,L]
+RewriteRule ^randare-3d/?$ /servicii/randare-3d [R=301,L]
+RewriteRule ^social-media-content/?$ /servicii/social-media [R=301,L]
+RewriteRule ^portfolio/?$ /portofoliu [R=301,L]
+RewriteRule ^about/?$ /despre-noi [R=301,L]
+RewriteRule ^about-us/?$ /despre-noi [R=301,L]
+
+# Redirectare pagini Wix cu _escaped_fragment
+RewriteCond %{QUERY_STRING} _escaped_fragment_= [NC]
+RewriteRule ^(.*)$ /$1? [R=301,L]
+
+# =============================================================================
+# FORTEAZA HTTPS
+# =============================================================================
+
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# =============================================================================
+# ELIMINARE www (canonical URL)
+# =============================================================================
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# =============================================================================
+# FRONT CONTROLLER - Toate cererile catre index.php
+# =============================================================================
+
+# Nu rescriem daca fisierul sau directorul exista fizic
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Directionam totul catre front controller
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# =============================================================================
+# DIVERSE CONFIGURARI
+# =============================================================================
+
+# Dezactivam listarea directoarelor
+Options -Indexes
+
+# Dezactivam server signature
+ServerSignature Off
+
+# Setam charset-ul implicit
+AddDefaultCharset UTF-8
+
+# Setam tipul MIME pentru WebP
+AddType image/webp .webp
+
+# Setam tipul MIME pentru fonturi
+AddType font/woff .woff
+AddType font/woff2 .woff2
+AddType font/ttf .ttf
+AddType font/otf .otf
+
+# Limitam dimensiunea maxima a upload-ului la 10 MB
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 12M
+    php_value max_execution_time 60
+    php_value max_input_time 60
+    php_value memory_limit 128M
+</IfModule>
+
+# Prevenim accesul la fisierele de backup
+<FilesMatch "(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
