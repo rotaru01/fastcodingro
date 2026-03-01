@@ -3,14 +3,15 @@
  * API: Trimitere formular de contact
  * POST /api/contact-submit
  *
- * Parametri POST:
- *   - csrf_token: token CSRF
+ * Acest fisier este inclus prin front controller (public/index.php)
+ * care deja a pornit sesiunea si a incarcat config/autoloader.
+ *
+ * Parametri JSON/POST:
  *   - name: numele expeditorului
  *   - email: adresa de email
  *   - phone: (opțional) telefon
  *   - service: (opțional) serviciul selectat
  *   - message: textul mesajului
- *   - website_url: câmp honeypot (trebuie gol)
  *
  * Returnează JSON cu rezultatul operației
  */
@@ -19,7 +20,7 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
 
-session_start();
+// Sesiunea este deja pornita de front controller - nu apelam session_start()
 
 // Verificare metodă
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -116,22 +117,18 @@ if (!empty($errors)) {
 }
 
 try {
-    require_once __DIR__ . '/../config/config.php';
-    require_once __DIR__ . '/../config/constants.php';
-    require_once __DIR__ . '/../src/Core/Database.php';
-    require_once __DIR__ . '/../src/Models/Message.php';
-
+    // Config si autoloader sunt deja incarcate de front controller
     $messageModel = new \Scanbox\Models\Message();
 
     $messageData = [
-        'name'       => $name,
-        'email'      => $email,
-        'phone'      => $phone,
+        'name'             => $name,
+        'email'            => $email,
+        'phone'            => $phone,
         'service_interest' => $service,
-        'message'    => $message,
-        'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
-        'user_agent' => mb_substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 500),
-        'status'     => 'new',
+        'message'          => $message,
+        'ip_address'       => $_SERVER['REMOTE_ADDR'] ?? '',
+        'user_agent'       => mb_substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 500),
+        'status'           => 'new',
     ];
 
     $messageId = $messageModel->create($messageData);

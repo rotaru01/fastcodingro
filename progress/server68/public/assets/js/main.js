@@ -151,16 +151,22 @@ function initContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (res.ok) {
+      const result = await res.json();
+      if (res.ok && result.success) {
         btn.innerHTML = 'Trimis cu succes! ✓';
         btn.style.background = 'linear-gradient(90deg, #04B494, #039B7E)';
         form.reset();
         setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; }, 3000);
-      } else { throw new Error(); }
-    } catch {
-      btn.innerHTML = 'Eroare. Încercați din nou.';
+      } else {
+        btn.innerHTML = result.message || 'Eroare. Încercați din nou.';
+        btn.style.background = '#ef4444';
+        setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; btn.style.background = ''; }, 4000);
+      }
+    } catch (err) {
+      console.error('Contact form error:', err);
+      btn.innerHTML = 'Eroare de conexiune. Încercați din nou.';
       btn.style.background = '#ef4444';
-      setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; btn.style.background = ''; }, 3000);
+      setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; btn.style.background = ''; }, 4000);
     }
   });
 }
