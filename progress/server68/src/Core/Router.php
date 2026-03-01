@@ -39,6 +39,12 @@ class Router
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $path = parse_url($uri, PHP_URL_PATH) ?? '/';
 
+        /** Eliminam base path-ul (pentru instalare in subfolder) */
+        $basePath = defined('BASE_URL_PATH') ? BASE_URL_PATH : '';
+        if ($basePath && str_starts_with($path, $basePath)) {
+            $path = substr($path, strlen($basePath));
+        }
+
         /** Eliminam trailing slash, dar pastram root */
         $path = rtrim($path, '/') ?: '/';
 
