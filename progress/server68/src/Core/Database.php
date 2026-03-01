@@ -16,6 +16,9 @@ namespace Scanbox\Core;
 
 class Database
 {
+    /** @var self|null Instanta singleton */
+    private static ?self $instance = null;
+
     /** @var \PDO Instanta conexiunii PDO */
     private \PDO $pdo;
 
@@ -32,6 +35,19 @@ class Database
     {
         $this->pdo = \DatabaseConnection::getInstance();
         $this->logFile = __DIR__ . '/../../logs/error.log';
+    }
+
+    /**
+     * Returneaza instanta singleton a clasei Database
+     *
+     * @return self
+     */
+    public static function getInstance(): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     /**
