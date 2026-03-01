@@ -56,7 +56,7 @@ class AdminController
         $recentActivity = $db->fetchAll(
             "SELECT al.*, u.name as user_name
              FROM activity_log al
-             LEFT JOIN users u ON al.user_id = u.id
+             LEFT JOIN admins u ON al.user_id = u.id
              ORDER BY al.created_at DESC
              LIMIT 10"
         );
@@ -69,7 +69,7 @@ class AdminController
             'totalGalleryImages' => $totalGalleryImages,
             'recentMessages' => $recentMessages,
             'recentActivity' => $recentActivity,
-        ]);
+        ], null);
     }
 
     /**
@@ -90,7 +90,7 @@ class AdminController
             'title' => 'Articole Blog - Admin Scanbox.ro',
             'posts' => $posts,
             'currentStatus' => $status,
-        ]);
+        ], null);
     }
 
     /**
@@ -150,7 +150,7 @@ class AdminController
             'categories' => $categories,
             'csrfToken' => $csrfToken,
             'formAction' => '/admin/blog/new',
-        ]);
+        ], null);
     }
 
     /**
@@ -221,7 +221,7 @@ class AdminController
             'categories' => $categories,
             'csrfToken' => $csrfToken,
             'formAction' => "/admin/blog/edit/{$id}",
-        ]);
+        ], null);
     }
 
     /**
@@ -274,7 +274,7 @@ class AdminController
         view('admin/gallery/index', [
             'title' => 'Galerie - Admin Scanbox.ro',
             'galleries' => $galleriesWithItems,
-        ]);
+        ], null);
     }
 
     /**
@@ -364,7 +364,7 @@ class AdminController
             'projects' => $projects,
             'categories' => $categories,
             'currentCategory' => $categoryFilter,
-        ]);
+        ], null);
     }
 
     /**
@@ -427,7 +427,7 @@ class AdminController
             'categories' => $categories,
             'csrfToken' => $csrfToken,
             'formAction' => '/admin/portfolio/new',
-        ]);
+        ], null);
     }
 
     /**
@@ -497,7 +497,7 @@ class AdminController
             'categories' => $categories,
             'csrfToken' => $csrfToken,
             'formAction' => "/admin/portfolio/edit/{$id}",
-        ]);
+        ], null);
     }
 
     /**
@@ -605,7 +605,7 @@ class AdminController
             'title' => 'Testimoniale - Admin Scanbox.ro',
             'testimonials' => $testimonials,
             'csrfToken' => $this->generateCsrf(),
-        ]);
+        ], null);
     }
 
     /**
@@ -686,7 +686,7 @@ class AdminController
             'title' => 'Clienți - Admin Scanbox.ro',
             'clients' => $clients,
             'csrfToken' => $this->generateCsrf(),
-        ]);
+        ], null);
     }
 
     /**
@@ -707,7 +707,7 @@ class AdminController
             'title' => 'Mesaje - Admin Scanbox.ro',
             'messages' => $messages,
             'currentStatus' => $status,
-        ]);
+        ], null);
     }
 
     /**
@@ -734,7 +734,7 @@ class AdminController
             'title' => 'Mesaj de la ' . htmlspecialchars($message['name']) . ' - Admin Scanbox.ro',
             'message' => $message,
             'csrfToken' => $this->generateCsrf(),
-        ]);
+        ], null);
     }
 
     /**
@@ -765,7 +765,7 @@ class AdminController
             'title' => 'Setări - Admin Scanbox.ro',
             'settings' => $settings,
             'csrfToken' => $this->generateCsrf(),
-        ]);
+        ], null);
     }
 
     /**
@@ -784,7 +784,7 @@ class AdminController
             'packages' => $packages,
             'services' => $services,
             'csrfToken' => $this->generateCsrf(),
-        ]);
+        ], null);
     }
 
     /**

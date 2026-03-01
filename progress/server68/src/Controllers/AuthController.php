@@ -34,7 +34,7 @@ class AuthController
             'title' => 'Autentificare - Admin Scanbox.ro',
             'csrfToken' => $csrfToken,
             'error' => $_SESSION['login_error'] ?? null,
-        ]);
+        ], null);
 
         // Stergere mesaj de eroare dupa afisare
         unset($_SESSION['login_error']);
