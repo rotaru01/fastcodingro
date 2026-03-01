@@ -17,34 +17,37 @@ include __DIR__ . '/../components/hero.php';
 ?>
 
 <!-- ===== CONTACT SECTION ===== -->
-<section class="contact-section" style="padding: 80px 0;">
+<section class="contact-section" lang="ro">
   <div class="container">
-    <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto;">
+    <p style="border-left: 3px solid #04B494; padding-left: 16px; color: #CBD5E1; font-size: 15px; line-height: 1.8; margin: 0 0 40px 0;">
+      Sediul Scanbox este in Str. Moroeni 60D, Sector 2, București, România. Compania oferă servicii in toată România și Republica Moldova. Program de lucru: Luni-Vineri, 09:00-18:00. Contact: office@scanbox.ro, telefon 0740 233 353.
+    </p>
+    <div class="contact-grid">
 
       <!-- Left: Contact Info -->
       <div class="contact-info">
-        <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 16px;">Informații de Contact</h2>
-        <p style="color: #94A3B8; line-height: 1.7; margin-bottom: 32px;">Suntem aici să te ajutăm cu orice întrebare legată de serviciile noastre. Contactează-ne prin oricare din metodele de mai jos sau completează formularul.</p>
+        <h2>Informații de Contact</h2>
+        <p>Suntem aici să te ajutăm cu orice întrebare legată de serviciile noastre. Contactează-ne prin oricare din metodele de mai jos sau completează formularul.</p>
 
         <!-- E-mail -->
-        <div class="contact-detail" style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;">
-          <div style="width: 44px; height: 44px; background: rgba(4,180,148,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 9L2 4"/></svg>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 9L2 4"/></svg>
           </div>
           <div>
-            <span style="font-weight: 600; display: block;">office@scanbox.ro</span>
-            <small style="color: #94A3B8; font-size: 13px;">E-mail</small>
+            <span>office@scanbox.ro</span>
+            <small>E-mail</small>
           </div>
         </div>
 
         <!-- Telefon -->
-        <div class="contact-detail" style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding: 16px 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;">
-          <div style="width: 44px; height: 44px; background: rgba(4,180,148,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
           </div>
           <div>
-            <span style="font-weight: 600; display: block;">0740 233 353</span>
-            <small style="color: #94A3B8; font-size: 13px;">Telefon</small>
+            <span>0740 233 353</span>
+            <small>Telefon</small>
           </div>
         </div>
 
@@ -87,12 +90,8 @@ include __DIR__ . '/../components/hero.php';
 
       <!-- Right: Contact Form -->
       <div class="contact-form">
-        <form id="contactForm" action="/api/contact-submit" method="POST">
-          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
-          <!-- Honeypot anti-spam -->
-          <div style="position:absolute;left:-9999px;"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
-
-          <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <form id="contactForm">
+          <div class="form-row">
             <div class="form-group">
               <label for="name">Nume</label>
               <input type="text" id="name" name="name" placeholder="Numele tău" required>
@@ -102,7 +101,7 @@ include __DIR__ . '/../components/hero.php';
               <input type="email" id="email" name="email" placeholder="adresa@email.com" required>
             </div>
           </div>
-          <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-row">
             <div class="form-group">
               <label for="phone">Telefon</label>
               <input type="tel" id="phone" name="phone" placeholder="07XX XXX XXX">
@@ -129,62 +128,9 @@ include __DIR__ . '/../components/hero.php';
             Trimite Mesajul
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </button>
-          <div id="formResponse" style="margin-top: 16px; text-align: center; display: none;"></div>
         </form>
       </div>
 
     </div>
   </div>
 </section>
-
-<style>
-@media (max-width: 768px) {
-  .contact-grid { grid-template-columns: 1fr !important; }
-}
-.form-group { margin-bottom: 16px; }
-.form-group label { display: block; font-size: 14px; font-weight: 500; color: #94A3B8; margin-bottom: 8px; }
-.form-group input, .form-group textarea, .form-group select {
-  width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
-  color: #fff; font-family: 'Inter', sans-serif; font-size: 15px; transition: border-color 0.3s;
-}
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-  outline: none; border-color: rgba(4,180,148,0.5);
-}
-.form-group select option { background: #1A2B4A; color: #fff; }
-</style>
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('button[type="submit"]');
-  const resp = document.getElementById('formResponse');
-  btn.disabled = true;
-  btn.innerHTML = 'Se trimite...';
-
-  const formData = new FormData(this);
-  fetch(this.action, {
-    method: 'POST',
-    body: formData,
-    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-  })
-  .then(r => r.json())
-  .then(data => {
-    resp.style.display = 'block';
-    if (data.success) {
-      resp.innerHTML = '<p style="color:#04B494;font-weight:600;">'+data.message+'</p>';
-      this.reset();
-    } else {
-      resp.innerHTML = '<p style="color:#ef4444;font-weight:600;">'+(data.message||'Eroare la trimitere.')+'</p>';
-    }
-  })
-  .catch(() => {
-    resp.style.display = 'block';
-    resp.innerHTML = '<p style="color:#ef4444;font-weight:600;">Eroare de conexiune. Încearcă din nou.</p>';
-  })
-  .finally(() => {
-    btn.disabled = false;
-    btn.innerHTML = 'Trimite Mesajul <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
-  });
-});
-</script>

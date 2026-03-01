@@ -7,156 +7,152 @@
  * @var array  $galleries - galeriile de tip sport [{gallery, items}]
  * @var array  $settings  - setarile site-ului
  */
-$metaDescription = 'Conținut vizual profesional pentru evenimente și branduri sportive: fotografie, video, reels. Experiență dovedită cu branduri din industria sportivă.';
+$metaDescription = 'Scanbox.ro oferă servicii sport content in București: fotografie sport profesională, video product in action și reels pentru evenimente sportive. Clienți: Keysport, Crosul Arenelor, Sport Guru, Share Your Run. Trăim sportul, nu doar il documentăm.';
 ?>
 
-<?php
-$heroType = 'page';
-$heroBadge = 'Sport Content';
-$heroBadgeIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg>';
-$heroTitle = 'Sport Content';
-$heroSubtitle = 'Conținut vizual dedicat sportului și evenimentelor sportive';
-include __DIR__ . '/../components/hero.php';
-?>
-
-<!-- ===== INTRO ===== -->
-<section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 80px 0;">
-  <div class="container">
-    <div class="section-header">
-      <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;">
-        Suntem specializați în crearea de conținut vizual pentru industria sportivă. De la evenimente și competiții, la produse și branduri — surprindem energia și pasiunea din fiecare moment.
-      </p>
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="page-hero-content">
+    <span class="hero-badge">&#127939; Sport Content</span>
+    <h1>Noi Nu Doar Document&#259;m Sportul. Tr&#259;im Sportul.</h1>
+    <p>Fotografie sport, video product in action &#537;i reels pentru evenimente sportive &#8212; cadre construite s&#259; spun&#259; o poveste!</p>
+    <div class="hero-buttons">
+      <a href="/contact" class="btn-primary">Solicită Ofertă <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#categorii" class="btn-outline">Vezi Serviciile <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
     </div>
   </div>
 </section>
 
-<!-- ===== CATEGORII ===== -->
-<section class="content-section" style="padding: 80px 0;">
+<!-- INTRO -->
+<section class="content-section" lang="ro" style="background:linear-gradient(180deg,#0D1B2A,#152540)">
   <div class="container">
+    <p style="border-left: 3px solid #04B494; padding-left: 16px; color: #CBD5E1; font-size: 15px; line-height: 1.8; margin: 24px 0;">
+      Scanbox.ro oferă 3 categorii de sport content: Fotografie Sport pentru evenimente și competiții, Video Product in Action pentru echipamente sportive și Reels Evenimente pentru activări de brand. Clienți: Keysport, Crosul Arenelor, Sport Guru, Share Your Run, Tenis Club AS.
+    </p>
+    <div class="section-header">
+      <span class="section-tag">Pasiunea noastră</span>
+      <h2 class="section-title">Sport, energie și autenticitate</h2>
+    </div>
+    <div style="max-width:800px;margin:0 auto;text-align:center">
+      <p style="font-size:17px;color:#94A3B8;line-height:1.8;margin-bottom:24px">Suntem sportivi amatori, alergăm, pedalăm și participăm la curse de anduranță, așa că știm exact ce momente contează și cum să le surprindem autentic și original.</p>
+      <p style="font-size:17px;color:#94A3B8;line-height:1.8;margin-bottom:24px">Fie că vorbim de fotografie la evenimente sportive, materiale video de tip product in action sau short reels pentru activări sportive, abordarea noastră este aceeași: <strong style="color:#E2E8F0">mișcare, energie și dinamism</strong>, cadre construite să spună o poveste!</p>
+      <p style="font-size:17px;color:#E2E8F0;line-height:1.8;font-style:italic">Livrăm experiența sportului, a performanței și a pasiunii, surprinsă așa cum trebuie: din mișcare, din interior, cu ochiul unui sportiv care știe să vadă ceea ce contează.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categorii" class="content-section" style="background:linear-gradient(180deg,#152540,#1A2B4A)">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Ce oferim</span>
+      <h2 class="section-title">Servicii Sport Content</h2>
+    </div>
 
     <!-- Fotografie Sport -->
-    <div class="content-grid">
+    <div class="content-grid" style="margin-bottom:80px">
       <div class="content-text">
-        <div class="section-tag">01</div>
-        <h2>Fotografie Sport</h2>
-        <p>Fotografie de acțiune pentru competiții, antrenamente și evenimente sportive. Surprindem momentele decisive cu echipamente rapide și experimentate.</p>
-        <ul style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Fotografie de acțiune high-speed
-          </li>
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Portrete sportivi & echipe
-          </li>
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Fotografie de eveniment sportiv
-          </li>
-        </ul>
+        <h3>Fotografie Sport</h3>
+        <h2>Surprindem emoția, viteza și energia competițiilor</h2>
+        <p>De la alergare și trail running, la ciclism și nu numai! De la start și până la linia finish, imortalizăm acțiunea sportivilor, efortul lor și atmosfera evenimentului.</p>
+        <p>Fiind sportivi amatori și participanți în propriile curse, știm exact ce momente merită surprinse și cum să arătăm efortul și pasiunea într-un cadru dinamic și autentic.</p>
+        <p><strong style="color:#E2E8F0">Rezultatul:</strong> imagini profesioniste, expresive și versatile, perfecte pentru promovare, social media, care transmit pasiunea pentru performanță, efortul și bucuria sportivilor.</p>
+        <a href="/contact" class="btn-primary btn-sm" style="margin-top:16px">Solicită Ofertă</a>
       </div>
       <div class="content-visual">
-        <svg viewBox="0 0 500 400" style="width:100%;background:#1A2B4A;border-radius:16px;">
-          <rect width="500" height="400" fill="#1A2B4A" rx="16"/>
-          <text x="250" y="200" text-anchor="middle" fill="#283868" font-size="28" font-family="Inter,sans-serif">Sport Foto</text>
-        </svg>
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:64px;opacity:0.3">&#128248;</div>
       </div>
     </div>
 
     <!-- Video Product in Action -->
-    <div class="content-grid reversed" style="margin-top: 80px;">
+    <div class="content-grid reversed" style="margin-bottom:80px">
       <div class="content-text">
-        <div class="section-tag">02</div>
-        <h2>Video Product in Action</h2>
-        <p>Prezentarea echipamentelor și produselor sportive în mediul lor natural. Videoclipuri dinamice care arată produsul în acțiune.</p>
-        <ul style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Filmare slow-motion
-          </li>
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Product showcase dinamic
-          </li>
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Editare cu grafice și motion
-          </li>
-        </ul>
+        <h3>Video „Product in Action"</h3>
+        <h2>Fiecare produs are o poveste</h2>
+        <p>Noi o transformăm într-un material video dinamic. Începem cu un scenariu personalizat, gândit să evidențieze funcționalitatea, designul și modul în care produsul inspiră performanță.</p>
+        <p>Fie că filmăm încălțăminte, echipamente sau haine sportive, produse de nutriție, indoor sau outdoor, fiecare cadru este planificat pentru a surprinde exact ceea ce îți dorești să transmiți în online.</p>
+        <a href="/contact" class="btn-primary btn-sm" style="margin-top:16px">Solicită Ofertă</a>
       </div>
-      <div class="content-visual">
-        <svg viewBox="0 0 500 400" style="width:100%;background:#1A2B4A;border-radius:16px;">
-          <rect width="500" height="400" fill="#1A2B4A" rx="16"/>
-          <text x="250" y="200" text-anchor="middle" fill="#283868" font-size="28" font-family="Inter,sans-serif">Product Video</text>
-        </svg>
+      <div class="content-visual" style="flex-direction:column;gap:16px;padding:16px">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DP8ZIdPCA02/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote>
       </div>
     </div>
 
     <!-- Reels Evenimente Sport -->
-    <div class="content-grid" style="margin-top: 80px;">
+    <div class="content-grid" style="margin-bottom:40px">
       <div class="content-text">
-        <div class="section-tag">03</div>
-        <h2>Reels & Evenimente Sport</h2>
-        <p>Conținut video scurt pentru social media, recap-uri de eveniment și highlight-uri. Optimizat pentru Instagram, TikTok și YouTube Shorts.</p>
-        <ul style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Reels & TikTok-uri virale
-          </li>
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Event recap video
-          </li>
-          <li style="display: flex; align-items: center; gap: 8px; color: #94A3B8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Behind-the-scenes content
-          </li>
-        </ul>
+        <h3>Reels Evenimente Sport & Activări Brand</h3>
+        <h2>Conținut scurt, captivant și dinamic</h2>
+        <p>Transformăm evenimentele și activările sportive în conținut special pentru social media. Începem cu un scenariu creativ, adaptat obiectivelor brandului tău, astfel încât fiecare cadru să surprindă emoția, energia și acțiunea participanților.</p>
+        <p>Fiind sportivi amatori și participanți activi în curse de running și ciclism, știm exact ce detalii contează și cum să le redăm autentic, astfel încât fiecare short video să inspire, să motiveze și să crească engagementul cu brandul tău.</p>
+        <a href="/contact" class="btn-primary btn-sm" style="margin-top:16px">Solicită Ofertă</a>
       </div>
-      <div class="content-visual">
-        <svg viewBox="0 0 500 400" style="width:100%;background:#1A2B4A;border-radius:16px;">
-          <rect width="500" height="400" fill="#1A2B4A" rx="16"/>
-          <text x="250" y="200" text-anchor="middle" fill="#283868" font-size="28" font-family="Inter,sans-serif">Reels Sport</text>
-        </svg>
+      <div class="content-visual" style="flex-direction:column;gap:16px;padding:16px">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSVU-PsiJ0T/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ===== QUOTE ===== -->
-<section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 60px 0;">
-  <div class="container" style="text-align: center;">
-    <blockquote style="max-width: 700px; margin: 0 auto; font-size: 20px; font-style: italic; color: #CBD5E1; line-height: 1.8;">
-      "Sportul este emoție pură. Noi o transformăm în conținut vizual care inspiră și motivează."
-    </blockquote>
-    <p style="color: #04B494; margin-top: 16px; font-weight: 600;">— Echipa Scanbox</p>
+<!-- Quote -->
+<section class="content-section" style="background:linear-gradient(180deg,#1A2B4A,#1d3155);padding:80px 0">
+  <div class="container" style="text-align:center;max-width:800px">
+    <p style="font-size:clamp(20px,2.5vw,28px);color:#E2E8F0;line-height:1.6;font-style:italic">„Experiența noastră ca participanți la curse ne permite să anticipăm momentele cheie și să surprindem tot ce contează pentru public și brand."</p>
+    <p style="color:#04B494;font-weight:600;margin-top:16px">— Echipa Scanbox</p>
   </div>
 </section>
 
-<!-- ===== PARTENERI SPORT ===== -->
-<?php if (!empty($galleries)): ?>
-<section class="content-section" style="padding: 80px 0;">
+<!-- LOGOS -->
+<section class="logos-section" style="background:linear-gradient(180deg,#1d3155,#172e52)">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        Parteneri Sport
-      </span>
+      <span class="section-tag">Parteneri</span>
+      <h2 class="section-title">Au încredere în noi</h2>
     </div>
-    <div class="logos-track">
-      <?php foreach ($galleries as $galleryData): ?>
-        <?php foreach ($galleryData['items'] ?? [] as $item): ?>
-        <div class="logo-placeholder">
-          <?php if (!empty($item['url'])): ?>
-          <img src="<?= htmlspecialchars($item['url']) ?>" alt="<?= htmlspecialchars($item['title'] ?? '') ?>" loading="lazy">
-          <?php else: ?>
-          <span><?= htmlspecialchars($item['title'] ?? '') ?></span>
-          <?php endif; ?>
-        </div>
-        <?php endforeach; ?>
-      <?php endforeach; ?>
+    <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap">
+      <div class="logo-placeholder">Keysport</div>
+      <div class="logo-placeholder">Crosul Arenelor</div>
+      <div class="logo-placeholder">Sport Guru</div>
+      <div class="logo-placeholder">Share Your Run</div>
+      <div class="logo-placeholder">Tenis Club AS</div>
     </div>
   </div>
 </section>
-<?php endif; ?>
+
+<!-- CTA -->
+<section class="cta-section" style="background:linear-gradient(180deg,#172e52,#152540)">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Ai un eveniment sportiv? Hai să vorbim!</h2>
+      <p>Contactează-ne pentru o ofertă personalizată de sport content.</p>
+      <a href="/contact" class="btn-white">Contactează-ne <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="content-section" lang="ro" style="background:linear-gradient(180deg,#152540,#152540);padding:80px 0">
+  <div class="container" style="max-width:800px">
+    <div class="section-header">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Întrebări Frecvente</h2>
+    </div>
+    <div itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-toggle">
+          <span itemprop="name">Ce servicii sport content oferă Scanbox?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text" style="padding:0 24px 20px;color:#94A3B8;font-size:15px;line-height:1.8;">
+            3 categorii: Fotografie Sport, Product in Action, Reels Evenimente. Clienți: Keysport, Crosul Arenelor, Sport Guru, Share Your Run, Tenis Club AS.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<?php $extraScripts = '<script async src="//www.instagram.com/embed.js"></script>'; ?>

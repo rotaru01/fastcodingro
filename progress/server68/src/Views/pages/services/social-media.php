@@ -10,255 +10,247 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Servicii complete de social media management: strategie, creare conținut, administrare pagini, reels și stories pentru Instagram, Facebook, TikTok.';
+$metaDescription = 'Scanbox.ro oferă pachete social media lunare in București: administrare platforme de la 250 euro, creare conținut vizual de la 350 euro și soluție completă de la 450 euro. Instagram, Facebook, TikTok, LinkedIn, YouTube — strategie, conținut foto-video și consistență pentru brandul tău.';
 
 $extraCss = '
-.slogan-text {
-  font-size: clamp(28px, 5vw, 56px);
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.08);
-  text-transform: uppercase;
-  text-align: center;
-  padding: 40px 0;
-}
-.collab-steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-  margin-top: 40px;
-}
-.collab-step {
-  background: rgba(26, 43, 74, 0.5);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: 32px;
-  text-align: center;
-}
-.collab-step .step-num {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #04B494, #039B7E);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
-  margin: 0 auto 16px;
-}
-.collab-step h3 { margin-bottom: 8px; }
-.collab-step p { color: #94A3B8; font-size: 14px; }
-.note-box {
-  background: rgba(4, 180, 148, 0.08);
-  border: 1px solid rgba(4, 180, 148, 0.2);
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-top: 32px;
-  color: #94A3B8;
-  font-size: 14px;
-  line-height: 1.6;
-}
+.slogan-text{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:4px;text-transform:uppercase;background:linear-gradient(90deg,#04B494,#039B7E,#04B494);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 4s linear infinite;margin-bottom:16px}
+.collab-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.collab-step{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:32px 24px;text-align:center;transition:all 0.4s}
+.collab-step:hover{transform:translateY(-6px);background:rgba(255,255,255,0.07)}
+.collab-step .num{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(4,180,148,0.15),rgba(3,155,126,0.08));border:1px solid rgba(4,180,148,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px;font-weight:800;background-clip:padding-box}
+.collab-step .num span{background:linear-gradient(90deg,#04B494,#039B7E);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.collab-step h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.collab-step p{font-size:14px;color:#94A3B8;line-height:1.7}
+.note-box{background:rgba(4,180,148,0.08);border:1px solid rgba(4,180,148,0.2);border-radius:16px;padding:24px;margin-top:40px;text-align:center}
+.note-box p{font-size:15px;color:#E2E8F0;line-height:1.7}
+@media(max-width:768px){.collab-steps{grid-template-columns:1fr}}
 ';
 ?>
 
 <?php
 $heroType = 'page';
-$heroBadge = 'Social Media';
-$heroBadgeIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>';
-$heroTitle = 'Social Media Management';
-$heroSubtitle = 'Strategie, creare conținut și administrare completă';
-include __DIR__ . '/../../components/hero.php';
+$heroStyle = 'min-height:60vh';
+$heroTitle = 'Social Media';
+$heroSubtitleHtml = 'Ce înseamnă Social Media în realitate! Îți spunem noi!<br><strong style="color:#E2E8F0">Strategie, Conținut, Consistență</strong>';
+$heroSloganText = 'WE ARE YOUR CONTENT CREATORS';
+$heroButtons = [
+  ['text' => 'Vezi exemple de conținut', 'href' => '/portofoliu-reels', 'class' => 'btn-primary', 'icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'],
+  ['text' => 'Vezi prețurile noastre', 'href' => '#pachete', 'class' => 'btn-outline', 'icon' => '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>'],
+];
 ?>
-
-<!-- ===== SLOGAN ===== -->
-<section class="content-section" style="padding: 40px 0; background: linear-gradient(180deg, #152540 0%, #1A2B4A 100%);">
-  <div class="container">
+<!-- HERO -->
+<section class="page-hero" style="min-height:60vh">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="page-hero-content">
     <div class="slogan-text">WE ARE YOUR CONTENT CREATORS</div>
+    <h1>Social Media</h1>
+    <p>Ce înseamnă Social Media în realitate! Îți spunem noi!<br><strong style="color:#E2E8F0">Strategie, Conținut, Consistență</strong></p>
+    <div class="hero-buttons" style="margin-top:24px">
+      <a href="/portofoliu-reels" class="btn-primary">Vezi exemple de conținut <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#pachete" class="btn-outline">Vezi prețurile noastre <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></a>
+    </div>
   </div>
 </section>
 
-<!-- ===== INTRO ===== -->
-<section class="content-section" style="background: #1A2B4A; padding: 60px 0;">
+<!-- INTRO -->
+<section class="content-section" lang="ro" style="background:linear-gradient(180deg,#0D1B2A,#152540)">
+  <div class="container" style="max-width:800px;text-align:center">
+    <p style="border-left: 3px solid #04B494; padding-left: 16px; color: #CBD5E1; font-size: 15px; line-height: 1.8; margin: 24px 0; text-align: left;">
+      Scanbox.ro oferă pachete social media lunare in București: administrare platforme de la 250 euro/lună, creare conținut vizual de la 350 euro/lună și soluție completă de la 450 euro/lună. Acoperim Instagram, Facebook, TikTok, LinkedIn și YouTube cu strategie, conținut foto-video original și consistență.
+    </p>
+    <p style="font-size:17px;color:#94A3B8;line-height:1.8;margin-bottom:16px">Prezența în social media nu înseamnă doar postări constante. Înseamnă direcție, coerență vizuală și conținut care susține poziționarea brandului.</p>
+    <p style="font-size:17px;color:#94A3B8;line-height:1.8;margin-bottom:16px">Felul în care arată și comunică brandul tău influențează direct încrederea, poziționarea și interacțiunea cu viitorii tăi clienți.</p>
+    <p style="font-size:17px;color:#E2E8F0;line-height:1.8">Fie că ai nevoie de administrare profesionistă, de conținut vizual nou sau de o soluție completă „la cheie", îți construim o prezență online care arată bine, comunică clar și susține obiectivele businessului tău!</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="servicii" style="background:linear-gradient(180deg,#152540,#1A2B4A)">
   <div class="container">
     <div class="section-header">
-      <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;">
-        Echipa noastră se ocupă de tot ce înseamnă prezența ta pe social media: de la strategie și creare conținut, până la gestionarea comunității și raportare lunară.
-      </p>
+      <span class="section-tag">Ce oferim</span>
+      <h2 class="section-title">Servicii Social Media</h2>
     </div>
-  </div>
-</section>
-
-<!-- ===== SERVICII SM ===== -->
-<section class="content-section" style="background: linear-gradient(180deg, #1A2B4A 0%, #152540 100%); padding: 80px 0;">
-  <div class="container">
-    <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+    <div class="services-grid" style="grid-template-columns:repeat(3,1fr)">
       <div class="service-card">
-        <div class="service-icon teal">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="36" height="36" rx="4"/><path d="M6 18h36"/><path d="M18 6v36"/></svg>
-        </div>
-        <h3>Strategie & Planificare</h3>
-        <p>Calendar editorial personalizat, strategie de conținut aliniată la obiectivele tale de business și analiza competiției.</p>
+        <div class="service-icon teal"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Administrare Social Media</h3>
+        <p>Soluția potrivită pentru companiile care nu au timp de „stat pe net". Tu creezi. Noi gestionăm prezența în online! Dacă ai materialele foto-video pregătite, ne ocupăm de partea operațională: organizare, programare, scriere de texte, publicare.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon blue">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="16"/><path d="M24 16v16M16 24h16"/></svg>
-        </div>
-        <h3>Creare Conținut</h3>
-        <p>Fotografii, videoclipuri, reels, stories și grafice profesionale create special pentru brandingul tău.</p>
+        <div class="service-icon mixed"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <h3>Creare de Conținut Vizual</h3>
+        <p>Ideal pentru brandurile care au deja o strategie, dar au nevoie de conținut profesionist. Realizăm materiale foto-video adaptate platformelor sociale, gândite să atragă atenția și să susțină identitatea brandului tău.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon teal">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 36V12a4 4 0 014-4h32a4 4 0 014 4v24a4 4 0 01-4 4H8a4 4 0 01-4-4z"/><path d="M12 20l8 8 16-16"/></svg>
-        </div>
-        <h3>Administrare & Community</h3>
-        <p>Gestionarea postărilor, răspuns la comentarii și mesaje, creștere organică a comunității.</p>
+        <div class="service-icon blue"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6B8ACA" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+        <h3>Administrare + Creare Conținut</h3>
+        <p>Soluția completă pentru afaceri care vor consistență, estetică și eficiență. Planificăm, creăm și administrăm tot conținutul online într-un flux unitar. Este opțiunea ideală pentru companiile care înțeleg că social media este un canal strategic.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PRICING ===== -->
-<section class="pricing-section content-section" style="background: linear-gradient(180deg, #152540 0%, #0D1B2A 100%); padding: 80px 0;">
+<!-- PRICING -->
+<section class="pricing-section" id="pachete" style="background:linear-gradient(180deg,#1A2B4A,#1d3155)">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Pachete Social Media</h2>
-      <p class="section-subtitle">Alege pachetul care se potrivește cel mai bine nevoilor tale</p>
+      <span class="section-tag">Pachete Lunare</span>
+      <h2 class="section-title">Prețuri corecte, rezultate reale</h2>
+      <p class="section-subtitle">Alege pachetul potrivit pentru businessul tău.</p>
     </div>
-
-    <?php if (!empty($pricing)): ?>
     <div class="pricing-grid">
-      <?php foreach ($pricing as $package): ?>
-      <div class="pricing-card<?= !empty($package['is_featured']) ? ' featured' : '' ?>">
-        <?php if (!empty($package['is_featured'])): ?>
-        <div class="pricing-badge">Recomandat</div>
-        <?php endif; ?>
-        <h3><?= htmlspecialchars($package['name'] ?? '') ?></h3>
-        <div class="pricing-price">
-          <span class="pricing-amount"><?= htmlspecialchars($package['price'] ?? '0') ?></span>
-          <span class="pricing-currency"><?= htmlspecialchars($package['currency'] ?? 'EUR') ?></span>
-          <span class="pricing-period"><?= htmlspecialchars($package['period'] ?? '/ lună') ?></span>
-        </div>
-        <div class="pricing-vat"><?= htmlspecialchars($package['vat_note'] ?? '+ TVA') ?></div>
-
-        <?php if (!empty($package['features'])): ?>
-        <ul class="pricing-features">
-          <?php foreach ($package['features'] as $feature): ?>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <?= htmlspecialchars($feature) ?>
-          </li>
-          <?php endforeach; ?>
-        </ul>
-        <?php endif; ?>
-
-        <a href="/contact" class="<?= !empty($package['is_featured']) ? 'btn-primary' : 'btn-outline' ?>">Solicită Ofertă</a>
-      </div>
-      <?php endforeach; ?>
-    </div>
-    <?php else: ?>
-    <!-- Fallback pachete statice -->
-    <div class="pricing-grid">
+      <!-- ADMIN -->
       <div class="pricing-card">
         <h3>ADMIN</h3>
-        <div class="pricing-price">
-          <span class="pricing-amount">250</span>
-          <span class="pricing-currency">EUR</span>
-          <span class="pricing-period">/ lună</span>
-        </div>
-        <div class="pricing-vat">+ TVA</div>
+        <div class="price">250€</div>
+        <div class="price-period">+ TVA / lună</div>
+        <p class="price-desc">Administrăm platformele și prelucrăm materialele foto-video puse la dispoziție de tine.</p>
         <ul class="pricing-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Administrare 2 platforme</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 12 postări / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 4 stories / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Raport lunar</li>
+          <li>12 postări lunare</li>
+          <li>Administrare platforme</li>
+          <li>Materialele clientului</li>
+          <li>Grafică pentru postări</li>
+          <li>Texte și descrieri postări</li>
+          <li>Calendar de postări dedicat</li>
+          <li>Acces online la livrabile</li>
+          <li>Raport lunar de activitate</li>
         </ul>
-        <a href="/contact" class="btn-outline">Solicită Ofertă</a>
+        <a href="/contact" class="btn-outline btn-sm" style="width:100%;justify-content:center">Solicită Ofertă</a>
       </div>
+      <!-- CREATOR -->
       <div class="pricing-card featured">
-        <div class="pricing-badge">Recomandat</div>
         <h3>CREATOR</h3>
-        <div class="pricing-price">
-          <span class="pricing-amount">350</span>
-          <span class="pricing-currency">EUR</span>
-          <span class="pricing-period">/ lună</span>
-        </div>
-        <div class="pricing-vat">+ TVA</div>
+        <div class="price">350€</div>
+        <div class="price-period">+ TVA / lună</div>
+        <p class="price-desc">Realizăm conținutul vizual foto-video necesar pentru o lună, iar tu te ocupi de administrare.</p>
         <ul class="pricing-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Administrare 3 platforme</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 20 postări / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 8 stories + 4 reels / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ședință foto lunară</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Raport detaliat</li>
+          <li>12 postări lunare</li>
+          <li>4 Reels lunare</li>
+          <li>Sesiune foto-video 2 ore / lună</li>
+          <li>Scenarii clipuri video</li>
+          <li>Înregistrare, filmare, editare</li>
+          <li>Livrare materiale în 48 ore</li>
         </ul>
-        <a href="/contact" class="btn-primary">Solicită Ofertă</a>
+        <a href="/contact" class="btn-primary btn-sm" style="width:100%;justify-content:center">Solicită Ofertă</a>
       </div>
+      <!-- MANAGER -->
       <div class="pricing-card">
         <h3>MANAGER</h3>
-        <div class="pricing-price">
-          <span class="pricing-amount">450</span>
-          <span class="pricing-currency">EUR</span>
-          <span class="pricing-period">/ lună</span>
-        </div>
-        <div class="pricing-vat">+ TVA</div>
+        <div class="price">450€</div>
+        <div class="price-period">+ TVA / lună</div>
+        <p class="price-desc">Noi facem totul! Scenarii, idei, filmări, fotografii, descrieri, postare și administrare.</p>
         <ul class="pricing-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Administrare 4+ platforme</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 30 postări / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 12 stories + 8 reels / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 2 ședințe foto / lună</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Strategie completă + ads</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Raport săptămânal</li>
+          <li>12 postări lunare</li>
+          <li>6 Reels lunare</li>
+          <li>Sesiune foto-video 3 ore / lună</li>
+          <li>Conținut foto/video original</li>
+          <li>Scenarii clipuri video</li>
+          <li>Înregistrare, filmare, editare</li>
+          <li>Administrare platforme</li>
+          <li>Grafică pentru postări</li>
+          <li>Texte și descrieri postări</li>
+          <li>Calendar de postări dedicat</li>
+          <li>Acces online la livrabile</li>
+          <li>Raport lunar de activitate</li>
         </ul>
-        <a href="/contact" class="btn-outline">Solicită Ofertă</a>
+        <a href="/contact" class="btn-outline btn-sm" style="width:100%;justify-content:center">Solicită Ofertă</a>
       </div>
     </div>
-    <?php endif; ?>
+    <div class="note-box">
+      <p>Numărul postărilor lunare se poate adapta în funcție de bugetul alocat, astfel încât să obținem o prezență online coerentă, cu performanțe ridicate.</p>
+      <p style="margin-top:12px;color:#94A3B8">Dacă nu vrei să apari în fața camerei, nu este nicio problemă! Venim noi cu actori și influenceri care să îți prezinte afacerea, serviciile și produsele într-o manieră elegantă și profesionistă.</p>
+    </div>
   </div>
 </section>
 
-<!-- ===== PAȘI COLABORARE ===== -->
-<section class="content-section" style="padding: 80px 0;">
+<!-- CUM FUNCȚIONEAZĂ -->
+<section class="content-section" style="background:linear-gradient(180deg,#1d3155,#1A2B4A);padding:100px 0">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Cum Colaborăm</h2>
+      <span class="section-tag">Proces</span>
+      <h2 class="section-title">Cum Funcționează Colaborarea</h2>
     </div>
     <div class="collab-steps">
       <div class="collab-step">
-        <div class="step-num">1</div>
-        <h3>Consultanță Gratuită</h3>
-        <p>Analizăm prezența ta actuală pe social media și stabilim obiectivele împreună.</p>
+        <div class="num"><span>1</span></div>
+        <h3>Strategie & Poziționare</h3>
+        <p>Începem cu o discuție aplicată despre obiective, public și nivelul la care vrei să îți poziționezi brandul. Nu vorbim acum despre postări, doar despre percepția publicului tău.</p>
       </div>
       <div class="collab-step">
-        <div class="step-num">2</div>
-        <h3>Strategie & Calendar</h3>
-        <p>Creăm o strategie personalizată și un calendar editorial pentru luna următoare.</p>
+        <div class="num"><span>2</span></div>
+        <h3>Concept & Execuție</h3>
+        <p>Construim planul editorial și producem conținutul vizual. Fie că lucrăm cu materialele tale sau le creăm de la zero, totul este coordonat unitar, vizual și estetic, aliniat cu brandul tău.</p>
       </div>
       <div class="collab-step">
-        <div class="step-num">3</div>
-        <h3>Creare & Publicare</h3>
-        <p>Realizăm conținutul, programăm postările și gestionăm interacțiunile zilnic.</p>
+        <div class="num"><span>3</span></div>
+        <h3>Implementare & Optimizare</h3>
+        <p>Planificăm și monitorizăm evoluția postărilor și ajustăm acolo unde este necesar. Comunicarea rămâne coerentă, ritmul este controlat, iar imaginea brandului tău este gestionată profesionist.</p>
       </div>
-    </div>
-
-    <div class="note-box">
-      <strong>Notă:</strong> Toate pachetele includ consultanță inițială gratuită. Prețurile nu includ bugetul pentru campanii de promovare plătite (Facebook Ads, Instagram Ads). Acesta se stabilește separat, în funcție de obiective.
     </div>
   </div>
 </section>
 
-<!-- ===== REELS PREVIEW ===== -->
-<section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 80px 0;">
+<!-- REELS PREVIEW -->
+<section class="content-section" style="background:linear-gradient(180deg,#1A2B4A,#172e52)">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Reels Recente</h2>
-      <p class="section-subtitle">Exemple din conținutul creat de echipa noastră</p>
+      <span class="section-tag">Portofoliu</span>
+      <h2 class="section-title">Exemple de Conținut</h2>
+      <p class="section-subtitle">O selecție din conținutul creat pentru clienții noștri.</p>
     </div>
+    <div class="reels-grid" style="max-width:900px;margin:0 auto">
+      <div class="reel-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DT4y8oeAhqR/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote></div>
+      <div class="reel-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DUoBChhDIa0/" data-instgrm-version="14" style="width:100%;margin:0"></blockquote></div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="/portofoliu-reels" class="btn-outline">Vezi mai multe Reel-uri <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
 
-    <div style="text-align: center; margin-top: 40px;">
-      <a href="/portofoliu-reels" class="btn-outline">
-        Vezi Tot Portofoliul de Reels
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+<!-- CTA -->
+<section class="cta-section" style="background:linear-gradient(180deg,#172e52,#152540)">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Pregătit pentru o prezență online profesionistă?</h2>
+      <p>Contactează-ne și hai să construim împreună strategia de social media potrivită brandului tău.</p>
+      <a href="/contact" class="btn-white">Contactează-ne <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="content-section" lang="ro" style="background:linear-gradient(180deg,#152540,#152540);padding:80px 0">
+  <div class="container" style="max-width:800px">
+    <div class="section-header">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Întrebări Frecvente</h2>
+    </div>
+    <div itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-toggle">
+          <span itemprop="name">Ce pachete social media oferă Scanbox?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text" style="padding:0 24px 20px;color:#94A3B8;font-size:15px;line-height:1.8;">
+            3 pachete: ADMIN (250&euro;/lună &mdash; 12 postări, calendar editorial), CREATOR (350&euro;/lună &mdash; 20 postări, 4 Reels, strategie) și MANAGER (450&euro;/lună &mdash; 30 postări, 8 Reels, Stories zilnice, campanii). Prețuri fără buget publicitar.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-toggle">
+          <span itemprop="name">Pentru ce platforme?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text" style="padding:0 24px 20px;color:#94A3B8;font-size:15px;line-height:1.8;">
+            Instagram, Facebook, TikTok, LinkedIn, YouTube. Specializare pe branduri din imobiliare, HoReCa, retail și sport.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

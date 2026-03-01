@@ -11,7 +11,7 @@
  * @var int    $totalPosts  - numarul total de articole
  * @var array  $settings    - setarile site-ului
  */
-$metaDescription = 'Blogul Scanbox: sfaturi, studii de caz și noutăți din lumea conținutului vizual, tururilor virtuale 3D și social media.';
+$metaDescription = 'Blogul Scanbox.ro: articole și resurse utile despre tururi virtuale 3D Matterport, fotografie profesională, videografie cu dronă și conținut vizual B2B. Ghiduri practice, studii de caz și noutăți din industria vizuală profesională din România.';
 ?>
 
 <?php
@@ -19,13 +19,16 @@ $heroType = 'page';
 $heroBadge = 'Blog';
 $heroBadgeIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>';
 $heroTitle = 'Blog';
-$heroSubtitle = 'Sfaturi, studii de caz și noutăți din lumea conținutului vizual';
+$heroSubtitle = 'Articole și resurse utile despre conținut vizual profesional';
 include __DIR__ . '/../../components/hero.php';
 ?>
 
-<!-- ===== BLOG GRID ===== -->
-<section class="blog-section content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 80px 0;">
+<!-- ===== BLOG SECTION ===== -->
+<section class="blog-section" lang="ro">
   <div class="container">
+    <p style="border-left: 3px solid #04B494; padding-left: 16px; color: #CBD5E1; font-size: 15px; line-height: 1.8; margin: 0 0 40px 0;">
+      Blogul Scanbox.ro oferă articole utile despre tururi virtuale 3D Matterport, fotografie profesională, videografie cu dronă și conținut vizual B2B. Ghiduri practice, studii de caz și noutăți din industria vizuală profesională din România.
+    </p>
 
     <?php if (!empty($categories)): ?>
     <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 48px;">
@@ -49,23 +52,18 @@ include __DIR__ . '/../../components/hero.php';
           <?php if (!empty($post['featured_image'])): ?>
           <img src="<?= htmlspecialchars($post['featured_image']) ?>" alt="<?= htmlspecialchars($post['title'] ?? '') ?>" loading="lazy">
           <?php else: ?>
-          <svg viewBox="0 0 400 250" style="width:100%;background:linear-gradient(135deg,#1A2B4A,#283868);">
-            <rect width="400" height="250" fill="url(#grad)"/>
-            <text x="200" y="125" text-anchor="middle" dominant-baseline="middle" fill="#394E75" font-size="24" font-family="Inter,sans-serif">SCANBOX</text>
-          </svg>
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
           <?php endif; ?>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-date">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <?= date('d.m.Y', strtotime($post['published_at'] ?? $post['created_at'] ?? 'now')) ?>
           </div>
           <h3><?= htmlspecialchars($post['title'] ?? '') ?></h3>
           <p><?= htmlspecialchars(mb_substr(strip_tags($post['excerpt'] ?? $post['content'] ?? ''), 0, 150)) ?>...</p>
-          <span class="service-link">
-            Citește
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+          <span class="service-link">Citește &rarr;</span>
         </div>
       </a>
       <?php endforeach; ?>
@@ -78,8 +76,129 @@ include __DIR__ . '/../../components/hero.php';
     ?>
 
     <?php else: ?>
-    <div style="text-align: center; padding: 60px 0; color: #94A3B8;">
-      <p>Nu există articole încă. Reveniți în curând!</p>
+    <!-- Static fallback blog cards matching original HTML design -->
+    <div class="blog-grid">
+
+      <!-- Blog Card 1 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">15 Ianuarie 2025</div>
+          <h3>5 Motive să alegi un tur virtual 3D ca soluție vizuală în imobiliare</h3>
+          <p>Descoperă de ce tururile virtuale 3D au devenit un instrument esențial pentru agenții imobiliari și dezvoltatori, oferind experiențe imersive clienților.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 2 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">28 Decembrie 2024</div>
+          <h3>Fotografie imobiliară: 6 sfaturi utile pentru o ședință foto așa cum trebuie</h3>
+          <p>Pregătirea spațiului, iluminarea corectă și unghiurile potrivite fac diferența între o fotografie obișnuită și una care vinde proprietatea rapid.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 3 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">10 Noiembrie 2024</div>
+          <h3>Avantajele prezentărilor video în procesul de producție</h3>
+          <p>Conținutul video de calitate accelerează deciziile de achiziție și oferă transparență în procesele de producție industrială.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 4 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">22 Octombrie 2024</div>
+          <h3>Cum te ajută un tur virtual 3D în industria evenimentelor corporate</h3>
+          <p>Locațiile pentru evenimente beneficiază enorm de tururi virtuale, permițând organizatorilor să exploreze spațiile de la distanță înainte de a lua o decizie.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 5 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">5 Septembrie 2024</div>
+          <h3>Utilizarea echipamentului Matterport în speologie</h3>
+          <p>Explorarea și documentarea peșterilor cu tehnologie Matterport deschide noi orizonturi pentru cercetarea științifică și turismul de aventură.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 6 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18 August 2024</div>
+          <h3>Matterport anunță Genesis - Generator AI</h3>
+          <p>Matterport lansează Genesis, un generator AI revoluționar care transformă scanările 3D în modele optimizate automat pentru diverse industrii.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 7 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">2 Iulie 2024</div>
+          <h3>Cum te ajută Matterport în imobiliare</h3>
+          <p>De la vizionări virtuale la măsurători precise, Matterport oferă agenților imobiliari instrumente puternice pentru a vinde mai rapid și mai eficient.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Blog Card 8 -->
+      <a href="#" class="blog-card">
+        <div class="blog-card-thumb">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;opacity:0.3;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">15 Mai 2024</div>
+          <h3>Importanța conservării obiectivelor turistice cu tehnologia Matterport</h3>
+          <p>Digitalizarea monumentelor și a obiectivelor turistice cu Matterport asigură conservarea patrimoniului cultural pentru generațiile viitoare.</p>
+          <span class="service-link">Citește &rarr;</span>
+        </div>
+      </a>
+
     </div>
     <?php endif; ?>
 
