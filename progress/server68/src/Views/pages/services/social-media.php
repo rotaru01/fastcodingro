@@ -11,6 +11,68 @@
  * @var array  $settings     - setarile site-ului
  */
 $metaDescription = 'Scanbox.ro oferă pachete social media lunare in București: administrare platforme de la 250 euro, creare conținut vizual de la 350 euro și soluție completă de la 450 euro. Instagram, Facebook, TikTok, LinkedIn, YouTube — strategie, conținut foto-video și consistență pentru brandul tău.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Social Media Management",
+  "description": "Administrare social media, creare conținut vizual și pachete lunare complete pentru afacerea ta.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro",
+    "telephone": "+40740233353",
+    "email": "office@scanbox.ro"
+  },
+  "areaServed": {"@type": "Country", "name": "România"},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Pachete Social Media",
+    "itemListElement": [
+      {"@type": "Offer", "name": "ADMIN", "description": "12 postări, calendar editorial, administrare platforme", "price": "250", "priceCurrency": "EUR"},
+      {"@type": "Offer", "name": "CREATOR", "description": "12 postări, 4 Reels, sesiune foto-video, strategie", "price": "350", "priceCurrency": "EUR"},
+      {"@type": "Offer", "name": "MANAGER", "description": "12 postări, 6 Reels, conținut original, administrare completă", "price": "450", "priceCurrency": "EUR"}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce pachete social media oferă Scanbox?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "3 pachete: ADMIN (250€/lună — 12 postări, calendar editorial), CREATOR (350€/lună — 20 postări, 4 Reels, strategie) și MANAGER (450€/lună — 30 postări, 8 Reels, Stories zilnice, campanii). Prețuri fără buget publicitar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pentru ce platforme?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Instagram, Facebook, TikTok, LinkedIn, YouTube. Specializare pe branduri din imobiliare, HoReCa, retail și sport."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Social Media", "item": "https://scanbox.ro/social-media.html"}
+  ]
+}
+</script>
+';
 
 $extraCss = '
 .slogan-text{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:4px;text-transform:uppercase;background:linear-gradient(90deg,#04B494,#039B7E,#04B494);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 4s linear infinite;margin-bottom:16px}

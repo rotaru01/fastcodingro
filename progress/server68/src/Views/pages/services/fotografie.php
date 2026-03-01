@@ -11,6 +11,94 @@
  * @var array  $settings     - setarile site-ului
  */
 $metaDescription = 'Scanbox.ro oferă servicii foto profesionale B2B în București: fotografie corporate, comercială, culinară și imobiliară HDR. Pachete de la 100 euro, livrare rapidă în 24-48h. Imagini care susțin brandul pe termen lung, realizate cu echipament profesional.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Servicii Foto B2B",
+  "description": "Servicii foto profesionale B2B: fotografie corporate, comercială, culinară și imobiliară HDR. Pachete de la 100 euro, livrare rapidă.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro",
+    "telephone": "+40740233353",
+    "email": "office@scanbox.ro",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Str. Moroeni 60D",
+      "addressLocality": "București",
+      "addressRegion": "Sector 2",
+      "postalCode": "021855",
+      "addressCountry": "RO"
+    }
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "România"
+  },
+  "serviceType": ["Fotografie Corporate", "Fotografie Comercială", "Fotografie Culinară", "Fotografie Imobiliară"],
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Pachet Basic",
+      "description": "15 fotografii profesionale",
+      "price": "100",
+      "priceCurrency": "EUR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pachet Standard",
+      "description": "30 fotografii HDR + aeriene",
+      "price": "200",
+      "priceCurrency": "EUR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Pachet Premium",
+      "description": "50+ fotografii, twilight, livrare 24h",
+      "price": "350",
+      "priceCurrency": "EUR"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce tipuri de fotografie oferă Scanbox?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "4 categorii: corporate (evenimente, portrete business), comercială (produse, e-commerce), culinară (meniuri, food styling) și imobiliară (HDR, twilight, aeriene)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cât costă o ședință foto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic: 15 fotografii, de la 100€. Standard: 30 fotografii HDR + aeriene, de la 200€. Premium: 50+ fotografii, twilight, livrare 24h, de la 350€."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Servicii Foto B2B", "item": "https://scanbox.ro/servicii-foto.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <?php

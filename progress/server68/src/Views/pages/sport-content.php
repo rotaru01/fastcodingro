@@ -8,6 +8,36 @@
  * @var array  $settings  - setarile site-ului
  */
 $metaDescription = 'Scanbox.ro oferă servicii sport content in București: fotografie sport profesională, video product in action și reels pentru evenimente sportive. Clienți: Keysport, Crosul Arenelor, Sport Guru, Share Your Run. Trăim sportul, nu doar il documentăm.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Sport Content",
+  "description": "Fotografie sport profesională, video product in action și reels pentru evenimente sportive.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro",
+    "telephone": "+40740233353",
+    "email": "office@scanbox.ro"
+  },
+  "areaServed": {"@type": "Country", "name": "România"},
+  "serviceType": ["Fotografie Sport", "Video Product in Action", "Reels Evenimente Sportive"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Sport Content", "item": "https://scanbox.ro/sport-content.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <!-- HERO -->

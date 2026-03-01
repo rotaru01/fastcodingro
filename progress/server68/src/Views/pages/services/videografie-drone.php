@@ -11,6 +11,65 @@
  * @var array  $settings     - setarile site-ului
  */
 $metaDescription = 'Scanbox.ro produce conținut video profesional B2B in București: clipuri prezentare companie, interviuri, testimoniale, video imobiliare cu dronă și reels social media. Filmări 4K/6K, editare cinematică, livrare optimizată. Prețuri de la 200 euro.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Servicii Video B2B",
+  "description": "Servicii video profesionale B2B: filmări 4K/6K, aeriene cu drone DJI, editare cinematică, color grading. Clipuri Social Media, prezentări și filme cinematice.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro",
+    "telephone": "+40740233353",
+    "email": "office@scanbox.ro"
+  },
+  "areaServed": {"@type": "Country", "name": "România"},
+  "serviceType": ["Video Prezentare Companie", "Video Interviu", "Video Imobiliare", "Reels Social Media"],
+  "offers": [
+    {"@type": "Offer", "name": "Clip Scurt", "price": "200", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Prezentare", "price": "400", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Cinematic", "price": "700", "priceCurrency": "EUR"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce servicii video oferă Scanbox?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Filmări 4K/6K, aeriene cu drone DJI, editare cinematică, color grading. Clipuri Social Media (30-60s), prezentări (1-2min), filme cinematice (2-3min)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cât costă un video profesional?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clip Scurt: de la 200€. Prezentare: de la 400€. Cinematic: de la 700€. Include muzică licențiată și livrare optimizată."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Servicii Video B2B", "item": "https://scanbox.ro/servicii-video.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <?php

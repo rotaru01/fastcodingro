@@ -12,6 +12,33 @@
  * @var array  $settings    - setarile site-ului
  */
 $metaDescription = 'Blogul Scanbox.ro: articole și resurse utile despre tururi virtuale 3D Matterport, fotografie profesională, videografie cu dronă și conținut vizual B2B. Ghiduri practice, studii de caz și noutăți din industria vizuală profesională din România.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blogul Scanbox.ro",
+  "description": "Articole și resurse utile despre conținut vizual profesional, tururi virtuale 3D, fotografie și videografie.",
+  "url": "https://scanbox.ro/blog.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://scanbox.ro/blog.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <?php

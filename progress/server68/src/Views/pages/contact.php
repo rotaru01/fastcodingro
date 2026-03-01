@@ -6,6 +6,62 @@
  * @var string $csrf_token - token CSRF pentru formular
  * @var array  $settings   - setarile site-ului
  */
+$metaDescription = 'Contactează Scanbox.ro pentru soluții vizuale profesionale in București. E-mail: office@scanbox.ro, telefon: 0740 233 353. Sediu: Str. Moroeni 60D, Sector 2, București. Program: Luni-Vineri 09:00-18:00. Formular de contact cu răspuns rapid.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Scanbox.ro",
+  "legalName": "TRIVIT SERVICES S.R.L.",
+  "url": "https://scanbox.ro",
+  "telephone": "+40740233353",
+  "email": "office@scanbox.ro",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Str. Moroeni 60D",
+    "addressLocality": "București",
+    "addressRegion": "Sector 2",
+    "postalCode": "021855",
+    "addressCountry": "RO"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 44.4268,
+    "longitude": 26.1025
+  },
+  "openingHours": "Mo-Fr 09:00-18:00",
+  "priceRange": "€€",
+  "image": "https://scanbox.ro/images/scanbox-logo.png",
+  "sameAs": [
+    "https://www.instagram.com/scanbox.ro/",
+    "https://www.facebook.com/scanbox.ro",
+    "https://www.tiktok.com/@scanbox.ro",
+    "https://www.youtube.com/@scanboxintegratedvisualsol9014",
+    "https://www.linkedin.com/company/scanbox-visual-solutions/"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Scanbox.ro",
+  "description": "Contactează Scanbox.ro pentru soluții vizuale profesionale în București.",
+  "url": "https://scanbox.ro/contact.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://scanbox.ro/contact.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <?php

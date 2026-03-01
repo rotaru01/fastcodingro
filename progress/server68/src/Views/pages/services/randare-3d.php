@@ -11,6 +11,60 @@
  * @var array  $settings     - setarile site-ului
  */
 $metaDescription = 'Scanbox.ro creează vizualizări 3D fotorealiste și planuri izometrice in București. Randări pentru arhitectură, design interior și dezvoltări imobiliare off-plan. Transformăm planuri tehnice in imagini de inaltă calitate — exterioare, interioare, tururi virtuale pe bază de proiect.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Randare 3D Fotorealistă",
+  "description": "Vizualizări 3D fotorealiste și planuri izometrice pentru arhitectură, design interior și dezvoltări imobiliare.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro",
+    "telephone": "+40740233353",
+    "email": "office@scanbox.ro"
+  },
+  "areaServed": {"@type": "Country", "name": "România"},
+  "serviceType": ["Randare 3D Exterioară", "Randare 3D Interioară", "Planuri Izometrice", "Animații 3D"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este randarea 3D fotorealistă?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Crearea de imagini digitale fotorealiste pornind de la modele 3D. Scanbox transformă planuri tehnice în vizualizări de înaltă calitate — exterioare, interioare, tururi virtuale pe bază de proiect."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pentru cine sunt utile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dezvoltatori imobiliari, arhitecți, designeri interior, agenții imobiliare (proprietăți off-plan), firme construcții."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Randare 3D", "item": "https://scanbox.ro/randare-3d.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <?php

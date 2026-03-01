@@ -10,7 +10,140 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Tur virtual 3D Matterport profesional pentru imobiliare, hoteluri, restaurante, showroom-uri și spații comerciale. Reseller oficial Matterport România.';
+$metaDescription = 'Scanbox.ro realizează tururi virtuale 3D Matterport profesionale în România și Republica Moldova. Reseller Oficial Matterport cu camere Pro 2 și Pro 3. Prețuri de la 150 euro, livrare în 48h. Peste 150 tururi virtuale finalizate pentru imobiliare, hoteluri, restaurante și showroom-uri.';
+$schemaJsonLd = '
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Tur Virtual 3D Matterport",
+  "description": "Servicii profesionale de tur virtual 3D Matterport — scanare completă, procesare cloud, model 3D navigabil, link partajabil. Reseller Oficial Matterport pentru România și Republica Moldova.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Scanbox.ro",
+    "legalName": "TRIVIT SERVICES S.R.L.",
+    "url": "https://scanbox.ro",
+    "telephone": "+40740233353",
+    "email": "office@scanbox.ro",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Str. Moroeni 60D",
+      "addressLocality": "București",
+      "addressRegion": "Sector 2",
+      "postalCode": "021855",
+      "addressCountry": "RO"
+    },
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Reseller Oficial",
+      "name": "Reseller Oficial Matterport — România și Republica Moldova"
+    }
+  },
+  "areaServed": [
+    {"@type": "Country", "name": "România"},
+    {"@type": "Country", "name": "Republica Moldova"}
+  ],
+  "serviceType": ["Tur Virtual 3D", "Scanare 3D Matterport", "Digital Twin", "Fotografie HDR 4K", "Planimetrie 2D"],
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Apartament (până la 100mp)",
+      "description": "Scanare completă, procesare cloud, tur virtual interactiv, link partajabil, livrare 48h",
+      "price": "150",
+      "priceCurrency": "EUR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Vilă / Casă (100-300mp)",
+      "description": "Scanare completă, procesare cloud, tur virtual interactiv, link partajabil, livrare 48h",
+      "price": "300",
+      "priceCurrency": "EUR"
+    },
+    {
+      "@type": "Offer",
+      "name": "Spațiu Comercial (peste 300mp)",
+      "description": "Scanare completă, procesare cloud, tur virtual interactiv, link partajabil, livrare 48h",
+      "price": "500",
+      "priceCurrency": "EUR"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ce este un tur virtual 3D Matterport?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un tur virtual 3D Matterport este o experiență digitală imersivă care permite vizitatorilor să exploreze un spațiu fizic la 360° dintr-un browser web, fără a instala software. Folosind camere specializate Matterport Pro 2 și Pro 3, spațiul este scanat și transformat într-un model 3D navigabil — un digital twin al locației reale. Scanbox.ro este Reseller Oficial Matterport pentru România și Republica Moldova."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cât costă un tur virtual 3D Matterport?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prețurile pentru un tur virtual 3D Matterport la Scanbox.ro încep de la 150€+TVA pentru un apartament de până la 100mp. O vilă sau casă (100-300mp) costă de la 300€+TVA, iar spațiile comerciale (peste 300mp) de la 500€+TVA. Prețul include scanarea completă, procesarea în cloud, turul virtual interactiv, link partajabil și livrarea în 48 de ore."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cât durează realizarea unui tur virtual Matterport?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Procesul de scanare durează între 1-3 ore, în funcție de dimensiunea spațiului. Procesarea în cloud Matterport și livrarea finală se realizează în 48 de ore. Pentru spații foarte mari (peste 500mp) sau proiecte complexe cu mai multe etaje, timpul poate fi ușor mai lung."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce echipament folosește Scanbox pentru tururi virtuale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scanbox folosește exclusiv camere Matterport Pro 2 și Matterport Pro 3 — cele mai avansate echipamente de scanare 3D de pe piață. Camera Pro 3 oferă rezoluție superioară, viteză de scanare dublă față de Pro 2 și precizie de ±20mm."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pentru ce tipuri de spații este util un tur virtual 3D?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tururile virtuale 3D Matterport sunt utilizate în 8 domenii principale: imobiliare, hoteluri și hospitality, restaurante, showroom-uri auto și retail, muzee și galerii, spații comerciale și birouri, construcții și dezvoltări imobiliare, arhitectură și design interior. Proprietățile cu tur virtual primesc de 2x mai multe vizualizări online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cum pot integra un tur virtual pe site-ul meu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Turul virtual Matterport poate fi integrat pe orice site web prin cod embed (iframe) furnizat de Scanbox. Funcționează pe desktop, tabletă și telefon fără instalare de software. De asemenea, primești un link direct partajabil pe social media, WhatsApp sau e-mail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Scanbox oferă servicii de tur virtual în afara Bucureștiului?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, Scanbox oferă servicii de scanare 3D și tur virtual Matterport în toată România și Republica Moldova. Avem experiență cu proiecte în București, Brașov, Cluj-Napoca, Timișoara, Constanța, Sinaia și alte orașe."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
+    {"@type": "ListItem", "position": 2, "name": "Tur Virtual 3D Matterport", "item": "https://scanbox.ro/tur-virtual-3d.html"}
+  ]
+}
+</script>
+';
 ?>
 
 <?php
