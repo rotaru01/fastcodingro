@@ -107,8 +107,12 @@ class Setting
         return $this->db->delete('settings', 'setting_key = ?', [$key]);
     }
 
-    private function castValue(string $value, string $type): mixed
+    private function castValue(?string $value, string $type): mixed
     {
+        if ($value === null) {
+            return null;
+        }
+
         return match ($type) {
             'boolean' => filter_var($value, FILTER_VALIDATE_BOOLEAN),
             'number' => str_contains($value, '.') ? (float) $value : (int) $value,
