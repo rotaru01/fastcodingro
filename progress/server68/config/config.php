@@ -19,8 +19,8 @@ define('DB_PASS', '@Ch@ng3m30@');
 define('DB_CHARSET', 'utf8mb4');
 
 /** Configurare site */
-define('SITE_URL', 'https://fastcodingagency.ro/progress/server68/public');
-define('BASE_URL_PATH', '/progress/server68/public');
+define('SITE_URL', 'https://fastcodingagency.ro');
+define('BASE_URL_PATH', '');
 define('SITE_NAME', 'Scanbox.ro');
 define('ADMIN_EMAIL', 'office@scanbox.ro');
 
