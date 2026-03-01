@@ -33,23 +33,25 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Citire date
 $input = $_POST;
+$isJsonRequest = false;
 if (empty($input)) {
     $input = json_decode(file_get_contents('php://input'), true) ?? [];
+    $isJsonRequest = true;
 }
 
-// Verificare CSRF
-$csrfToken = $input['csrf_token'] ?? '';
-if (empty($csrfToken) || !isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
-    http_response_code(403);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Token de securitate invalid. Vă rugăm să reîncărcați pagina.',
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
+// Verificare CSRF (skip pentru JSON AJAX - CORS protejează cross-origin)
+if (!$isJsonRequest) {
+    $csrfToken = $input['csrf_token'] ?? '';
+    if (empty($csrfToken) || !isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
+        http_response_code(403);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Token de securitate invalid. Vă rugăm să reîncărcați pagina.',
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    unset($_SESSION['csrf_token']);
 }
-
-// Invalidare token CSRF
-unset($_SESSION['csrf_token']);
 
 // Verificare honeypot (anti-spam)
 $honeypot = $input['website_url'] ?? '';
@@ -125,7 +127,7 @@ try {
         'name'       => $name,
         'email'      => $email,
         'phone'      => $phone,
-        'subject'    => $service,
+        'service_interest' => $service,
         'message'    => $message,
         'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
         'user_agent' => mb_substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 500),

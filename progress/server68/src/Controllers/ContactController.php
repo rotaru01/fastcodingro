@@ -107,7 +107,7 @@ class ContactController
                 'name' => $name,
                 'email' => $email,
                 'phone' => $phone,
-                'subject' => $subject,
+                'service_interest' => $subject,
                 'message' => $messageText,
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
                 'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',

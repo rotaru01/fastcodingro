@@ -27,7 +27,7 @@ $heroServices = [
     ['text' => 'Randare 3D', 'href' => '/servicii/randare-3d'],
 ];
 $heroButtons = [
-    ['text' => 'Cere Ofertă Gratuită', 'tag' => 'button', 'class' => 'btn-primary', 'onclick' => "document.getElementById('cta').scrollIntoView({behavior:'smooth'})", 'icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'],
+    ['text' => 'Cere Ofertă Gratuită', 'tag' => 'button', 'class' => 'btn-primary', 'onclick' => "document.getElementById('contact-section').scrollIntoView({behavior:'smooth'})", 'icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'],
     ['text' => 'Vezi Serviciile', 'href' => '#servicii', 'class' => 'btn-outline', 'icon' => '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'],
 ];
 include __DIR__ . '/../components/hero.php';
@@ -315,6 +315,112 @@ include __DIR__ . '/../components/counter.php';
           </div>
         </a>
       <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT FORM ===== -->
+<section class="contact-section" id="contact-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Contact</span>
+      <h2 class="section-title">Cere Ofertă Gratuită</h2>
+      <p class="section-subtitle">Spune-ne despre proiectul tău și revenim cu o ofertă personalizată în maxim 24 de ore.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Left: Contact Info -->
+      <div class="contact-info">
+        <h2>Hai să Discutăm</h2>
+        <p>Suntem aici să te ajutăm cu orice întrebare legată de serviciile noastre. Contactează-ne prin oricare din metodele de mai jos sau completează formularul.</p>
+
+        <!-- E-mail -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 9L2 4"/></svg>
+          </div>
+          <div>
+            <span>office@scanbox.ro</span>
+            <small>E-mail</small>
+          </div>
+        </div>
+
+        <!-- Telefon -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <span>0740 233 353</span>
+            <small>Telefon</small>
+          </div>
+        </div>
+
+        <!-- Adresa -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <span>Str. Moroeni 60D, Sector 2, București</span>
+            <small>Sediu</small>
+          </div>
+        </div>
+
+        <!-- Program -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <span>Luni - Vineri, 09:00 - 18:00</span>
+            <small>Program</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nume</label>
+              <input type="text" id="name" name="name" placeholder="Numele tău" required>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="adresa@email.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" name="phone" placeholder="07XX XXX XXX">
+            </div>
+            <div class="form-group">
+              <label for="service">Serviciu</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Alege serviciul</option>
+                <option value="Tur Virtual 3D">Tur Virtual 3D</option>
+                <option value="Foto">Foto</option>
+                <option value="Video">Video</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Sport Content">Sport Content</option>
+                <option value="Randare 3D">Randare 3D</option>
+                <option value="Altele">Altele</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Mesaj</label>
+            <textarea id="message" name="message" rows="5" placeholder="Descrie pe scurt proiectul tău..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+            Trimite Mesajul
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </section>

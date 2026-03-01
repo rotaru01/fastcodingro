@@ -12,7 +12,7 @@
 $ctaTitle = $ctaTitle ?? 'Ai un proiect? Hai să vorbim!';
 $ctaText = $ctaText ?? 'Solicită o ofertă personalizată și descoperă cum putem transforma vizual afacerea ta.';
 $ctaButton = $ctaButton ?? 'Contactează-ne Acum';
-$ctaLink = $ctaLink ?? 'mailto:office@scanbox.ro';
+$ctaLink = $ctaLink ?? '/contact';
 $ctaHidden = $ctaHidden ?? false;
 ?>
 

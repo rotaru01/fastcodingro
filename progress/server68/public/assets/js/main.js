@@ -146,7 +146,7 @@ function initContactForm() {
     const data = Object.fromEntries(new FormData(form));
 
     try {
-      const res = await fetch('https://fast-coding-agency--fast-coding-d1143.europe-west4.hosted.app/api/contact', {
+      const res = await fetch('/api/contact-submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
