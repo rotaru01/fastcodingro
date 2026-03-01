@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Scanbox\Controllers;
 
 use Scanbox\Models\BlogPost;
-use Scanbox\Models\Category;
+use Scanbox\Models\BlogCategory;
 use Scanbox\Models\Setting;
 
 class BlogController
 {
     private BlogPost $blogPostModel;
-    private Category $categoryModel;
+    private BlogCategory $categoryModel;
     private Setting $settingModel;
 
     private const POSTS_PER_PAGE = 12;
@@ -19,7 +19,7 @@ class BlogController
     public function __construct()
     {
         $this->blogPostModel = new BlogPost();
-        $this->categoryModel = new Category();
+        $this->categoryModel = new BlogCategory();
         $this->settingModel = new Setting();
     }
 
@@ -35,7 +35,7 @@ class BlogController
         $totalPosts = $this->blogPostModel->countPublished();
         $totalPages = (int) ceil($totalPosts / self::POSTS_PER_PAGE);
 
-        $categories = $this->categoryModel->getWithPostCount();
+        $categories = $this->categoryModel->getAll();
         $settings = $this->settingModel->getAll();
 
         view('pages/blog/index', [
@@ -64,20 +64,15 @@ class BlogController
             return;
         }
 
-        // Incrementare numar de vizualizari
-        $this->blogPostModel->incrementViews((int) $post['id']);
-
-        // Articole similare (din aceeasi categorie)
         $relatedPosts = [];
         if (!empty($post['category_id'])) {
-            $relatedPosts = $this->blogPostModel->getRelated(
-                (int) $post['id'],
-                (int) $post['category_id'],
-                3
-            );
+            $relatedPosts = $this->blogPostModel->getByCategory((int) $post['category_id']);
+            // Exclude current post and limit to 3
+            $relatedPosts = array_filter($relatedPosts, fn($p) => $p['id'] !== $post['id']);
+            $relatedPosts = array_slice($relatedPosts, 0, 3);
         }
 
-        $categories = $this->categoryModel->getWithPostCount();
+        $categories = $this->categoryModel->getAll();
         $settings = $this->settingModel->getAll();
 
         view('pages/blog/show', [
@@ -104,22 +99,19 @@ class BlogController
             return;
         }
 
+        $posts = $this->blogPostModel->getByCategory((int) $category['id']);
+        $totalPosts = count($posts);
+
         $page = max(1, (int) ($_GET['page'] ?? 1));
-        $offset = ($page - 1) * self::POSTS_PER_PAGE;
-
-        $posts = $this->blogPostModel->getByCategoryId(
-            (int) $category['id'],
-            self::POSTS_PER_PAGE,
-            $offset
-        );
-        $totalPosts = $this->blogPostModel->countByCategoryId((int) $category['id']);
         $totalPages = (int) ceil($totalPosts / self::POSTS_PER_PAGE);
+        $offset = ($page - 1) * self::POSTS_PER_PAGE;
+        $posts = array_slice($posts, $offset, self::POSTS_PER_PAGE);
 
-        $categories = $this->categoryModel->getWithPostCount();
+        $categories = $this->categoryModel->getAll();
         $settings = $this->settingModel->getAll();
 
         view('pages/blog/category', [
-            'title' => htmlspecialchars($category['name']) . ' - Blog Scanbox.ro',
+            'title' => htmlspecialchars($category['name'] ?? $category['name_ro'] ?? '') . ' - Blog Scanbox.ro',
             'category' => $category,
             'posts' => $posts,
             'categories' => $categories,
@@ -142,14 +134,15 @@ class BlogController
             exit;
         }
 
+        $posts = $this->blogPostModel->search($query);
+        $totalPosts = count($posts);
+
         $page = max(1, (int) ($_GET['page'] ?? 1));
-        $offset = ($page - 1) * self::POSTS_PER_PAGE;
-
-        $posts = $this->blogPostModel->search($query, self::POSTS_PER_PAGE, $offset);
-        $totalPosts = $this->blogPostModel->countSearch($query);
         $totalPages = (int) ceil($totalPosts / self::POSTS_PER_PAGE);
+        $offset = ($page - 1) * self::POSTS_PER_PAGE;
+        $posts = array_slice($posts, $offset, self::POSTS_PER_PAGE);
 
-        $categories = $this->categoryModel->getWithPostCount();
+        $categories = $this->categoryModel->getAll();
         $settings = $this->settingModel->getAll();
 
         view('pages/blog/search', [

@@ -68,29 +68,27 @@ class PageController
      */
     public function servicii(string $slug): void
     {
-        $service = $this->serviceModel->getBySlug($slug);
-
-        if ($service === null) {
+        if (!in_array($slug, VALID_SERVICE_SLUGS, true)) {
             http_response_code(404);
-            view('pages/404', [
-                'title' => 'Pagina nu a fost gasită - Scanbox.ro',
-            ]);
+            view('pages/404', ['title' => 'Pagina nu a fost gasită - Scanbox.ro']);
             return;
         }
 
-        $gallery = $this->galleryModel->getByServiceId((int) $service['id']);
-        $galleryItems = [];
-        if ($gallery !== null) {
-            $galleryItems = $this->galleryItemModel->getByGalleryId((int) $gallery['id']);
-        }
-
-        $pricing = $this->pricingModel->getByServiceId((int) $service['id']);
+        $service = $this->serviceModel->getBySlug($slug);
         $settings = $this->settingModel->getAll();
 
+        // Static views exist for each service - work even without DB data
+        if ($service === null) {
+            $service = ['slug' => $slug, 'title' => ucfirst(str_replace('-', ' ', $slug))];
+        }
+
+        $galleryItems = [];
+        $pricing = $this->pricingModel->getByService($slug);
+
         view('pages/services/show', [
-            'title' => htmlspecialchars($service['title']) . ' - Scanbox.ro',
+            'title' => htmlspecialchars($service['title'] ?? $slug) . ' - Scanbox.ro',
             'service' => $service,
-            'gallery' => $gallery,
+            'gallery' => null,
             'galleryItems' => $galleryItems,
             'pricing' => $pricing,
             'settings' => $settings,
@@ -102,11 +100,11 @@ class PageController
      */
     public function sportContent(): void
     {
-        $galleries = $this->galleryModel->getByType('sport');
+        $galleries = $this->galleryModel->getByPage('sport');
         $galleryData = [];
 
         foreach ($galleries as $gallery) {
-            $items = $this->galleryItemModel->getByGalleryId((int) $gallery['id']);
+            $items = $this->galleryItemModel->getByGallery((int) $gallery['id']);
             $galleryData[] = [
                 'gallery' => $gallery,
                 'items' => $items,
@@ -132,12 +130,12 @@ class PageController
 
         $mapData = [];
         foreach ($projects as $project) {
-            if (!empty($project['latitude']) && !empty($project['longitude'])) {
+            if (!empty($project['lat']) && !empty($project['lng'])) {
                 $mapData[] = [
                     'id' => $project['id'],
                     'title' => $project['title'],
-                    'lat' => (float) $project['latitude'],
-                    'lng' => (float) $project['longitude'],
+                    'lat' => (float) $project['lat'],
+                    'lng' => (float) $project['lng'],
                     'thumbnail' => $project['thumbnail'] ?? '',
                     'slug' => $project['slug'] ?? '',
                 ];
@@ -160,7 +158,7 @@ class PageController
      */
     public function portofoliuReels(): void
     {
-        $projects = $this->projectModel->getByType('reels');
+        $projects = $this->projectModel->getActive();
         $settings = $this->settingModel->getAll();
 
         view('pages/portofoliu-reels', [
