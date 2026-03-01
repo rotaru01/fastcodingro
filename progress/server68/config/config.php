@@ -38,9 +38,9 @@ define('LOGIN_LOCKOUT_TIME', 900); // 15 minute
 /** Configurare fus orar Romania */
 date_default_timezone_set('Europe/Bucharest');
 
-/** Dezactivare afisare erori in productie */
-error_reporting(0);
-ini_set('display_errors', '0');
+/** Activare temporara afisare erori pentru debugging */
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 /** Activare logare erori */
 ini_set('log_errors', '1');
