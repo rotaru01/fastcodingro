@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 /** Configurare baza de date */
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'scanbox_db');
-define('DB_USER', 'scanbox_user');
-define('DB_PASS', 'CHANGE_ME_STRONG_PASSWORD');
+define('DB_NAME', 'easyrent_scan');
+define('DB_USER', 'easyrent');
+define('DB_PASS', '@Ch@ng3m30@');
 define('DB_CHARSET', 'utf8mb4');
 
 /** Configurare site */
