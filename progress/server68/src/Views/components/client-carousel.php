@@ -1,47 +1,55 @@
 <?php
 /**
  * Componenta Client Logo Carousel
- *
- * Variabile disponibile:
- * @var array $clientLogos - array de logo-uri client, fiecare cu:
- *   'name'  - numele clientului
- *   'image' - URL imagine logo (optional)
- *   'url'   - link catre site-ul clientului (optional)
  */
 $clientLogos = $clientLogos ?? [];
+
+// Fallback logo-uri daca nu sunt in DB
+if (empty($clientLogos)) {
+    $clientLogos = [
+        ['name' => 'Cordia'],
+        ['name' => 'Lidl'],
+        ['name' => 'Kaufland'],
+        ['name' => 'Dedeman'],
+        ['name' => 'Renault'],
+        ['name' => 'BCR'],
+        ['name' => 'Vodafone'],
+        ['name' => 'Decathlon'],
+        ['name' => 'Leroy Merlin'],
+        ['name' => 'eMAG'],
+    ];
+}
 ?>
 
-<?php if (!empty($clientLogos)): ?>
 <!-- ===== CLIENT LOGOS CAROUSEL ===== -->
 <section class="logos-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        Clienți și Parteneri
-      </span>
+      <span class="section-tag">Parteneri</span>
+      <h2 class="section-title">Am Colaborat cu Branduri de Top</h2>
     </div>
   </div>
-  <div class="logos-track">
-    <?php
-    // Duplicam logo-urile pentru efect infinite scroll
-    $allLogos = array_merge($clientLogos, $clientLogos);
-    foreach ($allLogos as $logo):
-    ?>
-    <div class="logo-placeholder">
-      <?php if (!empty($logo['image'])): ?>
-        <?php if (!empty($logo['url'])): ?>
-        <a href="<?= htmlspecialchars($logo['url']) ?>" target="_blank" rel="noopener">
+  <div class="logos-track-wrapper">
+    <div class="logos-track" id="logosTrack">
+      <?php
+      // Duplicam logo-urile pentru efect infinite scroll
+      $allLogos = array_merge($clientLogos, $clientLogos);
+      foreach ($allLogos as $logo):
+      ?>
+      <div class="logo-placeholder">
+        <?php if (!empty($logo['image'])): ?>
+          <?php if (!empty($logo['url'])): ?>
+          <a href="<?= htmlspecialchars($logo['url']) ?>" target="_blank" rel="noopener">
+            <img src="<?= htmlspecialchars($logo['image']) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
+          </a>
+          <?php else: ?>
           <img src="<?= htmlspecialchars($logo['image']) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
-        </a>
+          <?php endif; ?>
         <?php else: ?>
-        <img src="<?= htmlspecialchars($logo['image']) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
+        <?= htmlspecialchars($logo['name'] ?? '') ?>
         <?php endif; ?>
-      <?php else: ?>
-      <span><?= htmlspecialchars($logo['name'] ?? '') ?></span>
-      <?php endif; ?>
+      </div>
+      <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
   </div>
 </section>
-<?php endif; ?>

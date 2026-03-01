@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Testimonials slider
 function initTestimonialsSlider() {
   const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('.testimonials-dots button');
+  const dots = document.querySelectorAll('.testimonial-dots button');
   if (!slides.length) return;
 
   let current = 0;
@@ -169,10 +169,13 @@ function initCounters() {
 
 // Set active nav link based on current page
 function setActiveNavLink() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const path = window.location.pathname;
   document.querySelectorAll('.navbar-links a, .mobile-menu a').forEach(link => {
     const href = link.getAttribute('href');
-    if (href && (href === path || (path === 'index.html' && href === './'))) {
+    if (!href || href === '#') return;
+    if (path === '/' && href === '/') {
+      link.classList.add('active');
+    } else if (href !== '/' && path.startsWith(href)) {
       link.classList.add('active');
     }
   });
