@@ -10,7 +10,7 @@
 RewriteEngine On
 
 # Setam directorul de baza
-RewriteBase /
+RewriteBase /progress/server68/public/
 
 # =============================================================================
 # PERMITERE EXPLICITA CRAWLERE AI (override server-level blocking)
