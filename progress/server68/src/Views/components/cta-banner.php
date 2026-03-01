@@ -12,13 +12,13 @@
 $ctaTitle = $ctaTitle ?? 'Ai un proiect? Hai să vorbim!';
 $ctaText = $ctaText ?? 'Solicită o ofertă personalizată și descoperă cum putem transforma vizual afacerea ta.';
 $ctaButton = $ctaButton ?? 'Contactează-ne Acum';
-$ctaLink = $ctaLink ?? '/contact';
+$ctaLink = $ctaLink ?? 'mailto:office@scanbox.ro';
 $ctaHidden = $ctaHidden ?? false;
 ?>
 
 <?php if (!$ctaHidden): ?>
 <!-- ===== CTA SECTION ===== -->
-<section class="cta-section">
+<section class="cta-section" id="cta">
   <div class="container">
     <div class="cta-banner">
       <h2><?= htmlspecialchars($ctaTitle) ?></h2>

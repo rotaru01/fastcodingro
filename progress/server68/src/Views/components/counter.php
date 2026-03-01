@@ -17,7 +17,7 @@ $stats = $stats ?? [
     <div class="stats-grid">
       <?php foreach ($stats as $stat): ?>
       <div class="stat-item">
-        <div class="stat-number" data-count="<?= htmlspecialchars($stat['value'] ?? '0') ?>">0</div>
+        <div class="stat-number" data-count="<?= htmlspecialchars($stat['value'] ?? '0') ?>"<?php if (!empty($stat['suffix'])): ?> data-suffix="<?= htmlspecialchars($stat['suffix']) ?>"<?php endif; ?>>0</div>
         <div class="stat-label"><?= htmlspecialchars($stat['label'] ?? '') ?></div>
       </div>
       <?php endforeach; ?>

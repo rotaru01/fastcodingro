@@ -3,18 +3,20 @@
  * Componenta Hero
  *
  * Variabile disponibile:
- * @var string $heroType      - 'full' (homepage) sau 'page' (pagini interioare)
- * @var string $heroBadge     - textul badge-ului (optional)
- * @var string $heroBadgeIcon - SVG icon-ul badge-ului (optional)
- * @var string $heroTitle     - titlul principal (H1)
- * @var string $heroSubtitle  - subtitlul (optional)
- * @var array  $heroButtons   - butoane [{text, href, class, icon}] (optional, doar pt homepage)
+ * @var string $heroType       - 'full' (homepage) sau 'page' (pagini interioare)
+ * @var string $heroBadge      - textul badge-ului (optional)
+ * @var string $heroBadgeIcon  - SVG icon-ul badge-ului (optional)
+ * @var string $heroTitle      - titlul principal (H1)
+ * @var array  $heroServices   - lista servicii hero [{text, href}] (optional, doar pt homepage)
+ * @var array  $heroButtons    - butoane [{text, href, class, icon, tag, onclick}] (optional)
+ * @var string $heroSubtitle   - subtitlul pt inner pages (optional)
  */
 $heroType = $heroType ?? 'page';
 $heroBadge = $heroBadge ?? '';
 $heroBadgeIcon = $heroBadgeIcon ?? '';
 $heroTitle = $heroTitle ?? '';
 $heroSubtitle = $heroSubtitle ?? '';
+$heroServices = $heroServices ?? [];
 $heroButtons = $heroButtons ?? [];
 ?>
 
@@ -38,8 +40,13 @@ $heroButtons = $heroButtons ?? [];
 
     <h1><?= $heroTitle ?></h1>
 
-    <?php if ($heroSubtitle): ?>
-    <p class="hero-subtitle"><?= $heroSubtitle ?></p>
+    <?php if (!empty($heroServices)): ?>
+    <div class="hero-services">
+      <?php foreach ($heroServices as $i => $svc): ?>
+        <?php if ($i > 0): ?><span class="sep">|</span><?php endif; ?>
+        <a href="<?= htmlspecialchars($svc['href']) ?>"><?= htmlspecialchars($svc['text']) ?></a>
+      <?php endforeach; ?>
+    </div>
     <?php endif; ?>
 
     <?php if (!empty($heroButtons)): ?>

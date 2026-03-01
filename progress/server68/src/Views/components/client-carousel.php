@@ -12,11 +12,13 @@ if (empty($clientLogos)) {
         ['name' => 'Kaufland'],
         ['name' => 'Dedeman'],
         ['name' => 'Renault'],
-        ['name' => 'BCR'],
+        ['name' => 'Carrefour'],
+        ['name' => 'Orange'],
         ['name' => 'Vodafone'],
+        ['name' => 'ING Bank'],
+        ['name' => 'BCR'],
+        ['name' => 'Mega Image'],
         ['name' => 'Decathlon'],
-        ['name' => 'Leroy Merlin'],
-        ['name' => 'eMAG'],
     ];
 }
 ?>

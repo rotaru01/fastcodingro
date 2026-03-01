@@ -25,6 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Mobile dropdown toggle
+  const mobileDropdownToggle = document.getElementById('mobileDropdownToggle');
+  const mobileDropdownItems = document.getElementById('mobileDropdownItems');
+  if (mobileDropdownToggle && mobileDropdownItems) {
+    mobileDropdownToggle.addEventListener('click', () => {
+      mobileDropdownItems.classList.toggle('active');
+      const svg = mobileDropdownToggle.querySelector('svg');
+      if (mobileDropdownItems.classList.contains('active')) {
+        svg.style.transform = 'rotate(180deg)';
+      } else {
+        svg.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
+
   // Intersection Observer for fade-in animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -35,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('.stat-item, .service-card, .step-item, .portfolio-card, .testimonial-content, .cta-banner, .blog-card, .pricing-card, .project-card, .content-grid, .gallery-item').forEach(el => {
+  document.querySelectorAll('.stat-item, .service-card, .step-item, .special-card, .testimonial-slider, .portfolio-card, .testimonial-content, .cta-banner, .blog-card, .pricing-card, .project-card, .content-grid, .gallery-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
@@ -52,20 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
   stagger('.services-grid .service-card');
   stagger('.services-bottom-row .service-card');
   stagger('.steps-wrapper .step-item', 0.15);
+  stagger('.special-grid .special-card', 0.15);
   stagger('.portfolio-grid .portfolio-card');
   stagger('.blog-grid .blog-card');
   stagger('.pricing-grid .pricing-card', 0.15);
   stagger('.gallery-grid .gallery-item', 0.05);
 
   // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href === '#') return;
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+  document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').forEach(anchor => {
+    if (anchor.tagName === 'A') {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   });
 
   // Testimonials slider
@@ -79,15 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Active nav link
   setActiveNavLink();
+
+  // FAQ accordion
+  initFaq();
 });
 
 // Testimonials slider
 function initTestimonialsSlider() {
   const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('.testimonial-dots button');
+  const dots = document.querySelectorAll('.testimonial-dot');
   if (!slides.length) return;
 
   let current = 0;
+  let slideInterval;
+
   const show = (index) => {
     slides.forEach(s => s.classList.remove('active'));
     dots.forEach(d => d.classList.remove('active'));
@@ -96,8 +119,15 @@ function initTestimonialsSlider() {
     current = index;
   };
 
-  dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
-  setInterval(() => show((current + 1) % slides.length), 6000);
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      show(parseInt(dot.dataset.index));
+      slideInterval = setInterval(() => show((current + 1) % slides.length), 6000);
+    });
+  });
+
+  slideInterval = setInterval(() => show((current + 1) % slides.length), 6000);
   show(0);
 }
 
@@ -172,11 +202,18 @@ function setActiveNavLink() {
   const path = window.location.pathname;
   document.querySelectorAll('.navbar-links a, .mobile-menu a').forEach(link => {
     const href = link.getAttribute('href');
-    if (!href || href === '#') return;
+    if (!href || href === '#' || href.startsWith('#')) return;
     if (path === '/' && href === '/') {
       link.classList.add('active');
     } else if (href !== '/' && path.startsWith(href)) {
       link.classList.add('active');
     }
+  });
+}
+
+// FAQ accordion toggle
+function initFaq() {
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
   });
 }

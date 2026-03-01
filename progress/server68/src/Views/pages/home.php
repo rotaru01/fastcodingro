@@ -16,15 +16,36 @@
 <?php
 $heroBadge = 'Reseller Oficial Matterport România';
 $heroBadgeIcon = '<svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>';
-$heroTitle = 'Soluții Vizuale Profesionale pentru Afacerea Ta';
-$heroSubtitle = 'Tur Virtual 3D Matterport <span>|</span> Fotografie <span>|</span> Videografie <span>|</span> Social Media Management';
+$heroTitle = 'Soluții Vizuale pentru Afacerea Ta';
 $heroType = 'full';
+$heroServices = [
+    ['text' => 'Tur Virtual 3D Matterport', 'href' => '/servicii/tur-virtual-3d'],
+    ['text' => 'Foto B2B', 'href' => '/servicii/fotografie'],
+    ['text' => 'Video B2B', 'href' => '/servicii/videografie-drone'],
+    ['text' => 'Social Media', 'href' => '/servicii/social-media'],
+    ['text' => 'Sport Content', 'href' => '/sport-content'],
+    ['text' => 'Randare 3D', 'href' => '/servicii/randare-3d'],
+];
 $heroButtons = [
-    ['text' => 'Cere Ofertă Gratuită', 'href' => '/contact', 'class' => 'btn-primary', 'icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'],
+    ['text' => 'Cere Ofertă Gratuită', 'tag' => 'button', 'class' => 'btn-primary', 'onclick' => "document.getElementById('cta').scrollIntoView({behavior:'smooth'})", 'icon' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'],
     ['text' => 'Vezi Serviciile', 'href' => '#servicii', 'class' => 'btn-outline', 'icon' => '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'],
 ];
 include __DIR__ . '/../components/hero.php';
 ?>
+
+<!-- ===== SLOGAN ===== -->
+<div class="slogan-banner">
+  <p class="slogan-text">WE ARE YOUR CONTENT CREATORS</p>
+</div>
+
+<!-- ===== CITATION BLOCK ===== -->
+<section lang="ro" style="background: linear-gradient(180deg, #0D1B2A, #0D1B2A); padding: 40px 0 0;">
+  <div class="container" style="max-width: 900px;">
+    <p style="border-left: 3px solid #04B494; padding-left: 16px; color: #CBD5E1; font-size: 15px; line-height: 1.8; margin: 24px 0;">
+      Scanbox.ro (TRIVIT SERVICES S.R.L.) este o companie B2B din București specializată in soluții vizuale profesionale: tur virtual 3D Matterport, fotografie profesională, videografie drone 4K, randare 3D fotorealistă, social media și sport content. Reseller Oficial Matterport România, 500+ proiecte finalizate.
+    </p>
+  </div>
+</section>
 
 <!-- ===== STATS ===== -->
 <?php
@@ -36,15 +57,6 @@ $stats = [
 ];
 include __DIR__ . '/../components/counter.php';
 ?>
-
-<!-- ===== SLOGAN BANNER ===== -->
-<section class="content-section" style="padding: 60px 0; background: linear-gradient(180deg, #0D1B2A 0%, #152540 100%);">
-  <div class="container" style="text-align: center;">
-    <div class="slogan-text" style="font-size: clamp(28px, 5vw, 56px); font-weight: 800; letter-spacing: 2px; color: rgba(255,255,255,0.08); text-transform: uppercase;">
-      WE ARE YOUR CONTENT CREATORS
-    </div>
-  </div>
-</section>
 
 <!-- ===== SERVICES ===== -->
 <section class="services-section" id="servicii">
@@ -92,7 +104,7 @@ include __DIR__ . '/../components/counter.php';
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
           </div>
           <h3>Servicii Video B2B</h3>
-          <p>Producție video completă: prezentări corporate, filmări cu drona 4K, interviuri, time-lapse și conținut pentru platforme digitale.</p>
+          <p>Conținut video cinematic, filmare aeriană cu drone și editare profesională pentru prezentări de impact ale afacerii tale.</p>
           <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </a>
 
@@ -101,7 +113,7 @@ include __DIR__ . '/../components/counter.php';
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
           </div>
           <h3>Social Media</h3>
-          <p>Administrare completă social media: strategie, content foto & video, creștere organică și management comunitate.</p>
+          <p>Strategie completă de social media: creare conținut, programare postări, community management și raportare lunară detaliată.</p>
           <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </a>
 
@@ -110,7 +122,7 @@ include __DIR__ . '/../components/counter.php';
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5B7FBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
           </div>
           <h3>Sport Content</h3>
-          <p>Conținut vizual dedicat pentru evenimente și branduri sportive: filmări de meci, highlight-uri, conținut social media.</p>
+          <p>Conținut vizual dinamic pentru evenimente sportive, cluburi și federații. Foto, video și social media specializate pe sport.</p>
           <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </a>
 
@@ -119,7 +131,7 @@ include __DIR__ . '/../components/counter.php';
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#04B494" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3>Randare 3D</h3>
-          <p>Vizualizări fotorealiste 3D pentru arhitectură, design interior și dezvoltări imobiliare. Proiecte prezentate înainte de construcție.</p>
+          <p>Vizualizări 3D fotorealiste și planuri izometrice pentru arhitectură, design interior și dezvoltări imobiliare de top.</p>
           <span class="service-link">Află mai multe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </a>
       <?php endif; ?>
@@ -296,13 +308,58 @@ include __DIR__ . '/../components/counter.php';
             <span class="blog-card-category">Social Media</span>
           </div>
           <div class="blog-card-body">
-            <span class="blog-card-date">1 Februarie 2026</span>
-            <h3>Strategii de Social Media pentru Companii B2B în 2026</h3>
-            <p>Cele mai eficiente tactici de social media pentru companii care vând către alte companii.</p>
+            <span class="blog-card-date">10 Ianuarie 2026</span>
+            <h3>Tendințe Social Media 2026: Ce Trebuie Să Știi</h3>
+            <p>Cele mai importante tendințe în social media pentru anul 2026 și cum le poți integra în strategia ta de marketing.</p>
             <span class="blog-card-link">Citește mai mult <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </div>
         </a>
       <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section lang="ro" style="background: linear-gradient(180deg, #0D1B2A, #0D1B2A); padding: 80px 0;">
+  <div class="container" style="max-width: 800px;">
+    <div class="section-header" style="text-align: center; margin-bottom: 48px;">
+      <span class="hero-badge" style="display: inline-block; margin-bottom: 16px;">FAQ</span>
+      <h2 style="font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.5px;">Întrebări Frecvente</h2>
+    </div>
+    <div itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-toggle">
+          <span itemprop="name">Ce este Scanbox.ro?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text" style="padding: 0 24px 20px; color: #94A3B8; font-size: 15px; line-height: 1.8;">
+            Scanbox.ro (TRIVIT SERVICES S.R.L.) este o companie B2B din București specializată în soluții vizuale profesionale: tur virtual 3D Matterport, fotografie profesională, videografie drone 4K, randare 3D fotorealistă, social media content management și sport content. Fondată în 2018, este singurul Reseller Oficial Matterport pentru România și Republica Moldova, cu peste 150 tururi virtuale și 500 proiecte finalizate.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-toggle">
+          <span itemprop="name">Unde se află Scanbox și în ce zone oferă servicii?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text" style="padding: 0 24px 20px; color: #94A3B8; font-size: 15px; line-height: 1.8;">
+            Sediul Scanbox este în Str. Moroeni 60D, Sector 2, București, România. Compania oferă servicii în toată România și Republica Moldova. Program de lucru: Luni-Vineri, 09:00-18:00. Contact: office@scanbox.ro, telefon 0740 233 353.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-toggle">
+          <span itemprop="name">De ce să aleg Scanbox pentru servicii vizuale?</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text" style="padding: 0 24px 20px; color: #94A3B8; font-size: 15px; line-height: 1.8;">
+            Scanbox este singura companie din România cu statut de Reseller Oficial Matterport, oferind acces direct la cele mai avansate tehnologii de scanare 3D. Cu peste 5 ani de experiență, 150+ tururi virtuale și 500+ proiecte finalizate, echipa combină expertiza tehnică cu creativitatea artistică. Livrare rapidă (48h) și echipament de ultimă generație.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
