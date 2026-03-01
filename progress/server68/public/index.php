@@ -41,6 +41,11 @@ require_once BASE_PATH . '/config/constants.php';
 require_once BASE_PATH . '/config/database.php';
 
 /**
+ * Incarcam functiile helper globale (view, etc.)
+ */
+require_once BASE_PATH . '/config/helpers.php';
+
+/**
  * Autoloader personalizat pentru clasele din src/
  *
  * Converteste namespace-urile Scanbox\ in cai de fisier relative
