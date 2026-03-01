@@ -78,13 +78,13 @@ class AuthController
             exit;
         }
 
-        // Cautare utilizator
+        // Cautare utilizator in tabelul admins
         $user = $this->db->fetch(
-            "SELECT * FROM users WHERE email = ? AND is_active = 1 LIMIT 1",
+            "SELECT * FROM admins WHERE email = ? AND is_active = 1 LIMIT 1",
             [$email]
         );
 
-        if ($user === null || !password_verify($password, $user['password'])) {
+        if ($user === null || !password_verify($password, $user['password_hash'])) {
             // Inregistrare incercare esuata
             $this->recordFailedAttempt($ipAddress, $email);
 
@@ -97,9 +97,8 @@ class AuthController
         $this->clearFailedAttempts($ipAddress);
 
         // Actualizare ultima autentificare
-        $this->db->update('users', [
-            'last_login_at' => date('Y-m-d H:i:s'),
-            'last_login_ip' => $ipAddress,
+        $this->db->update('admins', [
+            'last_login' => date('Y-m-d H:i:s'),
         ], 'id = ?', [(int) $user['id']]);
 
         // Regenerare ID sesiune pentru prevenirea fixarii sesiunii
