@@ -40,7 +40,8 @@ include __DIR__ . '/../components/hero.php';
     <?php if (!empty($projects)): ?>
     <div class="portfolio-grid" id="portfolioGrid">
       <?php foreach ($projects as $project): ?>
-      <div class="portfolio-card" data-category="<?= htmlspecialchars($project['category_slug'] ?? $project['category_id'] ?? '') ?>">
+      <?php $projectLink = $project['matterport_url'] ?? ''; ?>
+      <a href="<?= !empty($projectLink) ? htmlspecialchars($projectLink) : '#' ?>" class="portfolio-card" data-category="<?= htmlspecialchars($project['category_slug'] ?? $project['category_id'] ?? '') ?>" <?= !empty($projectLink) ? 'target="_blank" rel="noopener"' : '' ?>>
         <div class="portfolio-thumb">
           <?php if (!empty($project['thumbnail'])): ?>
           <img src="<?= htmlspecialchars($project['thumbnail']) ?>" alt="<?= htmlspecialchars($project['title'] ?? '') ?>" loading="lazy">
@@ -59,14 +60,12 @@ include __DIR__ . '/../components/hero.php';
           <?php if (!empty($project['description'])): ?>
           <p><?= htmlspecialchars(mb_substr($project['description'], 0, 100)) ?></p>
           <?php endif; ?>
-          <?php if (!empty($project['matterport_url'])): ?>
-          <a href="<?= htmlspecialchars($project['matterport_url']) ?>" class="service-link" target="_blank" rel="noopener">
+          <span class="service-link">
             Vezi Proiectul
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <?php endif; ?>
+          </span>
         </div>
-      </div>
+      </a>
       <?php endforeach; ?>
     </div>
     <?php else: ?>

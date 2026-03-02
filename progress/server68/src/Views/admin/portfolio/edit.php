@@ -58,9 +58,10 @@ ob_start();
                 </div>
 
                 <div class="form-group">
-                    <label for="matterport_url">URL Matterport</label>
-                    <input type="url" id="matterport_url" name="matterport_url" placeholder="https://my.matterport.com/show/?m=..."
+                    <label for="matterport_url">Link Proiect (Matterport, YouTube, etc.)</label>
+                    <input type="url" id="matterport_url" name="matterport_url" placeholder="https://my.matterport.com/show/?m=... sau https://youtube.com/..."
                            value="<?= htmlspecialchars($project['matterport_url'] ?? '') ?>">
+                    <span class="form-hint">Link-ul unde duc utilizatorii cand dau click pe proiect</span>
                 </div>
             </div>
 

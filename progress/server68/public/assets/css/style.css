@@ -1720,6 +1720,9 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(255, 255, 255, 0.06);
   transition: all 0.5s ease;
   cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .portfolio-card:hover {
