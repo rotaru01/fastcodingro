@@ -102,14 +102,22 @@ class AuthController
         ], 'id = ?', [(int) $user['id']]);
 
         // Regenerare ID sesiune pentru prevenirea fixarii sesiunii
-        session_regenerate_id(true);
+        \Scanbox\Core\Session::regenerate();
 
-        // Setare date sesiune
+        // Setare date sesiune (cheile admin_* sunt necesare pentru Auth::check())
+        \Scanbox\Core\Session::set('admin_id', (int) $user['id']);
+        \Scanbox\Core\Session::set('admin_username', $user['username'] ?? '');
+        \Scanbox\Core\Session::set('admin_name', $user['name']);
+        \Scanbox\Core\Session::set('admin_email', $user['email']);
+        \Scanbox\Core\Session::set('admin_role', $user['role'] ?? 'admin');
+        \Scanbox\Core\Session::set('admin_logged_in', true);
+        \Scanbox\Core\Session::set('login_time', time());
+
+        // Compatibilitate cu controllere care folosesc user_id/user_name
         $_SESSION['user_id'] = (int) $user['id'];
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['user_role'] = $user['role'] ?? 'admin';
-        $_SESSION['logged_in_at'] = time();
 
         // Inregistrare activitate
         $this->logActivity((int) $user['id'], 'login', 'Autentificare reușită');
@@ -123,27 +131,12 @@ class AuthController
      */
     public function logout(): void
     {
-        if (isset($_SESSION['user_id'])) {
-            $this->logActivity((int) $_SESSION['user_id'], 'logout', 'Deconectare');
+        $adminId = \Scanbox\Core\Session::get('admin_id');
+        if ($adminId !== null) {
+            $this->logActivity((int) $adminId, 'logout', 'Deconectare');
         }
 
-        // Distrugere sesiune
-        $_SESSION = [];
-
-        if (ini_get('session.use_cookies')) {
-            $params = session_get_cookie_params();
-            setcookie(
-                session_name(),
-                '',
-                time() - 42000,
-                $params['path'],
-                $params['domain'],
-                $params['secure'],
-                $params['httponly']
-            );
-        }
-
-        session_destroy();
+        \Scanbox\Core\Session::destroy();
 
         header('Location: /admin/login');
         exit;
