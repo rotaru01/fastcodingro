@@ -48,11 +48,19 @@ include __DIR__ . '/../components/hero.php';
         <?php foreach ($reelsItems as $reel):
           $reelUrl = $reel['external_url'] ?? '';
           $reelTitle = $reel['title'] ?? '';
+          $thumbPath = $reel['thumbnail_path'] ?? '';
+          if ($thumbPath && !str_starts_with($thumbPath, 'http') && !str_starts_with($thumbPath, '/')) {
+              $thumbPath = '/uploads/' . $thumbPath;
+          }
         ?>
-        <a href="<?= htmlspecialchars($reelUrl) ?>" target="_blank" rel="noopener" class="reel-card">
+        <a href="<?= htmlspecialchars($reelUrl) ?>" target="_blank" rel="noopener" class="reel-card<?= $thumbPath ? ' has-thumb' : '' ?>">
+          <?php if ($thumbPath): ?>
+          <img src="<?= htmlspecialchars($thumbPath) ?>" alt="<?= htmlspecialchars($reelTitle) ?>" class="reel-card-thumb" loading="lazy">
+          <?php else: ?>
           <div class="reel-card-bg">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"><rect x="2" y="2" width="20" height="20" rx="5"/><line x1="2" y1="8" x2="22" y2="8"/><line x1="8" y1="2" x2="8" y2="8"/><circle cx="12" cy="15" r="3.5"/></svg>
           </div>
+          <?php endif; ?>
           <div class="reel-card-play">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><polygon points="6 3 20 12 6 21 6 3"/></svg>
           </div>

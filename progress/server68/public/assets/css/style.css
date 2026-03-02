@@ -2044,6 +2044,27 @@ img { max-width: 100%; display: block; }
   border-color: rgba(4, 180, 148, 0.3);
 }
 
+.reel-card-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-card.has-thumb .reel-card-title,
+.reel-card.has-thumb .reel-card-badge {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.reel-card.has-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 40%, transparent 70%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+
 .reel-card-bg {
   position: absolute;
   inset: 0;
