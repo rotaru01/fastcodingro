@@ -121,7 +121,7 @@ class AdminController
                 'content' => $_POST['content'] ?? '',
                 'excerpt' => trim($_POST['excerpt'] ?? ''),
                 'category_id' => !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null,
-                'thumbnail' => trim($_POST['thumbnail'] ?? ''),
+                'featured_image' => trim($_POST['featured_image'] ?? ''),
                 'meta_title' => trim($_POST['meta_title'] ?? ''),
                 'meta_description' => trim($_POST['meta_description'] ?? ''),
                 'status' => $_POST['status'] ?? 'draft',
@@ -135,12 +135,12 @@ class AdminController
                 exit;
             }
 
-            // Upload imagine thumbnail daca exista
-            if (!empty($_FILES['thumbnail_file']['name'])) {
+            // Upload imagine featured daca exista
+            if (!empty($_FILES['featured_image_file']['name'])) {
                 $imageHandler = new ImageHandler();
-                $uploadResult = $imageHandler->upload($_FILES['thumbnail_file'], 'blog');
+                $uploadResult = $imageHandler->upload($_FILES['featured_image_file'], 'blog');
                 if ($uploadResult !== false) {
-                    $data['thumbnail'] = $uploadResult['file_path'];
+                    $data['featured_image'] = $uploadResult['file_path'];
                 }
             }
 
@@ -189,7 +189,7 @@ class AdminController
                 'content' => $_POST['content'] ?? '',
                 'excerpt' => trim($_POST['excerpt'] ?? ''),
                 'category_id' => !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null,
-                'thumbnail' => trim($_POST['thumbnail'] ?? $post['thumbnail']),
+                'featured_image' => trim($_POST['featured_image'] ?? $post['featured_image'] ?? ''),
                 'meta_title' => trim($_POST['meta_title'] ?? ''),
                 'meta_description' => trim($_POST['meta_description'] ?? ''),
                 'status' => $_POST['status'] ?? $post['status'],
@@ -206,12 +206,12 @@ class AdminController
                 exit;
             }
 
-            // Upload imagine thumbnail daca exista
-            if (!empty($_FILES['thumbnail_file']['name'])) {
+            // Upload imagine featured daca exista
+            if (!empty($_FILES['featured_image_file']['name'])) {
                 $imageHandler = new ImageHandler();
-                $uploadResult = $imageHandler->upload($_FILES['thumbnail_file'], 'blog');
+                $uploadResult = $imageHandler->upload($_FILES['featured_image_file'], 'blog');
                 if ($uploadResult !== false) {
-                    $data['thumbnail'] = $uploadResult['file_path'];
+                    $data['featured_image'] = $uploadResult['file_path'];
                 }
             }
 

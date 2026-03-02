@@ -29,6 +29,7 @@ define('ROUTES', [
     'GET|/portofoliu'                => ['PageController', 'portofoliu'],
     'GET|/portofoliu-reels'          => ['PageController', 'portofoliuReels'],
     'GET|/blog'                      => ['BlogController', 'index'],
+    'GET|/blog/categorie/{slug}'     => ['BlogController', 'category'],
     'GET|/blog/{slug}'               => ['BlogController', 'show'],
     'GET|/contact'                   => ['PageController', 'contact'],
     'POST|/contact'                  => ['ContactController', 'submit'],

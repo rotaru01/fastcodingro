@@ -52,9 +52,29 @@ class BlogPost
     public function getBySlug(string $slug): ?array
     {
         return $this->db->fetch(
-            "SELECT * FROM blog_posts WHERE slug = ?",
+            "SELECT bp.*, bc.name as category_name, bc.slug as category_slug
+             FROM blog_posts bp
+             LEFT JOIN blog_categories bc ON bp.category_id = bc.id
+             WHERE bp.slug = ?",
             [$slug]
         );
+    }
+
+    public function getByStatus(string $status, ?int $limit = null, ?int $offset = null): array
+    {
+        $sql = "SELECT * FROM blog_posts WHERE status = ? ORDER BY created_at DESC";
+        $params = [$status];
+
+        if ($limit !== null) {
+            $sql .= " LIMIT ?";
+            $params[] = $limit;
+            if ($offset !== null) {
+                $sql .= " OFFSET ?";
+                $params[] = $offset;
+            }
+        }
+
+        return $this->db->fetchAll($sql, $params);
     }
 
     public function getById(int $id): ?array
