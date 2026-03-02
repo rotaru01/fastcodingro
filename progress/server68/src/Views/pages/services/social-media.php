@@ -283,6 +283,22 @@ $heroButtons = [
   </div>
 </section>
 
+<!-- ===== GALERIE DINAMICA ===== -->
+<?php if (!empty($galleryItems)): ?>
+<section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 80px 0;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Portofoliu</span>
+      <h2 class="section-title">Galerie Social Media</h2>
+    </div>
+    <?php
+      $galleryColumns = '3';
+      include __DIR__ . '/../../components/gallery-grid.php';
+    ?>
+  </div>
+</section>
+<?php endif; ?>
+
 <!-- ===== FAQ ===== -->
 <section class="content-section" lang="ro" style="background:linear-gradient(180deg,#152540,#152540);padding:80px 0">
   <div class="container" style="max-width:800px">

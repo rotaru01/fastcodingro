@@ -26,6 +26,13 @@ $galleryColumns = $galleryColumns ?? '3';
       $altText = $item['alt'] ?? $item['alt_text'] ?? $item['title'] ?? '';
       $thumbUrl = $item['thumbnail'] ?? $item['thumbnail_path'] ?? '';
       $embedUrl = $item['external_url'] ?? $item['url'] ?? '';
+      // Adauga prefixul /uploads/ daca e cale relativa (nu URL complet)
+      if (!empty($imgUrl) && !str_starts_with($imgUrl, 'http') && !str_starts_with($imgUrl, '/')) {
+          $imgUrl = '/uploads/' . $imgUrl;
+      }
+      if (!empty($thumbUrl) && !str_starts_with($thumbUrl, 'http') && !str_starts_with($thumbUrl, '/')) {
+          $thumbUrl = '/uploads/' . $thumbUrl;
+      }
     ?>
     <?php if (($item['type'] ?? 'image') === 'image'): ?>
       <img src="<?= htmlspecialchars($imgUrl) ?>"

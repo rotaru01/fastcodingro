@@ -63,9 +63,9 @@ ob_start();
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
                     </div>
                     <?php
-                    $imgSrc = $item['file_path'] ?? $item['url'] ?? '';
-                    if (!empty($item['thumbnail'])) {
-                        $imgSrc = $item['thumbnail'];
+                    $imgSrc = $item['thumbnail_path'] ?? $item['file_path'] ?? $item['url'] ?? '';
+                    if (!empty($imgSrc) && !str_starts_with($imgSrc, 'http') && !str_starts_with($imgSrc, '/')) {
+                        $imgSrc = '/uploads/' . $imgSrc;
                     }
                     ?>
                     <?php if (!empty($imgSrc)): ?>

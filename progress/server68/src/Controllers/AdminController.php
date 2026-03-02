@@ -140,8 +140,8 @@ class AdminController
             if (!empty($_FILES['thumbnail_file']['name'])) {
                 $imageHandler = new ImageHandler();
                 $uploadResult = $imageHandler->upload($_FILES['thumbnail_file'], 'blog');
-                if ($uploadResult !== null) {
-                    $data['thumbnail'] = $uploadResult;
+                if ($uploadResult !== false) {
+                    $data['thumbnail'] = $uploadResult['file_path'];
                 }
             }
 
@@ -211,8 +211,8 @@ class AdminController
             if (!empty($_FILES['thumbnail_file']['name'])) {
                 $imageHandler = new ImageHandler();
                 $uploadResult = $imageHandler->upload($_FILES['thumbnail_file'], 'blog');
-                if ($uploadResult !== null) {
-                    $data['thumbnail'] = $uploadResult;
+                if ($uploadResult !== false) {
+                    $data['thumbnail'] = $uploadResult['file_path'];
                 }
             }
 
@@ -323,12 +323,13 @@ class AdminController
                                 'error' => $_FILES['images']['error'][$i],
                                 'size' => $_FILES['images']['size'][$i],
                             ];
-                            $uploadPath = $imageHandler->upload($file, 'gallery');
-                            if ($uploadPath !== null) {
+                            $uploadResult = $imageHandler->upload($file, 'gallery');
+                            if ($uploadResult !== false) {
                                 $currentMax++;
                                 $galleryItemModel->create([
                                     'gallery_id' => $galleryId,
-                                    'file_path' => $uploadPath,
+                                    'file_path' => $uploadResult['file_path'],
+                                    'thumbnail_path' => $uploadResult['thumbnail_path'] ?? null,
                                     'alt_text' => pathinfo($file['name'], PATHINFO_FILENAME),
                                     'sort_order' => $currentMax,
                                 ]);
@@ -440,13 +441,18 @@ class AdminController
                 'size' => $_FILES['images']['size'][$i],
             ];
 
-            $uploadPath = $imageHandler->upload($file, 'gallery');
-            if ($uploadPath !== null) {
+            $uploadResult = $imageHandler->upload($file, 'gallery');
+            if ($uploadResult !== false) {
+                $currentMax = (int) (Database::getInstance()->fetch(
+                    "SELECT MAX(sort_order) as mx FROM gallery_items WHERE gallery_id = ?",
+                    [$galleryId]
+                )['mx'] ?? 0);
                 $galleryItemModel->create([
                     'gallery_id' => $galleryId,
-                    'image_path' => $uploadPath,
+                    'file_path' => $uploadResult['file_path'],
+                    'thumbnail_path' => $uploadResult['thumbnail_path'] ?? null,
                     'alt_text' => pathinfo($file['name'], PATHINFO_FILENAME),
-                    'sort_order' => $galleryItemModel->getMaxSortOrder($galleryId) + 1,
+                    'sort_order' => $currentMax + 1,
                 ]);
                 $uploadCount++;
             }
@@ -521,8 +527,8 @@ class AdminController
             if (!empty($_FILES['thumbnail']['name'])) {
                 $imageHandler = new ImageHandler();
                 $uploadResult = $imageHandler->upload($_FILES['thumbnail'], 'portfolio');
-                if ($uploadResult !== null) {
-                    $data['thumbnail'] = $uploadResult;
+                if ($uploadResult !== false) {
+                    $data['thumbnail'] = $uploadResult['file_path'];
                 }
             }
 
@@ -591,8 +597,8 @@ class AdminController
             if (!empty($_FILES['thumbnail']['name'])) {
                 $imageHandler = new ImageHandler();
                 $uploadResult = $imageHandler->upload($_FILES['thumbnail'], 'portfolio');
-                if ($uploadResult !== null) {
-                    $data['thumbnail'] = $uploadResult;
+                if ($uploadResult !== false) {
+                    $data['thumbnail'] = $uploadResult['file_path'];
                 }
             }
 
@@ -669,8 +675,8 @@ class AdminController
                     if (!empty($_FILES['avatar']['name'])) {
                         $imageHandler = new ImageHandler();
                         $uploadResult = $imageHandler->upload($_FILES['avatar'], 'testimonials');
-                        if ($uploadResult !== null) {
-                            $data['avatar'] = $uploadResult;
+                        if ($uploadResult !== false) {
+                            $data['avatar'] = $uploadResult['file_path'];
                         }
                     }
 
@@ -693,8 +699,8 @@ class AdminController
                     if (!empty($_FILES['avatar']['name'])) {
                         $imageHandler = new ImageHandler();
                         $uploadResult = $imageHandler->upload($_FILES['avatar'], 'testimonials');
-                        if ($uploadResult !== null) {
-                            $data['avatar'] = $uploadResult;
+                        if ($uploadResult !== false) {
+                            $data['avatar'] = $uploadResult['file_path'];
                         }
                     }
 
@@ -748,8 +754,8 @@ class AdminController
                     if (!empty($_FILES['logo']['name'])) {
                         $imageHandler = new ImageHandler();
                         $uploadResult = $imageHandler->upload($_FILES['logo'], 'clients');
-                        if ($uploadResult !== null) {
-                            $data['logo_path'] = $uploadResult;
+                        if ($uploadResult !== false) {
+                            $data['logo_path'] = $uploadResult['file_path'];
                         }
                     }
 
@@ -774,8 +780,8 @@ class AdminController
                     if (!empty($_FILES['logo']['name'])) {
                         $imageHandler = new ImageHandler();
                         $uploadResult = $imageHandler->upload($_FILES['logo'], 'clients');
-                        if ($uploadResult !== null) {
-                            $data['logo_path'] = $uploadResult;
+                        if ($uploadResult !== false) {
+                            $data['logo_path'] = $uploadResult['file_path'];
                         }
                     }
 
