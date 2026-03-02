@@ -16,7 +16,6 @@ use Scanbox\Models\ClientLogo;
 use Scanbox\Models\Setting;
 use Scanbox\Models\PricingPackage;
 use Scanbox\Models\Category;
-use Scanbox\Models\Service;
 use Scanbox\Core\ImageHandler;
 
 class AdminController
@@ -891,12 +890,12 @@ class AdminController
             exit;
         }
 
-        $settings = $settingModel->getAllGrouped();
+        $settings = $settingModel->getAll();
 
         view('admin/settings/index', [
             'title' => 'Setări - Admin Scanbox.ro',
             'settings' => $settings,
-            'csrfToken' => $this->generateCsrf(),
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
@@ -906,16 +905,91 @@ class AdminController
     public function pricing(): void
     {
         $pricingModel = new PricingPackage();
-        $serviceModel = new Service();
 
-        $packages = $pricingModel->getAllGrouped();
-        $services = $serviceModel->getAll();
+        // Handle POST actions
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCsrf();
+            $postAction = $_POST['action'] ?? '';
+            $pkgId = (int) ($_POST['id'] ?? 0);
+
+            switch ($postAction) {
+                case 'create':
+                    $featuresText = trim($_POST['features'] ?? '');
+                    $featuresArray = array_values(array_filter(
+                        array_map('trim', explode("\n", $featuresText)),
+                        fn($f) => $f !== ''
+                    ));
+
+                    $data = [
+                        'name' => trim($_POST['name'] ?? ''),
+                        'service_page' => trim($_POST['service_page'] ?? ''),
+                        'price' => (float) ($_POST['price'] ?? 0),
+                        'currency' => $_POST['currency'] ?? 'RON',
+                        'features_json' => json_encode($featuresArray, JSON_UNESCAPED_UNICODE),
+                        'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
+                        'is_active' => 1,
+                    ];
+
+                    if (!empty($data['name']) && !empty($data['service_page'])) {
+                        $newId = $pricingModel->create($data);
+                        $this->logActivity('pricing_create', "Pachet creat: {$data['name']} (ID: {$newId})");
+                        $_SESSION['flash_success'] = 'Pachetul a fost creat.';
+                    } else {
+                        $_SESSION['flash_error'] = 'Numele și serviciul sunt obligatorii.';
+                    }
+                    $redirect = !empty($data['service_page']) ? '?service=' . urlencode($data['service_page']) : '';
+                    header('Location: /admin/pricing' . $redirect);
+                    exit;
+
+                case 'toggle_featured':
+                    if ($pkgId > 0) {
+                        $pricingModel->toggleFeatured($pkgId);
+                        $this->logActivity('pricing_update', "Toggle featured pachet (ID: {$pkgId})");
+                    }
+                    header('Location: /admin/pricing');
+                    exit;
+
+                case 'toggle_active':
+                    if ($pkgId > 0) {
+                        $pricingModel->toggleActive($pkgId);
+                        $this->logActivity('pricing_update', "Toggle activ pachet (ID: {$pkgId})");
+                    }
+                    header('Location: /admin/pricing');
+                    exit;
+
+                case 'delete':
+                    if ($pkgId > 0) {
+                        $existing = $pricingModel->getById($pkgId);
+                        if ($existing) {
+                            $pricingModel->delete($pkgId);
+                            $this->logActivity('pricing_delete', "Pachet șters: {$existing['name']} (ID: {$pkgId})");
+                            $_SESSION['flash_success'] = 'Pachetul a fost șters.';
+                        }
+                    }
+                    header('Location: /admin/pricing');
+                    exit;
+            }
+        }
+
+        // GET: afisare pachete
+        $currentService = $_GET['service'] ?? '';
+        if (!empty($currentService)) {
+            $packages = $pricingModel->getByService($currentService);
+        } else {
+            $packages = $pricingModel->getAll();
+        }
+
+        // Map features_json -> features for the view
+        foreach ($packages as &$pkg) {
+            $pkg['features'] = $pkg['features_json'] ?? null;
+        }
+        unset($pkg);
 
         view('admin/pricing/manage', [
             'title' => 'Prețuri - Admin Scanbox.ro',
             'packages' => $packages,
-            'services' => $services,
-            'csrfToken' => $this->generateCsrf(),
+            'current_service' => $currentService,
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
