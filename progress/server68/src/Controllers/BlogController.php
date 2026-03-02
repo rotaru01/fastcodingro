@@ -75,7 +75,7 @@ class BlogController
         $categories = $this->categoryModel->getAll();
         $settings = $this->settingModel->getAll();
 
-        view('pages/blog/show', [
+        view('pages/blog/single', [
             'title' => htmlspecialchars($post['title']) . ' - Blog Scanbox.ro',
             'post' => $post,
             'relatedPosts' => $relatedPosts,
