@@ -82,13 +82,21 @@ class PageController
             $service = ['slug' => $slug, 'title' => ucfirst(str_replace('-', ' ', $slug))];
         }
 
+        // Incarca galeria asociata serviciului (pe baza slug-ului ca page)
         $galleryItems = [];
+        $gallery = null;
+        $galleries = $this->galleryModel->getByPage($slug);
+        if (!empty($galleries)) {
+            $gallery = $galleries[0];
+            $galleryItems = $this->galleryItemModel->getByGallery((int) $gallery['id']);
+        }
+
         $pricing = $this->pricingModel->getByService($slug);
 
         view('pages/services/show', [
             'title' => htmlspecialchars($service['title'] ?? $slug) . ' - Scanbox.ro',
             'service' => $service,
-            'gallery' => null,
+            'gallery' => $gallery,
             'galleryItems' => $galleryItems,
             'pricing' => $pricing,
             'settings' => $settings,
