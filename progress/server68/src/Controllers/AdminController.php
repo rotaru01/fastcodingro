@@ -269,23 +269,19 @@ class AdminController
     public function gallery(): void
     {
         $galleryModel = new Gallery();
-        $galleryItemModel = new GalleryItem();
+        $db = Database::getInstance();
 
         $galleries = $galleryModel->getAll();
-        $galleriesWithItems = [];
 
-        foreach ($galleries as $gallery) {
-            $items = $galleryItemModel->getByGalleryId((int) $gallery['id']);
-            $galleriesWithItems[] = [
-                'gallery' => $gallery,
-                'items' => $items,
-                'itemCount' => count($items),
-            ];
+        // Adaugam item_count direct pe fiecare galerie (flat, cum asteapta view-ul)
+        foreach ($galleries as &$gallery) {
+            $gallery['item_count'] = $db->count('gallery_items', 'gallery_id = ?', [(int) $gallery['id']]);
         }
+        unset($gallery);
 
         view('admin/gallery/list', [
             'title' => 'Galerie - Admin Scanbox.ro',
-            'galleries' => $galleriesWithItems,
+            'galleries' => $galleries,
         ], null);
     }
 
