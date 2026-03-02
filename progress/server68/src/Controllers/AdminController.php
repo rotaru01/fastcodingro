@@ -38,37 +38,49 @@ class AdminController
     {
         $db = Database::getInstance();
 
-        $messageModel = new Message();
-        $projectModel = new Project();
-        $blogPostModel = new BlogPost();
-        $galleryItemModel = new GalleryItem();
-
-        // Statistici
-        $unreadMessages = $messageModel->countByStatus('new');
-        $totalProjects = $projectModel->countAll();
-        $totalPosts = $blogPostModel->countAll();
-        $totalGalleryImages = $galleryItemModel->countAll();
+        // Statistici directe (modelele nu au countAll/countByStatus)
+        $stats = [
+            'unread_messages' => $db->count('messages', "status = 'new'"),
+            'total_projects' => $db->count('portfolio_projects'),
+            'total_posts' => $db->count('blog_posts'),
+            'total_gallery_images' => $db->count('gallery_items'),
+        ];
 
         // Mesaje recente
-        $recentMessages = $messageModel->getRecent(5);
+        $recent_messages = $db->fetchAll(
+            "SELECT * FROM messages ORDER BY created_at DESC LIMIT 5"
+        );
 
         // Activitate recenta
-        $recentActivity = $db->fetchAll(
+        $recentRows = $db->fetchAll(
             "SELECT al.*, u.name as user_name
              FROM activity_log al
-             LEFT JOIN admins u ON al.user_id = u.id
+             LEFT JOIN admins u ON al.admin_id = u.id
              ORDER BY al.created_at DESC
              LIMIT 10"
         );
 
+        $recent_activity = array_map(function ($row) {
+            return [
+                'action' => $row['action'] ?? '',
+                'badge_class' => match ($row['action'] ?? '') {
+                    'login' => 'badge-green',
+                    'logout' => 'badge-gray',
+                    'blog_create', 'portfolio_create' => 'badge-blue',
+                    'blog_update', 'portfolio_update' => 'badge-orange',
+                    'blog_delete', 'portfolio_delete' => 'badge-red',
+                    default => 'badge-gray',
+                },
+                'item' => $row['details'] ?? ($row['entity_type'] ?? '-'),
+                'date' => isset($row['created_at']) ? date('d.m.Y H:i', strtotime($row['created_at'])) : '-',
+            ];
+        }, $recentRows);
+
         view('admin/dashboard', [
             'title' => 'Dashboard - Admin Scanbox.ro',
-            'unreadMessages' => $unreadMessages,
-            'totalProjects' => $totalProjects,
-            'totalPosts' => $totalPosts,
-            'totalGalleryImages' => $totalGalleryImages,
-            'recentMessages' => $recentMessages,
-            'recentActivity' => $recentActivity,
+            'stats' => $stats,
+            'recent_messages' => $recent_messages,
+            'recent_activity' => $recent_activity,
         ], null);
     }
 
