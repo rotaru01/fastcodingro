@@ -45,10 +45,18 @@ include __DIR__ . '/../components/hero.php';
   <div class="container">
     <div class="reels-grid">
       <?php if (!empty($reelsItems)): ?>
-        <?php foreach ($reelsItems as $reel): ?>
+        <?php foreach ($reelsItems as $reel):
+          // Extragem codul reel-ului din URL (ex: C1HAzZhIs_0)
+          $reelCode = '';
+          if (preg_match('/instagram\.com\/(?:reel|p)\/([\w\-]+)/', $reel['external_url'], $m)) {
+              $reelCode = $m[1];
+          }
+        ?>
+          <?php if ($reelCode): ?>
           <div class="reel-item">
-            <blockquote class="instagram-media" data-instgrm-permalink="<?= htmlspecialchars($reel['external_url']) ?>" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
+            <iframe src="https://www.instagram.com/reel/<?= htmlspecialchars($reelCode) ?>/embed" frameborder="0" scrolling="no" allowtransparency="true" style="width:100%; min-height:500px; border-radius:16px; background:#0D1B2A; border:0;"></iframe>
           </div>
+          <?php endif; ?>
         <?php endforeach; ?>
       <?php else: ?>
         <p style="color:#94A3B8; text-align:center; grid-column:1/-1;">Nu sunt reels disponibile momentan.</p>
@@ -65,4 +73,3 @@ include __DIR__ . '/../components/hero.php';
   </div>
 </section>
 
-<?php $extraScripts = '<script async src="//www.instagram.com/embed.js"></script>'; ?>
