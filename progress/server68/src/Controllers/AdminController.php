@@ -89,6 +89,7 @@ class AdminController
     public function blog(): void
     {
         $blogPostModel = new BlogPost();
+        $db = Database::getInstance();
         $status = $_GET['status'] ?? null;
 
         if ($status && in_array($status, ['published', 'draft', 'archived'], true)) {
@@ -97,10 +98,28 @@ class AdminController
             $posts = $blogPostModel->getAll();
         }
 
+        // JOIN category name pentru fiecare post
+        $posts = array_map(function ($post) use ($db) {
+            if (!empty($post['category_id'])) {
+                $cat = $db->fetch("SELECT name FROM blog_categories WHERE id = ?", [$post['category_id']]);
+                $post['category_name'] = $cat['name'] ?? '-';
+            }
+            return $post;
+        }, $posts);
+
+        // Contoare pentru tab-uri
+        $counts = [
+            'total' => $blogPostModel->countAll(),
+            'published' => $blogPostModel->countPublished(),
+            'draft' => (int) ($db->fetch("SELECT COUNT(*) as total FROM blog_posts WHERE status = 'draft'")['total'] ?? 0),
+        ];
+
         view('admin/blog/list', [
             'title' => 'Articole Blog - Admin Scanbox.ro',
             'posts' => $posts,
-            'currentStatus' => $status,
+            'current_status' => $status ?? 'all',
+            'counts' => $counts,
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
