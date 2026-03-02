@@ -105,7 +105,7 @@ ob_start();
                         <?php if (!empty($categories)): ?>
                             <?php foreach ($categories as $cat): ?>
                                 <option value="<?= $cat['id'] ?>" <?= ($project['category_id'] ?? '') == $cat['id'] ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($cat['name']) ?>
+                                    <?= htmlspecialchars($cat['name_ro'] ?? $cat['name'] ?? '') ?>
                                 </option>
                             <?php endforeach; ?>
                         <?php endif; ?>

@@ -133,8 +133,15 @@ class PageController
      */
     public function portofoliu(): void
     {
-        $categories = (new Category())->getAll();
-        $projects = $this->projectModel->getActive();
+        $db = \Scanbox\Core\Database::getInstance();
+        $categories = $db->fetchAll("SELECT * FROM portfolio_categories WHERE is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $projects = $db->fetchAll(
+            "SELECT p.*, c.name_ro as category_name, c.slug as category_slug
+             FROM portfolio_projects p
+             LEFT JOIN portfolio_categories c ON p.category_id = c.id
+             WHERE p.is_active = 1
+             ORDER BY p.sort_order ASC, p.id DESC"
+        );
 
         $mapData = [];
         foreach ($projects as $project) {

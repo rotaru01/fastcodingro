@@ -30,7 +30,7 @@ include __DIR__ . '/../components/hero.php';
       <button class="btn-sm btn-primary portfolio-filter active" data-category="all">Toate</button>
       <?php foreach ($categories as $category): ?>
       <button class="btn-sm btn-outline portfolio-filter" data-category="<?= htmlspecialchars($category['slug'] ?? $category['id'] ?? '') ?>">
-        <?= htmlspecialchars($category['name'] ?? '') ?>
+        <?= htmlspecialchars($category['name_ro'] ?? $category['name'] ?? '') ?>
       </button>
       <?php endforeach; ?>
     </div>
@@ -59,8 +59,8 @@ include __DIR__ . '/../components/hero.php';
           <?php if (!empty($project['description'])): ?>
           <p><?= htmlspecialchars(mb_substr($project['description'], 0, 100)) ?></p>
           <?php endif; ?>
-          <?php if (!empty($project['link'])): ?>
-          <a href="<?= htmlspecialchars($project['link']) ?>" class="service-link" target="_blank" rel="noopener">
+          <?php if (!empty($project['matterport_url'])): ?>
+          <a href="<?= htmlspecialchars($project['matterport_url']) ?>" class="service-link" target="_blank" rel="noopener">
             Vezi Proiectul
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>

@@ -465,188 +465,175 @@ class AdminController
     }
 
     /**
-     * Lista proiecte portofoliu in admin
+     * Gestionare portofoliu in admin (lista, edit, create, update, delete)
      */
     public function portfolio(): void
     {
         $projectModel = new Project();
-        $categoryModel = new Category();
+        $db = Database::getInstance();
 
-        $categoryFilter = $_GET['category'] ?? null;
-        if ($categoryFilter) {
-            $projects = $projectModel->getByCategoryId((int) $categoryFilter);
-        } else {
-            $projects = $projectModel->getAll();
+        // Handle POST actions (create, update, delete)
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCsrf();
+            $postAction = $_POST['action'] ?? '';
+            $projectId = (int) ($_POST['id'] ?? 0);
+
+            switch ($postAction) {
+                case 'create':
+                    $data = [
+                        'title' => trim($_POST['title'] ?? ''),
+                        'slug' => !empty($_POST['slug']) ? $this->generateSlug($_POST['slug']) : $this->generateSlug($_POST['title'] ?? ''),
+                        'description' => $_POST['description'] ?? '',
+                        'category_id' => !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null,
+                        'city' => trim($_POST['city'] ?? ''),
+                        'address' => trim($_POST['address'] ?? ''),
+                        'lat' => !empty($_POST['latitude']) ? (float) $_POST['latitude'] : null,
+                        'lng' => !empty($_POST['longitude']) ? (float) $_POST['longitude'] : null,
+                        'matterport_url' => trim($_POST['matterport_url'] ?? ''),
+                        'completion_date' => !empty($_POST['completed_at']) ? $_POST['completed_at'] : null,
+                        'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
+                        'is_active' => isset($_POST['is_active']) ? 1 : 0,
+                    ];
+
+                    if (empty($data['title'])) {
+                        $_SESSION['flash_error'] = 'Titlul este obligatoriu.';
+                        header('Location: /admin/portfolio?action=edit');
+                        exit;
+                    }
+
+                    // Upload thumbnail
+                    if (!empty($_FILES['thumbnail_file']['name'])) {
+                        $imageHandler = new ImageHandler();
+                        $uploadResult = $imageHandler->upload($_FILES['thumbnail_file'], 'portfolio');
+                        if ($uploadResult !== false) {
+                            $data['thumbnail'] = $uploadResult['file_path'];
+                        }
+                    } elseif (!empty($_POST['thumbnail'])) {
+                        $data['thumbnail'] = trim($_POST['thumbnail']);
+                    }
+
+                    $newId = $projectModel->create($data);
+                    $this->logActivity('portfolio_create', "Proiect creat: {$data['title']} (ID: {$newId})");
+                    $_SESSION['flash_success'] = 'Proiectul a fost creat cu succes.';
+                    header('Location: /admin/portfolio');
+                    exit;
+
+                case 'update':
+                    if ($projectId <= 0) break;
+                    $existing = $projectModel->getById($projectId);
+                    if (!$existing) {
+                        $_SESSION['flash_error'] = 'Proiectul nu a fost găsit.';
+                        header('Location: /admin/portfolio');
+                        exit;
+                    }
+
+                    $data = [
+                        'title' => trim($_POST['title'] ?? ''),
+                        'slug' => !empty($_POST['slug']) ? $this->generateSlug($_POST['slug']) : $this->generateSlug($_POST['title'] ?? ''),
+                        'description' => $_POST['description'] ?? '',
+                        'category_id' => !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null,
+                        'city' => trim($_POST['city'] ?? ''),
+                        'address' => trim($_POST['address'] ?? ''),
+                        'lat' => !empty($_POST['latitude']) ? (float) $_POST['latitude'] : null,
+                        'lng' => !empty($_POST['longitude']) ? (float) $_POST['longitude'] : null,
+                        'matterport_url' => trim($_POST['matterport_url'] ?? ''),
+                        'completion_date' => !empty($_POST['completed_at']) ? $_POST['completed_at'] : null,
+                        'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
+                        'is_active' => isset($_POST['is_active']) ? 1 : 0,
+                    ];
+
+                    if (empty($data['title'])) {
+                        $_SESSION['flash_error'] = 'Titlul este obligatoriu.';
+                        header("Location: /admin/portfolio?action=edit&id={$projectId}");
+                        exit;
+                    }
+
+                    // Upload thumbnail daca exista fisier nou
+                    if (!empty($_FILES['thumbnail_file']['name'])) {
+                        $imageHandler = new ImageHandler();
+                        $uploadResult = $imageHandler->upload($_FILES['thumbnail_file'], 'portfolio');
+                        if ($uploadResult !== false) {
+                            $data['thumbnail'] = $uploadResult['file_path'];
+                        }
+                    } elseif (!empty($_POST['thumbnail'])) {
+                        $data['thumbnail'] = trim($_POST['thumbnail']);
+                    }
+
+                    $projectModel->update($projectId, $data);
+                    $this->logActivity('portfolio_update', "Proiect actualizat: {$data['title']} (ID: {$projectId})");
+                    $_SESSION['flash_success'] = 'Proiectul a fost actualizat cu succes.';
+                    header('Location: /admin/portfolio');
+                    exit;
+
+                case 'delete':
+                    if ($projectId > 0) {
+                        $existing = $projectModel->getById($projectId);
+                        if ($existing) {
+                            $projectModel->delete($projectId);
+                            $this->logActivity('portfolio_delete', "Proiect șters: {$existing['title']} (ID: {$projectId})");
+                            $_SESSION['flash_success'] = 'Proiectul a fost șters.';
+                        }
+                    }
+                    header('Location: /admin/portfolio');
+                    exit;
+            }
         }
 
-        $categories = $categoryModel->getAll();
+        // Handle GET actions
+        $action = $_GET['action'] ?? '';
+
+        // Edit/New form
+        if ($action === 'edit') {
+            $editId = (int) ($_GET['id'] ?? 0);
+            $project = $editId > 0 ? $projectModel->getById($editId) : null;
+
+            // Map DB column names to what the view expects
+            if ($project) {
+                $project['latitude'] = $project['lat'] ?? '';
+                $project['longitude'] = $project['lng'] ?? '';
+                $project['completed_at'] = $project['completion_date'] ?? '';
+            }
+
+            $categories = $db->fetchAll("SELECT id, name_ro, slug FROM portfolio_categories ORDER BY sort_order ASC, id ASC");
+
+            view('admin/portfolio/edit', [
+                'title' => $project ? 'Editare Proiect - Admin Scanbox.ro' : 'Proiect Nou - Admin Scanbox.ro',
+                'project' => $project,
+                'categories' => $categories,
+                'csrf_token' => $this->generateCsrf(),
+            ], null);
+            return;
+        }
+
+        // List view
+        $categoryFilter = $_GET['category'] ?? null;
+        if ($categoryFilter) {
+            $projects = $db->fetchAll(
+                "SELECT p.*, c.name_ro as category_name
+                 FROM portfolio_projects p
+                 LEFT JOIN portfolio_categories c ON p.category_id = c.id
+                 WHERE p.category_id = ?
+                 ORDER BY p.sort_order ASC, p.id DESC",
+                [(int) $categoryFilter]
+            );
+        } else {
+            $projects = $db->fetchAll(
+                "SELECT p.*, c.name_ro as category_name
+                 FROM portfolio_projects p
+                 LEFT JOIN portfolio_categories c ON p.category_id = c.id
+                 ORDER BY p.sort_order ASC, p.id DESC"
+            );
+        }
+
+        $categories = $db->fetchAll("SELECT id, name_ro, slug FROM portfolio_categories ORDER BY sort_order ASC, id ASC");
 
         view('admin/portfolio/list', [
             'title' => 'Portofoliu - Admin Scanbox.ro',
             'projects' => $projects,
             'categories' => $categories,
-            'currentCategory' => $categoryFilter,
+            'current_category' => $categoryFilter,
+            'csrf_token' => $this->generateCsrf(),
         ], null);
-    }
-
-    /**
-     * Proiect nou in portofoliu (GET/POST)
-     */
-    public function portfolioNew(): void
-    {
-        $projectModel = new Project();
-        $categoryModel = new Category();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->validateCsrf();
-
-            $data = [
-                'title' => trim($_POST['title'] ?? ''),
-                'slug' => $this->generateSlug($_POST['title'] ?? ''),
-                'description' => $_POST['description'] ?? '',
-                'short_description' => trim($_POST['short_description'] ?? ''),
-                'category_id' => !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null,
-                'client_name' => trim($_POST['client_name'] ?? ''),
-                'project_date' => !empty($_POST['project_date']) ? $_POST['project_date'] : null,
-                'project_url' => trim($_POST['project_url'] ?? ''),
-                'video_url' => trim($_POST['video_url'] ?? ''),
-                'latitude' => !empty($_POST['latitude']) ? (float) $_POST['latitude'] : null,
-                'longitude' => !empty($_POST['longitude']) ? (float) $_POST['longitude'] : null,
-                'type' => $_POST['type'] ?? 'standard',
-                'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
-                'is_active' => isset($_POST['is_active']) ? 1 : 0,
-            ];
-
-            if (empty($data['title'])) {
-                $_SESSION['flash_error'] = 'Titlul este obligatoriu.';
-                header('Location: /admin/portfolio/new');
-                exit;
-            }
-
-            // Upload thumbnail
-            if (!empty($_FILES['thumbnail']['name'])) {
-                $imageHandler = new ImageHandler();
-                $uploadResult = $imageHandler->upload($_FILES['thumbnail'], 'portfolio');
-                if ($uploadResult !== false) {
-                    $data['thumbnail'] = $uploadResult['file_path'];
-                }
-            }
-
-            $projectId = $projectModel->create($data);
-            $this->logActivity('portfolio_create', "Proiect creat: {$data['title']} (ID: {$projectId})");
-
-            $_SESSION['flash_success'] = 'Proiectul a fost creat cu succes.';
-            header('Location: /admin/portfolio');
-            exit;
-        }
-
-        $categories = $categoryModel->getAll();
-        $csrfToken = $this->generateCsrf();
-
-        view('admin/portfolio/edit', [
-            'title' => 'Proiect Nou - Admin Scanbox.ro',
-            'project' => null,
-            'categories' => $categories,
-            'csrfToken' => $csrfToken,
-            'formAction' => '/admin/portfolio/new',
-        ], null);
-    }
-
-    /**
-     * Editare proiect portofoliu (GET/POST)
-     */
-    public function portfolioEdit(int $id): void
-    {
-        $projectModel = new Project();
-        $categoryModel = new Category();
-
-        $project = $projectModel->getById($id);
-        if ($project === null) {
-            $_SESSION['flash_error'] = 'Proiectul nu a fost găsit.';
-            header('Location: /admin/portfolio');
-            exit;
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->validateCsrf();
-
-            $data = [
-                'title' => trim($_POST['title'] ?? ''),
-                'slug' => !empty($_POST['slug']) ? $this->generateSlug($_POST['slug']) : $this->generateSlug($_POST['title'] ?? ''),
-                'description' => $_POST['description'] ?? '',
-                'short_description' => trim($_POST['short_description'] ?? ''),
-                'category_id' => !empty($_POST['category_id']) ? (int) $_POST['category_id'] : null,
-                'client_name' => trim($_POST['client_name'] ?? ''),
-                'project_date' => !empty($_POST['project_date']) ? $_POST['project_date'] : null,
-                'project_url' => trim($_POST['project_url'] ?? ''),
-                'video_url' => trim($_POST['video_url'] ?? ''),
-                'latitude' => !empty($_POST['latitude']) ? (float) $_POST['latitude'] : null,
-                'longitude' => !empty($_POST['longitude']) ? (float) $_POST['longitude'] : null,
-                'type' => $_POST['type'] ?? $project['type'],
-                'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
-                'is_active' => isset($_POST['is_active']) ? 1 : 0,
-            ];
-
-            if (empty($data['title'])) {
-                $_SESSION['flash_error'] = 'Titlul este obligatoriu.';
-                header("Location: /admin/portfolio/edit/{$id}");
-                exit;
-            }
-
-            // Upload thumbnail daca exista fisier nou
-            if (!empty($_FILES['thumbnail']['name'])) {
-                $imageHandler = new ImageHandler();
-                $uploadResult = $imageHandler->upload($_FILES['thumbnail'], 'portfolio');
-                if ($uploadResult !== false) {
-                    $data['thumbnail'] = $uploadResult['file_path'];
-                }
-            }
-
-            $projectModel->update($id, $data);
-            $this->logActivity('portfolio_update', "Proiect actualizat: {$data['title']} (ID: {$id})");
-
-            $_SESSION['flash_success'] = 'Proiectul a fost actualizat cu succes.';
-            header('Location: /admin/portfolio');
-            exit;
-        }
-
-        $categories = $categoryModel->getAll();
-        $csrfToken = $this->generateCsrf();
-
-        view('admin/portfolio/edit', [
-            'title' => 'Editare Proiect - Admin Scanbox.ro',
-            'project' => $project,
-            'categories' => $categories,
-            'csrfToken' => $csrfToken,
-            'formAction' => "/admin/portfolio/edit/{$id}",
-        ], null);
-    }
-
-    /**
-     * Stergere proiect portofoliu (POST)
-     */
-    public function portfolioDelete(int $id): void
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /admin/portfolio');
-            exit;
-        }
-
-        $this->validateCsrf();
-
-        $projectModel = new Project();
-        $project = $projectModel->getById($id);
-
-        if ($project !== null) {
-            $projectModel->delete($id);
-            $this->logActivity('portfolio_delete', "Proiect șters: {$project['title']} (ID: {$id})");
-            $_SESSION['flash_success'] = 'Proiectul a fost șters.';
-        } else {
-            $_SESSION['flash_error'] = 'Proiectul nu a fost găsit.';
-        }
-
-        header('Location: /admin/portfolio');
-        exit;
     }
 
     /**

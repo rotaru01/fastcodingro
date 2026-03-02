@@ -19,7 +19,7 @@ ob_start();
         <a href="/admin/portfolio" class="tab <?= empty($current_category) ? 'active' : '' ?>">Toate</a>
         <?php foreach ($categories as $cat): ?>
             <a href="/admin/portfolio?category=<?= $cat['id'] ?>" class="tab <?= $current_category == $cat['id'] ? 'active' : '' ?>">
-                <?= htmlspecialchars($cat['name']) ?>
+                <?= htmlspecialchars($cat['name_ro'] ?? $cat['name'] ?? '') ?>
             </a>
         <?php endforeach; ?>
     </div>
@@ -74,8 +74,8 @@ ob_start();
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php if (!empty($project['completed_at'])): ?>
-                                <?= date('d.m.Y', strtotime($project['completed_at'])) ?>
+                            <?php if (!empty($project['completion_date'])): ?>
+                                <?= date('d.m.Y', strtotime($project['completion_date'])) ?>
                             <?php else: ?>
                                 <span class="text-muted">-</span>
                             <?php endif; ?>
