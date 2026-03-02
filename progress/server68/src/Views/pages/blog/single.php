@@ -23,16 +23,6 @@ $heroSubtitle = date('d.m.Y', strtotime($post['published_at'] ?? $post['created_
 include __DIR__ . '/../../components/hero.php';
 ?>
 
-<!-- ===== BREADCRUMB ===== -->
-<?php
-$breadcrumbs = [
-    ['Acasă', '/'],
-    ['Blog', '/blog'],
-    [htmlspecialchars($post['title'] ?? ''), ''],
-];
-include __DIR__ . '/../../components/breadcrumb.php';
-?>
-
 <!-- ===== ARTICOL ===== -->
 <section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 60px 0 80px;">
   <div class="container">
