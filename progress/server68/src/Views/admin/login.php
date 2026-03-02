@@ -125,12 +125,12 @@
         <?php endif; ?>
 
         <form method="POST" action="/admin/login" autocomplete="on">
-            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '') ?>">
 
             <div class="form-group">
-                <label for="username">Utilizator</label>
-                <input type="text" id="username" name="username" placeholder="Numele de utilizator"
-                       value="<?= htmlspecialchars($old_username ?? '') ?>" autofocus required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Adresa de email"
+                       value="" autofocus required>
             </div>
 
             <div class="form-group">
