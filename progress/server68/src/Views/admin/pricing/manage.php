@@ -129,13 +129,15 @@ ob_start();
                         <?php endif; ?>
 
                         <h4 class="pricing-manage-name"><?= htmlspecialchars($pkg['name']) ?></h4>
+                        <?php if (!empty($pkg['price']) && (float)$pkg['price'] > 0): ?>
                         <div class="pricing-manage-price">
                             <?php if (!empty($pkg['price_note'])): ?>
                                 <span class="pricing-note"><?= htmlspecialchars($pkg['price_note']) ?></span>
                             <?php endif; ?>
-                            <span class="pricing-amount"><?= htmlspecialchars($pkg['price'] ?? '-') ?></span>
+                            <span class="pricing-amount"><?= htmlspecialchars($pkg['price']) ?></span>
                             <span class="pricing-currency"><?= htmlspecialchars($pkg['currency'] ?? 'RON') ?></span>
                         </div>
+                        <?php endif; ?>
 
                         <?php if (!empty($pkg['features'])): ?>
                             <ul class="pricing-manage-features">

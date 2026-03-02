@@ -41,11 +41,16 @@ $pricingSubtitle = $pricingSubtitle ?? '';
         <div class="pricing-badge">Recomandat</div>
         <?php endif; ?>
         <h3><?= htmlspecialchars($package['name'] ?? '') ?></h3>
+        <?php if (!empty($package['price']) && (float)$package['price'] > 0): ?>
         <div class="pricing-price">
-          <span class="pricing-amount"><?= htmlspecialchars($package['price'] ?? '0') ?></span>
+          <?php if (!empty($package['price_note'])): ?>
+          <span class="pricing-note"><?= htmlspecialchars($package['price_note']) ?></span>
+          <?php endif; ?>
+          <span class="pricing-amount"><?= htmlspecialchars($package['price']) ?></span>
           <span class="pricing-currency"><?= htmlspecialchars($package['currency'] ?? 'EUR') ?></span>
           <span class="pricing-period"><?= htmlspecialchars($package['period'] ?? '/ lună') ?></span>
         </div>
+        <?php endif; ?>
         <?php if (!empty($package['vat_note'])): ?>
         <div class="pricing-vat"><?= htmlspecialchars($package['vat_note']) ?></div>
         <?php endif; ?>
