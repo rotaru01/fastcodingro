@@ -102,6 +102,25 @@ class Setting
         return $settings;
     }
 
+    public function getAllGrouped(): array
+    {
+        $rows = $this->db->fetchAll(
+            "SELECT * FROM settings ORDER BY setting_group ASC, setting_key ASC"
+        );
+
+        $grouped = [];
+        foreach ($rows as $row) {
+            $group = $row['setting_group'] ?? 'general';
+            $grouped[$group][$row['setting_key']] = [
+                'value' => $this->castValue($row['setting_value'], $row['setting_type']),
+                'type' => $row['setting_type'],
+                'description' => $row['description'] ?? '',
+            ];
+        }
+
+        return $grouped;
+    }
+
     public function delete(string $key): int
     {
         return $this->db->delete('settings', 'setting_key = ?', [$key]);

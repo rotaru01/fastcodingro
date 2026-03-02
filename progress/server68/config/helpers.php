@@ -47,3 +47,17 @@ function view(string $viewName, array $data = [], ?string $layout = 'layout/layo
     // Fara layout - randam direct
     require $viewFile;
 }
+
+/**
+ * Obtine valoarea unei setari din array-ul de settings
+ *
+ * @param array $settings Array-ul de setari (din getAll())
+ * @param string $key Cheia setarii
+ * @param string $default Valoare implicita daca setarea nu exista sau e goala
+ * @return string
+ */
+function setting(array $settings, string $key, string $default = ''): string
+{
+    $value = $settings[$key]['value'] ?? null;
+    return ($value !== null && $value !== '') ? (string) $value : $default;
+}

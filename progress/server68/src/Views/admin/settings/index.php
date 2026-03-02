@@ -25,11 +25,6 @@ ob_start();
             <input type="url" id="site_url" name="settings[site_url]"
                    value="<?= htmlspecialchars($settings['site_url']['value'] ?? 'https://scanbox.ro') ?>">
         </div>
-        <div class="form-group">
-            <label for="admin_email">Email administrator</label>
-            <input type="email" id="admin_email" name="settings[admin_email]"
-                   value="<?= htmlspecialchars($settings['admin_email']['value'] ?? 'office@scanbox.ro') ?>">
-        </div>
 
         <button type="submit" class="btn btn-primary">Salvează setările generale</button>
     </form>
@@ -43,20 +38,26 @@ ob_start();
         <input type="hidden" name="group" value="contact">
 
         <div class="form-group">
-            <label for="phone">Telefon</label>
-            <input type="text" id="phone" name="settings[phone]"
-                   value="<?= htmlspecialchars($settings['phone']['value'] ?? '') ?>"
-                   placeholder="+40 7XX XXX XXX">
+            <label for="contact_email">Email contact</label>
+            <input type="email" id="contact_email" name="settings[contact_email]"
+                   value="<?= htmlspecialchars($settings['contact_email']['value'] ?? 'office@scanbox.ro') ?>"
+                   placeholder="office@scanbox.ro">
         </div>
         <div class="form-group">
-            <label for="address">Adresă</label>
-            <textarea id="address" name="settings[address]" rows="2" placeholder="Adresa companiei"><?= htmlspecialchars($settings['address']['value'] ?? '') ?></textarea>
+            <label for="contact_phone">Telefon</label>
+            <input type="text" id="contact_phone" name="settings[contact_phone]"
+                   value="<?= htmlspecialchars($settings['contact_phone']['value'] ?? '') ?>"
+                   placeholder="0740 233 353">
         </div>
         <div class="form-group">
-            <label for="working_hours">Program de lucru</label>
-            <input type="text" id="working_hours" name="settings[working_hours]"
-                   value="<?= htmlspecialchars($settings['working_hours']['value'] ?? '') ?>"
-                   placeholder="Luni - Vineri: 09:00 - 18:00">
+            <label for="contact_address">Adresă</label>
+            <textarea id="contact_address" name="settings[contact_address]" rows="2" placeholder="Adresa companiei"><?= htmlspecialchars($settings['contact_address']['value'] ?? '') ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="contact_working_hours">Program de lucru</label>
+            <input type="text" id="contact_working_hours" name="settings[contact_working_hours]"
+                   value="<?= htmlspecialchars($settings['contact_working_hours']['value'] ?? '') ?>"
+                   placeholder="Luni - Vineri, 09:00 - 18:00">
         </div>
 
         <button type="submit" class="btn btn-primary">Salvează datele de contact</button>
@@ -72,36 +73,36 @@ ob_start();
 
         <div class="form-row">
             <div class="form-group">
-                <label for="instagram_url">Instagram</label>
-                <input type="url" id="instagram_url" name="settings[instagram_url]"
-                       value="<?= htmlspecialchars($settings['instagram_url']['value'] ?? '') ?>"
+                <label for="social_instagram">Instagram</label>
+                <input type="url" id="social_instagram" name="settings[social_instagram]"
+                       value="<?= htmlspecialchars($settings['social_instagram']['value'] ?? '') ?>"
                        placeholder="https://instagram.com/...">
             </div>
             <div class="form-group">
-                <label for="facebook_url">Facebook</label>
-                <input type="url" id="facebook_url" name="settings[facebook_url]"
-                       value="<?= htmlspecialchars($settings['facebook_url']['value'] ?? '') ?>"
+                <label for="social_facebook">Facebook</label>
+                <input type="url" id="social_facebook" name="settings[social_facebook]"
+                       value="<?= htmlspecialchars($settings['social_facebook']['value'] ?? '') ?>"
                        placeholder="https://facebook.com/...">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label for="tiktok_url">TikTok</label>
-                <input type="url" id="tiktok_url" name="settings[tiktok_url]"
-                       value="<?= htmlspecialchars($settings['tiktok_url']['value'] ?? '') ?>"
+                <label for="social_tiktok">TikTok</label>
+                <input type="url" id="social_tiktok" name="settings[social_tiktok]"
+                       value="<?= htmlspecialchars($settings['social_tiktok']['value'] ?? '') ?>"
                        placeholder="https://tiktok.com/@...">
             </div>
             <div class="form-group">
-                <label for="youtube_url">YouTube</label>
-                <input type="url" id="youtube_url" name="settings[youtube_url]"
-                       value="<?= htmlspecialchars($settings['youtube_url']['value'] ?? '') ?>"
+                <label for="social_youtube">YouTube</label>
+                <input type="url" id="social_youtube" name="settings[social_youtube]"
+                       value="<?= htmlspecialchars($settings['social_youtube']['value'] ?? '') ?>"
                        placeholder="https://youtube.com/@...">
             </div>
         </div>
         <div class="form-group">
-            <label for="linkedin_url">LinkedIn</label>
-            <input type="url" id="linkedin_url" name="settings[linkedin_url]"
-                   value="<?= htmlspecialchars($settings['linkedin_url']['value'] ?? '') ?>"
+            <label for="social_linkedin">LinkedIn</label>
+            <input type="url" id="social_linkedin" name="settings[social_linkedin]"
+                   value="<?= htmlspecialchars($settings['social_linkedin']['value'] ?? '') ?>"
                    placeholder="https://linkedin.com/company/...">
         </div>
 
@@ -117,17 +118,17 @@ ob_start();
         <input type="hidden" name="group" value="seo">
 
         <div class="form-group">
-            <label for="default_meta_title">Meta Title implicit</label>
-            <input type="text" id="default_meta_title" name="settings[default_meta_title]"
-                   value="<?= htmlspecialchars($settings['default_meta_title']['value'] ?? '') ?>"
+            <label for="seo_default_title">Meta Title implicit</label>
+            <input type="text" id="seo_default_title" name="settings[seo_default_title]"
+                   value="<?= htmlspecialchars($settings['seo_default_title']['value'] ?? '') ?>"
                    placeholder="Scanbox.ro - Servicii Profesionale de Scanare 3D" maxlength="70">
-            <span class="char-count" data-for="default_meta_title">0/70</span>
+            <span class="char-count" data-for="seo_default_title">0/70</span>
         </div>
         <div class="form-group">
-            <label for="default_meta_description">Meta Description implicită</label>
-            <textarea id="default_meta_description" name="settings[default_meta_description]" rows="3"
-                      placeholder="Descrierea site-ului pentru motoarele de căutare" maxlength="160"><?= htmlspecialchars($settings['default_meta_description']['value'] ?? '') ?></textarea>
-            <span class="char-count" data-for="default_meta_description">0/160</span>
+            <label for="seo_default_description">Meta Description implicită</label>
+            <textarea id="seo_default_description" name="settings[seo_default_description]" rows="3"
+                      placeholder="Descrierea site-ului pentru motoarele de căutare" maxlength="160"><?= htmlspecialchars($settings['seo_default_description']['value'] ?? '') ?></textarea>
+            <span class="char-count" data-for="seo_default_description">0/160</span>
         </div>
 
         <button type="submit" class="btn btn-primary">Salvează setările SEO</button>
@@ -144,26 +145,26 @@ ob_start();
 
         <div class="form-row">
             <div class="form-group">
-                <label for="stats_tours_count">Tururi virtuale realizate</label>
-                <input type="number" id="stats_tours_count" name="settings[stats_tours_count]"
-                       value="<?= htmlspecialchars($settings['stats_tours_count']['value'] ?? '0') ?>" min="0">
-            </div>
-            <div class="form-group">
                 <label for="stats_projects_count">Proiecte finalizate</label>
                 <input type="number" id="stats_projects_count" name="settings[stats_projects_count]"
-                       value="<?= htmlspecialchars($settings['stats_projects_count']['value'] ?? '0') ?>" min="0">
+                       value="<?= htmlspecialchars((string)($settings['stats_projects_count']['value'] ?? '0')) ?>" min="0">
+            </div>
+            <div class="form-group">
+                <label for="stats_clients_count">Clienți mulțumiți</label>
+                <input type="number" id="stats_clients_count" name="settings[stats_clients_count]"
+                       value="<?= htmlspecialchars((string)($settings['stats_clients_count']['value'] ?? '0')) ?>" min="0">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label for="stats_clients_count">Clienți mulțumiți</label>
-                <input type="number" id="stats_clients_count" name="settings[stats_clients_count]"
-                       value="<?= htmlspecialchars($settings['stats_clients_count']['value'] ?? '0') ?>" min="0">
-            </div>
-            <div class="form-group">
                 <label for="stats_years_experience">Ani de experiență</label>
                 <input type="number" id="stats_years_experience" name="settings[stats_years_experience]"
-                       value="<?= htmlspecialchars($settings['stats_years_experience']['value'] ?? '0') ?>" min="0">
+                       value="<?= htmlspecialchars((string)($settings['stats_years_experience']['value'] ?? '0')) ?>" min="0">
+            </div>
+            <div class="form-group">
+                <label for="stats_satisfaction_rate">Rată de satisfacție (%)</label>
+                <input type="number" id="stats_satisfaction_rate" name="settings[stats_satisfaction_rate]"
+                       value="<?= htmlspecialchars((string)($settings['stats_satisfaction_rate']['value'] ?? '98')) ?>" min="0" max="100">
             </div>
         </div>
 

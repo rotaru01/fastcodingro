@@ -27,6 +27,18 @@ $ogType = $ogType ?? 'website';
 $canonicalUrl = $canonicalUrl ?? $siteUrl . ($_SERVER['REQUEST_URI'] ?? '/');
 $robotsMeta = $robotsMeta ?? 'index, follow';
 $schemaOrg = $schemaOrg ?? [];
+
+// Setari dinamice pentru schema.org
+$_seo_s = $settings ?? [];
+$_seo_email = setting($_seo_s, 'contact_email', 'office@scanbox.ro');
+$_seo_phone = setting($_seo_s, 'contact_phone', '0740 233 353');
+$_seo_sameAs = array_filter([
+    setting($_seo_s, 'social_instagram', 'https://www.instagram.com/scanbox.ro/'),
+    setting($_seo_s, 'social_facebook', 'https://www.facebook.com/scanbox.ro'),
+    setting($_seo_s, 'social_tiktok', 'https://www.tiktok.com/@scanbox.ro'),
+    setting($_seo_s, 'social_youtube', 'https://www.youtube.com/@scanboxintegratedvisualsol9014'),
+    setting($_seo_s, 'social_linkedin', 'https://www.linkedin.com/company/scanbox-visual-solutions/'),
+]);
 ?>
 
 <!-- SEO Core Meta -->
@@ -105,8 +117,8 @@ $schemaOrg = $schemaOrg ?? [];
         "@id": "<?= $siteUrl ?>/#logo",
         "url": "<?= $siteUrl ?>/assets/images/logo.png"
       },
-      "telephone": "+40740233353",
-      "email": "office@scanbox.ro",
+      "telephone": "<?= htmlspecialchars($_seo_phone) ?>",
+      "email": "<?= htmlspecialchars($_seo_email) ?>",
       "foundingDate": "2018",
       "address": {
         "@type": "PostalAddress",
@@ -124,13 +136,7 @@ $schemaOrg = $schemaOrg ?? [];
         {"@type": "Country", "name": "România"},
         {"@type": "Country", "name": "Republica Moldova"}
       ],
-      "sameAs": [
-        "https://www.instagram.com/scanbox.ro/",
-        "https://www.facebook.com/scanbox.ro",
-        "https://www.tiktok.com/@scanbox.ro",
-        "https://www.youtube.com/@scanboxintegratedvisualsol9014",
-        "https://www.linkedin.com/company/scanbox-visual-solutions/"
-      ],
+      "sameAs": <?= json_encode(array_values($_seo_sameAs), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>,
       "knowsAbout": [
         "Tur Virtual 3D Matterport",
         "Scanare 3D",
@@ -154,8 +160,8 @@ $schemaOrg = $schemaOrg ?? [];
       "@id": "<?= $siteUrl ?>/#localbusiness",
       "name": "Scanbox.ro",
       "url": "<?= $siteUrl ?>",
-      "telephone": "+40740233353",
-      "email": "office@scanbox.ro",
+      "telephone": "<?= htmlspecialchars($_seo_phone) ?>",
+      "email": "<?= htmlspecialchars($_seo_email) ?>",
       "priceRange": "€€",
       "currenciesAccepted": "EUR, RON",
       "address": {

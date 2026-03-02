@@ -50,10 +50,10 @@ include __DIR__ . '/../components/hero.php';
 <!-- ===== STATS ===== -->
 <?php
 $stats = [
-    ['value' => '500', 'suffix' => '+', 'label' => 'Proiecte Livrate'],
-    ['value' => '150', 'suffix' => '+', 'label' => 'Clienți Mulțumiți'],
-    ['value' => '7',   'suffix' => '+', 'label' => 'Ani de Experiență'],
-    ['value' => '98',  'suffix' => '%', 'label' => 'Rată de Satisfacție'],
+    ['value' => setting($settings ?? [], 'stats_projects_count', '500'), 'suffix' => '+', 'label' => 'Proiecte Livrate'],
+    ['value' => setting($settings ?? [], 'stats_clients_count', '150'), 'suffix' => '+', 'label' => 'Clienți Mulțumiți'],
+    ['value' => setting($settings ?? [], 'stats_years_experience', '7'), 'suffix' => '+', 'label' => 'Ani de Experiență'],
+    ['value' => setting($settings ?? [], 'stats_satisfaction_rate', '98'), 'suffix' => '%', 'label' => 'Rată de Satisfacție'],
 ];
 include __DIR__ . '/../components/counter.php';
 ?>
@@ -340,7 +340,7 @@ include __DIR__ . '/../components/counter.php';
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 9L2 4"/></svg>
           </div>
           <div>
-            <span>office@scanbox.ro</span>
+            <span><?= htmlspecialchars(setting($settings ?? [], 'contact_email', 'office@scanbox.ro')) ?></span>
             <small>E-mail</small>
           </div>
         </div>
@@ -351,7 +351,7 @@ include __DIR__ . '/../components/counter.php';
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
           </div>
           <div>
-            <span>0740 233 353</span>
+            <span><?= htmlspecialchars(setting($settings ?? [], 'contact_phone', '0740 233 353')) ?></span>
             <small>Telefon</small>
           </div>
         </div>
@@ -362,7 +362,7 @@ include __DIR__ . '/../components/counter.php';
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
           <div>
-            <span>Str. Moroeni 60D, Sector 2, București</span>
+            <span><?= htmlspecialchars(setting($settings ?? [], 'contact_address', 'Str. Moroeni 60D, Sector 2, București')) ?></span>
             <small>Sediu</small>
           </div>
         </div>
@@ -373,7 +373,7 @@ include __DIR__ . '/../components/counter.php';
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div>
-            <span>Luni - Vineri, 09:00 - 18:00</span>
+            <span><?= htmlspecialchars(setting($settings ?? [], 'contact_working_hours', 'Luni - Vineri, 09:00 - 18:00')) ?></span>
             <small>Program</small>
           </div>
         </div>

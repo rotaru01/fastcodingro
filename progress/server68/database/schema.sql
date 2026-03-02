@@ -415,25 +415,27 @@ INSERT INTO `blog_categories` (`name`, `slug`) VALUES
 INSERT INTO `settings` (`setting_key`, `setting_value`, `setting_type`, `setting_group`, `description`) VALUES
 -- General
 ('site_name', 'Scanbox.ro', 'text', 'general', 'Numele site-ului'),
+('site_url', 'https://scanbox.ro', 'text', 'general', 'URL-ul site-ului'),
 ('site_description', 'Servicii profesionale de tur virtual 3D, fotografie, videografie drone si randare 3D', 'textarea', 'general', 'Descrierea site-ului pentru SEO'),
 ('site_logo', NULL, 'image', 'general', 'Logo-ul site-ului'),
 ('site_favicon', NULL, 'image', 'general', 'Favicon-ul site-ului'),
 
 -- Contact
 ('contact_email', 'office@scanbox.ro', 'text', 'contact', 'Adresa de email pentru contact'),
-('contact_phone', '+40 XXX XXX XXX', 'text', 'contact', 'Numar de telefon principal'),
+('contact_phone', '0740 233 353', 'text', 'contact', 'Numar de telefon principal'),
 ('contact_phone_secondary', NULL, 'text', 'contact', 'Numar de telefon secundar'),
-('contact_address', 'Romania', 'textarea', 'contact', 'Adresa fizica'),
-('contact_city', 'Bucuresti', 'text', 'contact', 'Orasul sediului'),
+('contact_address', 'Str. Moroeni 60D, Sector 2, București', 'textarea', 'contact', 'Adresa fizica'),
+('contact_city', 'București', 'text', 'contact', 'Orasul sediului'),
+('contact_working_hours', 'Luni - Vineri, 09:00 - 18:00', 'text', 'contact', 'Program de lucru'),
 ('contact_map_lat', '44.4268', 'text', 'contact', 'Latitudine GPS pentru harta'),
 ('contact_map_lng', '26.1025', 'text', 'contact', 'Longitudine GPS pentru harta'),
 
 -- Social media
-('social_facebook', NULL, 'text', 'social', 'URL pagina Facebook'),
-('social_instagram', NULL, 'text', 'social', 'URL profil Instagram'),
-('social_youtube', NULL, 'text', 'social', 'URL canal YouTube'),
-('social_linkedin', NULL, 'text', 'social', 'URL profil LinkedIn'),
-('social_tiktok', NULL, 'text', 'social', 'URL profil TikTok'),
+('social_facebook', 'https://www.facebook.com/scanbox.ro', 'text', 'social', 'URL pagina Facebook'),
+('social_instagram', 'https://www.instagram.com/scanbox.ro/', 'text', 'social', 'URL profil Instagram'),
+('social_youtube', 'https://www.youtube.com/@scanboxintegratedvisualsol9014', 'text', 'social', 'URL canal YouTube'),
+('social_linkedin', 'https://www.linkedin.com/company/scanbox-visual-solutions/', 'text', 'social', 'URL profil LinkedIn'),
+('social_tiktok', 'https://www.tiktok.com/@scanbox.ro', 'text', 'social', 'URL profil TikTok'),
 
 -- Analytics
 ('google_analytics_id', NULL, 'text', 'analytics', 'ID Google Analytics (GA4)'),
@@ -451,6 +453,13 @@ INSERT INTO `settings` (`setting_key`, `setting_value`, `setting_type`, `setting
 ('homepage_stats_projects', '150+', 'text', 'homepage', 'Numar proiecte finalizate (afisat pe homepage)'),
 ('homepage_stats_clients', '80+', 'text', 'homepage', 'Numar clienti multumiti (afisat pe homepage)'),
 ('homepage_stats_cities', '15+', 'text', 'homepage', 'Numar orase acoperite (afisat pe homepage)'),
+
+-- Statistici (contoare homepage)
+('stats_projects_count', '500', 'number', 'stats', 'Numar total proiecte finalizate'),
+('stats_clients_count', '150', 'number', 'stats', 'Numar clienti multumiti'),
+('stats_years_experience', '7', 'number', 'stats', 'Ani de experienta'),
+('stats_satisfaction_rate', '98', 'number', 'stats', 'Rata de satisfactie (procent)'),
+('stats_tours_count', '150', 'number', 'stats', 'Tururi virtuale realizate'),
 
 -- Configurare
 ('maintenance_mode', '0', 'boolean', 'config', 'Modul de intretinere activ'),
