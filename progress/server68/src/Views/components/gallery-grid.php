@@ -21,17 +21,23 @@ $galleryColumns = $galleryColumns ?? '3';
 <div class="gallery-grid" style="--gallery-cols: <?= (int)$galleryColumns ?>;">
   <?php foreach ($galleryItems as $item): ?>
   <div class="gallery-item">
+    <?php
+      $imgUrl = $item['url'] ?? $item['file_path'] ?? $item['thumbnail_path'] ?? $item['thumbnail'] ?? '';
+      $altText = $item['alt'] ?? $item['alt_text'] ?? $item['title'] ?? '';
+      $thumbUrl = $item['thumbnail'] ?? $item['thumbnail_path'] ?? '';
+      $embedUrl = $item['external_url'] ?? $item['url'] ?? '';
+    ?>
     <?php if (($item['type'] ?? 'image') === 'image'): ?>
-      <img src="<?= htmlspecialchars($item['url'] ?? $item['thumbnail'] ?? '') ?>"
-           alt="<?= htmlspecialchars($item['alt'] ?? $item['title'] ?? '') ?>"
+      <img src="<?= htmlspecialchars($imgUrl) ?>"
+           alt="<?= htmlspecialchars($altText) ?>"
            loading="lazy">
     <?php elseif (($item['type'] ?? '') === 'video'): ?>
-      <video controls preload="metadata" poster="<?= htmlspecialchars($item['thumbnail'] ?? '') ?>">
-        <source src="<?= htmlspecialchars($item['url'] ?? '') ?>" type="video/mp4">
+      <video controls preload="metadata" poster="<?= htmlspecialchars($thumbUrl) ?>">
+        <source src="<?= htmlspecialchars($imgUrl) ?>" type="video/mp4">
       </video>
     <?php elseif (($item['type'] ?? '') === 'embed'): ?>
       <div class="gallery-embed">
-        <?= $item['url'] ?? '' ?>
+        <?= $embedUrl ?>
       </div>
     <?php endif; ?>
     <?php if (!empty($item['title'])): ?>
