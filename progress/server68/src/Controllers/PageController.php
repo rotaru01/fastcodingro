@@ -173,12 +173,18 @@ class PageController
      */
     public function portofoliuReels(): void
     {
-        $projects = $this->projectModel->getActive();
         $settings = $this->settingModel->getAll();
+
+        // Luam galeria "portofoliu-reels" si elementele ei din DB
+        $reelsItems = [];
+        $gallery = $this->galleryModel->getBySlug('portofoliu-reels');
+        if ($gallery) {
+            $reelsItems = $this->galleryItemModel->getByGallery((int) $gallery['id']);
+        }
 
         view('pages/portofoliu-reels', [
             'title' => 'Portofoliu Reels - Scanbox.ro',
-            'projects' => $projects,
+            'reelsItems' => $reelsItems,
             'settings' => $settings,
         ]);
     }

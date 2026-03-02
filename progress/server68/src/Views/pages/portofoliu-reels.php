@@ -44,37 +44,15 @@ include __DIR__ . '/../components/hero.php';
 <section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 80px 0 100px;">
   <div class="container">
     <div class="reels-grid">
-
-      <!-- Reel 1 -->
-      <div class="reel-item">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C1HAzZhIs_0/" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-      </div>
-
-      <!-- Reel 2 -->
-      <div class="reel-item">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C0gOfOgo1FM/" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-      </div>
-
-      <!-- Reel 3 -->
-      <div class="reel-item">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Cy5BL7Ux5ll/" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-      </div>
-
-      <!-- Reel 4 -->
-      <div class="reel-item">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DKwYH4ZsgCB/" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-      </div>
-
-      <!-- Reel 5 -->
-      <div class="reel-item">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DT4y8oeAhqR/" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-      </div>
-
-      <!-- Reel 6 -->
-      <div class="reel-item">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DUoBChhDIa0/" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-      </div>
-
+      <?php if (!empty($reelsItems)): ?>
+        <?php foreach ($reelsItems as $reel): ?>
+          <div class="reel-item">
+            <blockquote class="instagram-media" data-instgrm-permalink="<?= htmlspecialchars($reel['external_url']) ?>" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
+          </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <p style="color:#94A3B8; text-align:center; grid-column:1/-1;">Nu sunt reels disponibile momentan.</p>
+      <?php endif; ?>
     </div>
 
     <!-- Back link -->
