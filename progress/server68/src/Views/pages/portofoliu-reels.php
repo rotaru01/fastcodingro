@@ -45,10 +45,27 @@ include __DIR__ . '/../components/hero.php';
   <div class="container">
     <div class="reels-grid">
       <?php if (!empty($reelsItems)): ?>
-        <?php foreach ($reelsItems as $reel): ?>
-        <div class="reel-item">
-          <blockquote class="instagram-media" data-instgrm-permalink="<?= htmlspecialchars($reel['external_url']) ?>" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-        </div>
+        <?php foreach ($reelsItems as $i => $reel):
+          $reelUrl = $reel['external_url'] ?? '';
+          $reelTitle = $reel['title'] ?? 'Reel #' . ($i + 1);
+          // Extragem codul din URL pentru thumbnail
+          $reelCode = '';
+          if (preg_match('/instagram\.com\/(?:reel|p)\/([\w\-]+)/', $reelUrl, $m)) {
+              $reelCode = $m[1];
+          }
+          $thumbUrl = $reelCode ? 'https://www.instagram.com/p/' . $reelCode . '/media/?size=l' : '';
+        ?>
+        <a href="<?= htmlspecialchars($reelUrl) ?>" target="_blank" rel="noopener" class="reel-card">
+          <?php if ($thumbUrl): ?>
+          <img src="<?= htmlspecialchars($thumbUrl) ?>" alt="<?= htmlspecialchars($reelTitle) ?>" loading="lazy">
+          <?php endif; ?>
+          <div class="reel-card-overlay">
+            <div class="reel-card-play">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <span class="reel-card-label"><?= htmlspecialchars($reelTitle) ?></span>
+          </div>
+        </a>
         <?php endforeach; ?>
       <?php else: ?>
         <p style="color:#94A3B8; text-align:center; grid-column:1/-1;">Nu sunt reels disponibile momentan.</p>
@@ -64,5 +81,3 @@ include __DIR__ . '/../components/hero.php';
     </div>
   </div>
 </section>
-
-<?php $extraScripts = '<script async src="//www.instagram.com/embed.js"></script>'; ?>
