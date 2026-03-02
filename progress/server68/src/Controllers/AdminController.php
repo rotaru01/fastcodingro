@@ -796,7 +796,7 @@ class AdminController
         if (empty($token) || !isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $token)) {
             http_response_code(403);
             $_SESSION['flash_error'] = 'Token de securitate invalid.';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/admin/dashboard'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/admin'));
             exit;
         }
     }

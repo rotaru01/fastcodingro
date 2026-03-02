@@ -23,7 +23,7 @@ class AuthController
     {
         // Daca este deja autentificat, redirectioneaza la dashboard
         if (Auth::check()) {
-            header('Location: /admin/dashboard');
+            header('Location: /admin');
             exit;
         }
 
@@ -114,7 +114,7 @@ class AuthController
         // Inregistrare activitate
         $this->logActivity((int) $user['id'], 'login', 'Autentificare reușită');
 
-        header('Location: /admin/dashboard');
+        header('Location: /admin');
         exit;
     }
 
