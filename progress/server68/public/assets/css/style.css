@@ -249,7 +249,7 @@ img { max-width: 100%; display: block; }
 }
 
 .navbar-cta {
-  background: linear-gradient(90deg, #04B494, #039B7E);
+  background: linear-gradient(90deg, #0ED8B2, #06C9A1);
   color: #FFFFFF;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -259,10 +259,11 @@ img { max-width: 100%; display: block; }
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(4, 180, 148, 0.3);
+  box-shadow: 0 4px 15px rgba(14, 216, 178, 0.3);
 }
 
 .navbar-cta:hover {
+  background: linear-gradient(90deg, #04B494, #039B7E);
   transform: translateY(-2px);
   box-shadow: 0 6px 25px rgba(4, 180, 148, 0.5);
 }
