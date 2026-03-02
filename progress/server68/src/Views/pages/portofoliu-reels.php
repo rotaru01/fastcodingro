@@ -43,17 +43,12 @@ include __DIR__ . '/../components/hero.php';
 <!-- ===== REELS GRID ===== -->
 <section class="content-section" style="background: linear-gradient(180deg, #152540 0%, #1A2B4A 50%, #152540 100%); padding: 80px 0 100px;">
   <div class="container">
-    <div class="reels-grid">
-      <?php if (!empty($reelsItems)): ?>
-        <?php foreach ($reelsItems as $reel): ?>
-          <div class="reel-item">
-            <blockquote class="instagram-media" data-instgrm-permalink="<?= htmlspecialchars($reel['external_url']) ?>" data-instgrm-version="14" style="background:#0D1B2A; border:0; border-radius:16px; margin:0; max-width:100%; min-width:100%; padding:0; width:100%;"></blockquote>
-          </div>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <p style="color:#94A3B8; text-align:center; grid-column:1/-1;">Nu sunt reels disponibile momentan.</p>
-      <?php endif; ?>
-    </div>
+    <?php
+      $galleryItems = $reelsItems ?? [];
+      $galleryTitle = '';
+      $galleryColumns = '3';
+      include __DIR__ . '/../components/gallery-grid.php';
+    ?>
 
     <!-- Back link -->
     <div style="text-align: center; margin-top: 60px;">
@@ -64,16 +59,3 @@ include __DIR__ . '/../components/hero.php';
     </div>
   </div>
 </section>
-
-<script async src="https://www.instagram.com/embed.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var check = setInterval(function() {
-    if (window.instgrm && window.instgrm.Embeds) {
-      clearInterval(check);
-      window.instgrm.Embeds.process();
-    }
-  }, 300);
-  setTimeout(function() { clearInterval(check); }, 10000);
-});
-</script>
