@@ -33,7 +33,7 @@ class ClientController
         $csrfToken = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $csrfToken;
 
-        view('admin/clients/index', [
+        view('admin/clients/manage', [
             'title' => 'Clienți - Admin Scanbox.ro',
             'clients' => $clients,
             'csrfToken' => $csrfToken,

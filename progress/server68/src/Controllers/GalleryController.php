@@ -46,7 +46,7 @@ class GalleryController
         $csrfToken = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $csrfToken;
 
-        view('admin/gallery/index', [
+        view('admin/gallery/list', [
             'title' => 'Galerii - Admin Scanbox.ro',
             'galleries' => $galleriesWithItems,
             'csrfToken' => $csrfToken,

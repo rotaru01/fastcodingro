@@ -42,7 +42,7 @@ class ProjectController
 
         $categories = $this->categoryModel->getAll();
 
-        view('admin/portfolio/index', [
+        view('admin/portfolio/list', [
             'title' => 'Proiecte Portofoliu - Admin Scanbox.ro',
             'projects' => $projects,
             'categories' => $categories,
@@ -91,7 +91,7 @@ class ProjectController
         $categories = $this->categoryModel->getAll();
         $csrfToken = $this->generateCsrf();
 
-        view('admin/portfolio/form', [
+        view('admin/portfolio/edit', [
             'title' => 'Proiect Nou - Admin Scanbox.ro',
             'project' => null,
             'categories' => $categories,
@@ -150,7 +150,7 @@ class ProjectController
         $categories = $this->categoryModel->getAll();
         $csrfToken = $this->generateCsrf();
 
-        view('admin/portfolio/form', [
+        view('admin/portfolio/edit', [
             'title' => 'Editare Proiect - Admin Scanbox.ro',
             'project' => $project,
             'categories' => $categories,

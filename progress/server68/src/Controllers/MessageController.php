@@ -43,7 +43,7 @@ class MessageController
             $statusCounts[$s] = $this->messageModel->countByStatus($s);
         }
 
-        view('admin/messages/index', [
+        view('admin/messages/list', [
             'title' => 'Mesaje - Admin Scanbox.ro',
             'messages' => $messages,
             'currentStatus' => $status,

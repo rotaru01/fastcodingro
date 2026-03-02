@@ -36,7 +36,7 @@ class PricingController
         $csrfToken = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $csrfToken;
 
-        view('admin/pricing/index', [
+        view('admin/pricing/manage', [
             'title' => 'Pachete de Prețuri - Admin Scanbox.ro',
             'packages' => $packages,
             'services' => $services,

@@ -33,7 +33,7 @@ class TestimonialController
         $csrfToken = bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $csrfToken;
 
-        view('admin/testimonials/index', [
+        view('admin/testimonials/manage', [
             'title' => 'Testimoniale - Admin Scanbox.ro',
             'testimonials' => $testimonials,
             'csrfToken' => $csrfToken,

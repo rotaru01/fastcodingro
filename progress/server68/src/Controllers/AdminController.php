@@ -98,7 +98,7 @@ class AdminController
             $posts = $blogPostModel->getAll();
         }
 
-        view('admin/blog/index', [
+        view('admin/blog/list', [
             'title' => 'Articole Blog - Admin Scanbox.ro',
             'posts' => $posts,
             'currentStatus' => $status,
@@ -156,7 +156,7 @@ class AdminController
         $categories = $categoryModel->getAll();
         $csrfToken = $this->generateCsrf();
 
-        view('admin/blog/form', [
+        view('admin/blog/edit', [
             'title' => 'Articol Nou - Admin Scanbox.ro',
             'post' => null,
             'categories' => $categories,
@@ -227,7 +227,7 @@ class AdminController
         $categories = $categoryModel->getAll();
         $csrfToken = $this->generateCsrf();
 
-        view('admin/blog/form', [
+        view('admin/blog/edit', [
             'title' => 'Editare Articol - Admin Scanbox.ro',
             'post' => $post,
             'categories' => $categories,
@@ -283,7 +283,7 @@ class AdminController
             ];
         }
 
-        view('admin/gallery/index', [
+        view('admin/gallery/list', [
             'title' => 'Galerie - Admin Scanbox.ro',
             'galleries' => $galleriesWithItems,
         ], null);
@@ -371,7 +371,7 @@ class AdminController
 
         $categories = $categoryModel->getAll();
 
-        view('admin/portfolio/index', [
+        view('admin/portfolio/list', [
             'title' => 'Portofoliu - Admin Scanbox.ro',
             'projects' => $projects,
             'categories' => $categories,
@@ -433,7 +433,7 @@ class AdminController
         $categories = $categoryModel->getAll();
         $csrfToken = $this->generateCsrf();
 
-        view('admin/portfolio/form', [
+        view('admin/portfolio/edit', [
             'title' => 'Proiect Nou - Admin Scanbox.ro',
             'project' => null,
             'categories' => $categories,
@@ -503,7 +503,7 @@ class AdminController
         $categories = $categoryModel->getAll();
         $csrfToken = $this->generateCsrf();
 
-        view('admin/portfolio/form', [
+        view('admin/portfolio/edit', [
             'title' => 'Editare Proiect - Admin Scanbox.ro',
             'project' => $project,
             'categories' => $categories,
@@ -613,7 +613,7 @@ class AdminController
 
         $testimonials = $testimonialModel->getAll();
 
-        view('admin/testimonials/index', [
+        view('admin/testimonials/manage', [
             'title' => 'Testimoniale - Admin Scanbox.ro',
             'testimonials' => $testimonials,
             'csrfToken' => $this->generateCsrf(),
@@ -694,7 +694,7 @@ class AdminController
 
         $clients = $clientLogoModel->getAll();
 
-        view('admin/clients/index', [
+        view('admin/clients/manage', [
             'title' => 'Clienți - Admin Scanbox.ro',
             'clients' => $clients,
             'csrfToken' => $this->generateCsrf(),
@@ -715,7 +715,7 @@ class AdminController
             $messages = $messageModel->getAll();
         }
 
-        view('admin/messages/index', [
+        view('admin/messages/list', [
             'title' => 'Mesaje - Admin Scanbox.ro',
             'messages' => $messages,
             'currentStatus' => $status,
@@ -791,7 +791,7 @@ class AdminController
         $packages = $pricingModel->getAllGrouped();
         $services = $serviceModel->getAll();
 
-        view('admin/pricing/index', [
+        view('admin/pricing/manage', [
             'title' => 'Prețuri - Admin Scanbox.ro',
             'packages' => $packages,
             'services' => $services,
