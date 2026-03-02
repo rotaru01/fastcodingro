@@ -271,6 +271,30 @@ class AdminController
         $galleryModel = new Gallery();
         $db = Database::getInstance();
 
+        // Gestionare galerie individuala
+        $action = $_GET['action'] ?? '';
+        if ($action === 'manage' && !empty($_GET['id'])) {
+            $galleryId = (int) $_GET['id'];
+            $gallery = $galleryModel->getById($galleryId);
+
+            if ($gallery === null) {
+                $_SESSION['flash_error'] = 'Galeria nu a fost găsită.';
+                header('Location: /admin/gallery');
+                exit;
+            }
+
+            $galleryItemModel = new GalleryItem();
+            $items = $galleryItemModel->getByGallery($galleryId);
+
+            view('admin/gallery/upload', [
+                'title' => 'Gestionare Galerie - Admin Scanbox.ro',
+                'gallery' => $gallery,
+                'items' => $items,
+                'csrf_token' => $this->generateCsrf(),
+            ], null);
+            return;
+        }
+
         $galleries = $galleryModel->getAll();
 
         // Adaugam item_count direct pe fiecare galerie (flat, cum asteapta view-ul)
@@ -282,6 +306,7 @@ class AdminController
         view('admin/gallery/list', [
             'title' => 'Galerie - Admin Scanbox.ro',
             'galleries' => $galleries,
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
