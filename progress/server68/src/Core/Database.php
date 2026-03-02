@@ -174,17 +174,28 @@ class Database
             $params[$paramKey] = $value;
         }
 
+        /** Convertim ? pozitionali in parametri numiti :w0, :w1 etc. pentru a evita mixarea cu :set_* */
+        $whereIdx = 0;
+        $where = preg_replace_callback('/\?/', function () use (&$whereIdx, $whereParams, &$params) {
+            $key = ':w' . $whereIdx;
+            $params[$key] = $whereParams[$whereIdx] ?? null;
+            $whereIdx++;
+            return $key;
+        }, $where);
+
+        /** Daca whereParams avea deja chei numite (ex: ':id' => 5), le adaugam direct */
+        foreach ($whereParams as $key => $value) {
+            if (is_string($key)) {
+                $params[$key] = $value;
+            }
+        }
+
         $sql = sprintf(
             'UPDATE `%s` SET %s WHERE %s',
             $table,
             implode(', ', $setParts),
             $where
         );
-
-        /** Adaugam parametrii WHERE */
-        foreach ($whereParams as $key => $value) {
-            $params[$key] = $value;
-        }
 
         try {
             $stmt = $this->pdo->prepare($sql);
