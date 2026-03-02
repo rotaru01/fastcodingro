@@ -39,13 +39,15 @@ if (empty($clientLogos)) {
       foreach ($allLogos as $logo):
       ?>
       <div class="logo-placeholder">
-        <?php if (!empty($logo['image'])): ?>
-          <?php if (!empty($logo['url'])): ?>
-          <a href="<?= htmlspecialchars($logo['url']) ?>" target="_blank" rel="noopener">
-            <img src="<?= htmlspecialchars($logo['image']) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
+        <?php $logoImg = $logo['logo_path'] ?? $logo['image'] ?? ''; ?>
+        <?php if (!empty($logoImg)): ?>
+          <?php $logoUrl = $logo['website_url'] ?? $logo['url'] ?? ''; ?>
+          <?php if (!empty($logoUrl)): ?>
+          <a href="<?= htmlspecialchars($logoUrl) ?>" target="_blank" rel="noopener">
+            <img src="<?= htmlspecialchars($logoImg) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
           </a>
           <?php else: ?>
-          <img src="<?= htmlspecialchars($logo['image']) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
+          <img src="<?= htmlspecialchars($logoImg) ?>" alt="<?= htmlspecialchars($logo['name'] ?? '') ?>" loading="lazy">
           <?php endif; ?>
         <?php else: ?>
         <?= htmlspecialchars($logo['name'] ?? '') ?>

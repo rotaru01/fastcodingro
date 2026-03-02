@@ -172,13 +172,12 @@ class AdminController
         }
 
         $categories = $db->fetchAll("SELECT * FROM blog_categories ORDER BY name ASC");
-        $csrfToken = $this->generateCsrf();
 
         view('admin/blog/edit', [
             'title' => 'Articol Nou - Admin Scanbox.ro',
             'post' => null,
             'categories' => $categories,
-            'csrfToken' => $csrfToken,
+            'csrf_token' => $this->generateCsrf(),
             'formAction' => '/admin/blog/new',
         ], null);
     }
@@ -243,13 +242,12 @@ class AdminController
         }
 
         $categories = $db->fetchAll("SELECT * FROM blog_categories ORDER BY name ASC");
-        $csrfToken = $this->generateCsrf();
 
         view('admin/blog/edit', [
             'title' => 'Editare Articol - Admin Scanbox.ro',
             'post' => $post,
             'categories' => $categories,
-            'csrfToken' => $csrfToken,
+            'csrf_token' => $this->generateCsrf(),
             'formAction' => "/admin/blog/edit/{$id}",
         ], null);
     }
@@ -746,7 +744,7 @@ class AdminController
         view('admin/testimonials/manage', [
             'title' => 'Testimoniale - Admin Scanbox.ro',
             'testimonials' => $testimonials,
-            'csrfToken' => $this->generateCsrf(),
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
@@ -767,20 +765,22 @@ class AdminController
                     $data = [
                         'name' => trim($_POST['name'] ?? ''),
                         'website_url' => trim($_POST['website_url'] ?? ''),
-                        'is_active' => isset($_POST['is_active']) ? 1 : 0,
-                        'sort_order' => (int) ($_POST['sort_order'] ?? 0),
+                        'type' => in_array($_POST['type'] ?? '', ['client', 'partner']) ? $_POST['type'] : 'client',
+                        'logo_path' => trim($_POST['logo_url'] ?? ''),
+                        'is_active' => 1,
                     ];
 
-                    if (!empty($_FILES['logo']['name'])) {
+                    // Upload logo file (prioritate peste URL)
+                    if (!empty($_FILES['logo_file']['name'])) {
                         $imageHandler = new ImageHandler();
-                        $uploadResult = $imageHandler->upload($_FILES['logo'], 'clients');
+                        $uploadResult = $imageHandler->upload($_FILES['logo_file'], 'clients');
                         if ($uploadResult !== false) {
                             $data['logo_path'] = $uploadResult['file_path'];
                         }
                     }
 
-                    if (empty($data['name']) || empty($data['logo_path'] ?? '')) {
-                        $_SESSION['flash_error'] = 'Numele și logo-ul sunt obligatorii.';
+                    if (empty($data['name'])) {
+                        $_SESSION['flash_error'] = 'Numele este obligatoriu.';
                     } else {
                         $clientLogoModel->create($data);
                         $this->logActivity('client_create', "Client adăugat: {$data['name']}");
@@ -793,13 +793,17 @@ class AdminController
                     $data = [
                         'name' => trim($_POST['name'] ?? ''),
                         'website_url' => trim($_POST['website_url'] ?? ''),
-                        'is_active' => isset($_POST['is_active']) ? 1 : 0,
-                        'sort_order' => (int) ($_POST['sort_order'] ?? 0),
+                        'type' => in_array($_POST['type'] ?? '', ['client', 'partner']) ? $_POST['type'] : 'client',
                     ];
 
-                    if (!empty($_FILES['logo']['name'])) {
+                    $logoUrl = trim($_POST['logo_url'] ?? '');
+                    if (!empty($logoUrl)) {
+                        $data['logo_path'] = $logoUrl;
+                    }
+
+                    if (!empty($_FILES['logo_file']['name'])) {
                         $imageHandler = new ImageHandler();
-                        $uploadResult = $imageHandler->upload($_FILES['logo'], 'clients');
+                        $uploadResult = $imageHandler->upload($_FILES['logo_file'], 'clients');
                         if ($uploadResult !== false) {
                             $data['logo_path'] = $uploadResult['file_path'];
                         }
@@ -808,6 +812,13 @@ class AdminController
                     $clientLogoModel->update($id, $data);
                     $this->logActivity('client_update', "Client actualizat (ID: {$id})");
                     $_SESSION['flash_success'] = 'Clientul a fost actualizat.';
+                    break;
+
+                case 'toggle_active':
+                    $id = (int) ($_POST['id'] ?? 0);
+                    $clientLogoModel->toggleActive($id);
+                    $this->logActivity('client_update', "Client toggled (ID: {$id})");
+                    $_SESSION['flash_success'] = 'Statusul a fost schimbat.';
                     break;
 
                 case 'delete':
@@ -827,7 +838,7 @@ class AdminController
         view('admin/clients/manage', [
             'title' => 'Clienți - Admin Scanbox.ro',
             'clients' => $clients,
-            'csrfToken' => $this->generateCsrf(),
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
@@ -875,7 +886,7 @@ class AdminController
         view('admin/messages/view', [
             'title' => 'Mesaj de la ' . htmlspecialchars($message['name']) . ' - Admin Scanbox.ro',
             'message' => $message,
-            'csrfToken' => $this->generateCsrf(),
+            'csrf_token' => $this->generateCsrf(),
         ], null);
     }
 
