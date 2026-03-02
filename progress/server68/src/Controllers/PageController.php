@@ -53,7 +53,7 @@ class PageController
         $settings = $this->settingModel->getAll();
 
         view('pages/home', [
-            'title' => 'Scanbox.ro — Tur Virtual 3D Matterport, Fotografie, Video Drone, Randare 3D',
+            'title' => 'Scanbox.ro — Tur Virtual 3D, Foto, Video, Randare',
             'metaDescription' => 'Scanbox.ro — Reseller Oficial Matterport România. Tururi virtuale 3D, fotografie profesională, videografie drone 4K, randare 3D și social media pentru afaceri.',
             'services' => $services,
             'featuredProjects' => $featuredProjects,
@@ -217,7 +217,7 @@ class PageController
         $clientLogos = $this->clientLogoModel->getActive();
 
         view('pages/despre-noi', [
-            'title' => 'Despre Noi — Scanbox.ro | Reseller Oficial Matterport România',
+            'title' => 'Despre Noi — Scanbox.ro | Reseller Matterport',
             'metaDescription' => 'Echipa Scanbox.ro — Reseller Oficial Matterport pentru România și Republica Moldova. Peste 5 ani experiență în tururi virtuale 3D, fotografie și videografie profesională.',
             'settings' => $settings,
             'testimonials' => $testimonials,

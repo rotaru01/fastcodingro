@@ -8,8 +8,7 @@ $currentUri = $_SERVER['REQUEST_URI'] ?? '/';
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar">
   <a href="/" class="navbar-logo">
-    <div class="logo-icon">S</div>
-    scanbox
+    <img src="/assets/images/logo-scanbox.png" alt="Scanbox.ro — Integrated Visual Solutions" class="logo-img">
   </a>
   <div class="navbar-links">
     <a href="/"<?= $currentUri === '/' ? ' class="active"' : '' ?>>Acasă</a>

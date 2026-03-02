@@ -116,7 +116,7 @@ $_seo_sameAs = array_filter([
       "logo": {
         "@type": "ImageObject",
         "@id": "<?= $siteUrl ?>/#logo",
-        "url": "<?= $siteUrl ?>/assets/images/logo.png"
+        "url": "<?= $siteUrl ?>/assets/images/logo-scanbox.png"
       },
       "telephone": "<?= htmlspecialchars($_seo_phone) ?>",
       "email": "<?= htmlspecialchars($_seo_email) ?>",
