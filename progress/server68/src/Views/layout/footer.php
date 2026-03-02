@@ -19,7 +19,7 @@ $_linkedin = setting($_s, 'social_linkedin', 'https://www.linkedin.com/company/s
       <!-- Brand Column -->
       <div class="footer-brand">
         <a href="/" class="navbar-logo">
-          <img src="/assets/images/logo-scanbox.png" alt="Scanbox.ro — Integrated Visual Solutions" class="logo-img">
+          <img src="/assets/images/logo-scanbox.png" alt="Scanbox.ro — Integrated Visual Solutions" class="logo-img" width="119" height="32">
         </a>
         <p>Soluții vizuale profesionale care transformă modul în care clienții tăi experimentează spațiile și produsele tale. WE ARE YOUR CONTENT CREATORS.</p>
         <div class="footer-socials">

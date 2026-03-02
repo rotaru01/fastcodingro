@@ -125,12 +125,16 @@ img { max-width: 100%; display: block; }
 
 .navbar-logo .logo-img {
   height: 36px;
+  max-height: 36px;
   width: auto;
+  max-width: 200px;
   display: block;
+  object-fit: contain;
 }
 
 .footer-brand .navbar-logo .logo-img {
   height: 32px;
+  max-height: 32px;
 }
 
 .navbar-links {
