@@ -7,7 +7,7 @@
  * @var array  $galleries - galeriile de tip sport [{gallery, items}]
  * @var array  $settings  - setarile site-ului
  */
-$metaDescription = 'Scanbox.ro oferă servicii sport content in București: fotografie sport profesională, video product in action și reels pentru evenimente sportive. Clienți: Keysport, Crosul Arenelor, Sport Guru, Share Your Run. Trăim sportul, nu doar il documentăm.';
+$metaDescription = 'Sport content în București: fotografie sport, video product in action și reels pentru evenimente sportive. Scanbox.ro';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -33,7 +33,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Sport Content", "item": "https://scanbox.ro/sport-content.html"}
+    {"@type": "ListItem", "position": 2, "name": "Sport Content", "item": "https://scanbox.ro/sport-content"}
   ]
 }
 </script>
@@ -84,7 +84,7 @@ $schemaJsonLd = '
     <!-- Fotografie Sport -->
     <div class="content-grid" style="margin-bottom:80px">
       <div class="content-text">
-        <h3>Fotografie Sport</h3>
+        <span class="section-tag">Fotografie Sport</span>
         <h2>Surprindem emoția, viteza și energia competițiilor</h2>
         <p>De la alergare și trail running, la ciclism și nu numai! De la start și până la linia finish, imortalizăm acțiunea sportivilor, efortul lor și atmosfera evenimentului.</p>
         <p>Fiind sportivi amatori și participanți în propriile curse, știm exact ce momente merită surprinse și cum să arătăm efortul și pasiunea într-un cadru dinamic și autentic.</p>
@@ -99,7 +99,7 @@ $schemaJsonLd = '
     <!-- Video Product in Action -->
     <div class="content-grid reversed" style="margin-bottom:80px">
       <div class="content-text">
-        <h3>Video „Product in Action"</h3>
+        <span class="section-tag">Video „Product in Action"</span>
         <h2>Fiecare produs are o poveste</h2>
         <p>Noi o transformăm într-un material video dinamic. Începem cu un scenariu personalizat, gândit să evidențieze funcționalitatea, designul și modul în care produsul inspiră performanță.</p>
         <p>Fie că filmăm încălțăminte, echipamente sau haine sportive, produse de nutriție, indoor sau outdoor, fiecare cadru este planificat pentru a surprinde exact ceea ce îți dorești să transmiți în online.</p>
@@ -113,7 +113,7 @@ $schemaJsonLd = '
     <!-- Reels Evenimente Sport -->
     <div class="content-grid" style="margin-bottom:40px">
       <div class="content-text">
-        <h3>Reels Evenimente Sport & Activări Brand</h3>
+        <span class="section-tag">Reels Evenimente Sport & Activări Brand</span>
         <h2>Conținut scurt, captivant și dinamic</h2>
         <p>Transformăm evenimentele și activările sportive în conținut special pentru social media. Începem cu un scenariu creativ, adaptat obiectivelor brandului tău, astfel încât fiecare cadru să surprindă emoția, energia și acțiunea participanților.</p>
         <p>Fiind sportivi amatori și participanți activi în curse de running și ciclism, știm exact ce detalii contează și cum să le redăm autentic, astfel încât fiecare short video să inspire, să motiveze și să crească engagementul cu brandul tău.</p>

@@ -53,7 +53,8 @@ class PageController
         $settings = $this->settingModel->getAll();
 
         view('pages/home', [
-            'title' => 'Scanbox.ro - Servicii Profesionale de Scanare 3D și Fotografie',
+            'title' => 'Scanbox.ro — Tur Virtual 3D Matterport, Fotografie, Video Drone, Randare 3D',
+            'metaDescription' => 'Scanbox.ro — Reseller Oficial Matterport România. Tururi virtuale 3D, fotografie profesională, videografie drone 4K, randare 3D și social media pentru afaceri.',
             'services' => $services,
             'featuredProjects' => $featuredProjects,
             'testimonials' => $testimonials,
@@ -216,10 +217,26 @@ class PageController
         $clientLogos = $this->clientLogoModel->getActive();
 
         view('pages/despre-noi', [
-            'title' => 'Despre Noi - Scanbox.ro',
+            'title' => 'Despre Noi — Scanbox.ro | Reseller Oficial Matterport România',
+            'metaDescription' => 'Echipa Scanbox.ro — Reseller Oficial Matterport pentru România și Republica Moldova. Peste 5 ani experiență în tururi virtuale 3D, fotografie și videografie profesională.',
             'settings' => $settings,
             'testimonials' => $testimonials,
             'clientLogos' => $clientLogos,
         ]);
+    }
+
+    /**
+     * Pagini legale (GDPR, Cookies)
+     */
+    public function legal(string $slug): void
+    {
+        $validSlugs = ['prelucrarea-datelor', 'politica-cookies'];
+        if (!in_array($slug, $validSlugs, true)) {
+            http_response_code(404);
+            view('pages/404');
+            return;
+        }
+
+        view('pages/legal/' . $slug);
     }
 }

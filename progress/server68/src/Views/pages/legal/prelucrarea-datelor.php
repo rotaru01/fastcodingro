@@ -2,6 +2,9 @@
 /**
  * Politica de Prelucrare a Datelor cu Caracter Personal (GDPR)
  */
+$title = 'Prelucrarea Datelor Personale — Politica GDPR | Scanbox.ro';
+$metaDescription = 'Politica de prelucrare a datelor cu caracter personal (GDPR) a Scanbox.ro — TRIVIT SERVICES S.R.L. Drepturile dumneavoastră și modul în care protejăm datele.';
+$robotsMeta = 'noindex, follow';
 ?>
 
 <?php

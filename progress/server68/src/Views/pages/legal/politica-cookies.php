@@ -2,6 +2,9 @@
 /**
  * Politica de Cookies
  */
+$title = 'Politica de Cookies | Scanbox.ro';
+$metaDescription = 'Politica de cookies a Scanbox.ro — informații despre tipurile de cookie-uri utilizate, durata lor și cum le puteți gestiona.';
+$robotsMeta = 'noindex, follow';
 ?>
 
 <?php

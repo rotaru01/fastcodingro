@@ -12,6 +12,55 @@
 $metaDescription = htmlspecialchars(mb_substr(strip_tags($post['excerpt'] ?? $post['content'] ?? ''), 0, 160));
 $ogImage = $post['featured_image'] ?? '';
 $ogType = 'article';
+
+// Article meta for Open Graph
+$articlePublished = !empty($post['published_at']) ? date('c', strtotime($post['published_at'])) : '';
+$articleModified = !empty($post['updated_at']) ? date('c', strtotime($post['updated_at'])) : $articlePublished;
+$articleSection = $post['category_name'] ?? '';
+
+// BlogPosting + BreadcrumbList Schema.org
+$_siteUrl = defined('SITE_URL') ? SITE_URL : 'https://scanbox.ro';
+$_postUrl = $_siteUrl . '/blog/' . ($post['slug'] ?? '');
+$_blogPosting = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'BlogPosting',
+            'headline' => $post['title'] ?? '',
+            'description' => mb_substr(strip_tags($post['excerpt'] ?? $post['content'] ?? ''), 0, 160),
+            'url' => $_postUrl,
+            'datePublished' => $articlePublished,
+            'dateModified' => $articleModified ?: $articlePublished,
+            'author' => [
+                '@type' => 'Organization',
+                'name' => 'Scanbox.ro',
+                'url' => $_siteUrl,
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'Scanbox.ro',
+                'url' => $_siteUrl,
+                'logo' => ['@type' => 'ImageObject', 'url' => $_siteUrl . '/assets/images/logo.png'],
+            ],
+            'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $_postUrl],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Acasă', 'item' => $_siteUrl],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog', 'item' => $_siteUrl . '/blog'],
+                ['@type' => 'ListItem', 'position' => 3, 'name' => $post['title'] ?? '', 'item' => $_postUrl],
+            ],
+        ],
+    ],
+];
+if (!empty($post['featured_image'])) {
+    $_blogPosting['@graph'][0]['image'] = $post['featured_image'];
+}
+if (!empty($post['category_name'])) {
+    $_blogPosting['@graph'][0]['articleSection'] = $post['category_name'];
+}
+$schemaJsonLd = '<script type="application/ld+json">' . json_encode($_blogPosting, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
 ?>
 
 <?php

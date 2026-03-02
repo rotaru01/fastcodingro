@@ -10,7 +10,7 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Scanbox.ro realizează tururi virtuale 3D Matterport profesionale în România și Republica Moldova. Reseller Oficial Matterport cu camere Pro 2 și Pro 3. Prețuri de la 150 euro, livrare în 48h. Peste 150 tururi virtuale finalizate pentru imobiliare, hoteluri, restaurante și showroom-uri.';
+$metaDescription = 'Tururi virtuale 3D Matterport profesionale de la 150€. Reseller Oficial Matterport România. Livrare în 48h, prețuri transparente. Scanbox.ro';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -139,7 +139,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Tur Virtual 3D Matterport", "item": "https://scanbox.ro/tur-virtual-3d.html"}
+    {"@type": "ListItem", "position": 2, "name": "Tur Virtual 3D Matterport", "item": "https://scanbox.ro/servicii/tur-virtual-3d"}
   ]
 }
 </script>
@@ -220,7 +220,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid">
       <div class="content-text">
-        <h3>Echipament Profesional</h3>
+        <span class="section-tag">Echipament Profesional</span>
         <h2>Camere Matterport Pro 2 & Pro 3</h2>
         <p>
           Ca Reseller Oficial Matterport pentru România și Republica Moldova, avem acces direct la cele mai recente modele de camere și actualizări software. Camera Pro 3 oferă rezoluție superioară, viteză de scanare dublă față de Pro 2 și cea mai bună precizie din industrie.
@@ -253,7 +253,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid reversed">
       <div class="content-text">
-        <h3>Ce primești</h3>
+        <span class="section-tag">Ce primești</span>
         <h2>Livrabile incluse în fiecare proiect</h2>
         <p>
           Fiecare tur virtual Matterport vine cu un pachet complet de livrabile digitale care te ajută să promovezi spațiul pe toate canalele — de la website la social media.

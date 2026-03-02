@@ -10,7 +10,7 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Scanbox.ro creează vizualizări 3D fotorealiste și planuri izometrice in București. Randări pentru arhitectură, design interior și dezvoltări imobiliare off-plan. Transformăm planuri tehnice in imagini de inaltă calitate — exterioare, interioare, tururi virtuale pe bază de proiect.';
+$metaDescription = 'Vizualizări 3D fotorealiste și planuri izometrice în București. Randări pentru arhitectură, design interior, dezvoltări imobiliare. Scanbox.ro';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -60,7 +60,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Randare 3D", "item": "https://scanbox.ro/randare-3d.html"}
+    {"@type": "ListItem", "position": 2, "name": "Randare 3D", "item": "https://scanbox.ro/servicii/randare-3d"}
   ]
 }
 </script>
@@ -84,7 +84,7 @@ include __DIR__ . '/../../components/hero.php';
     </p>
     <div class="content-grid">
       <div class="content-text">
-        <h3>Ce este Randarea 3D?</h3>
+        <span class="section-tag">Ce este Randarea 3D?</span>
         <h2>Vizualizări Fotorealiste pentru Proiectul Tău</h2>
         <p>Randarea 3D este procesul de creare a imaginilor fotorealiste din modele tridimensionale digitale. Folosind software avansat de randare, transformăm planurile și proiectele tale arhitecturale în imagini de o calitate excepțională, greu de distins de fotografiile reale.</p>
         <p>Fie că ai nevoie de vizualizări exterioare pentru un ansamblu rezidențial, randări interioare pentru un proiect de design sau planuri izometrice detaliate, echipa noastră livrează rezultate la cele mai înalte standarde.</p>
@@ -186,7 +186,7 @@ include __DIR__ . '/../../components/hero.php';
     <!-- Use Case 1: Arhitectură -->
     <div class="content-grid" style="margin-bottom: 80px;">
       <div class="content-text">
-        <h3>Arhitectură</h3>
+        <span class="section-tag">Arhitectură</span>
         <h2>Vizualizări Arhitecturale Exterioare și Interioare</h2>
         <p>Transformăm proiectele arhitecturale în imagini fotorealiste care surprind fiecare detaliu, de la texturile materialelor la jocul luminii naturale. Randările noastre arhitecturale ajută la:</p>
         <ul>
@@ -209,7 +209,7 @@ include __DIR__ . '/../../components/hero.php';
     <!-- Use Case 2: Design Interior -->
     <div class="content-grid reversed" style="margin-bottom: 80px;">
       <div class="content-text">
-        <h3>Design Interior</h3>
+        <span class="section-tag">Design Interior</span>
         <h2>Vizualizări de Interior cu Fiecare Detaliu</h2>
         <p>Randările de interior dau viață conceptelor de design, permițând clienților să vadă exact cum va arăta spațiul lor înainte de implementare. Serviciile includ:</p>
         <ul>
@@ -232,7 +232,7 @@ include __DIR__ . '/../../components/hero.php';
     <!-- Use Case 3: Dezvoltări Imobiliare -->
     <div class="content-grid">
       <div class="content-text">
-        <h3>Dezvoltări Imobiliare</h3>
+        <span class="section-tag">Dezvoltări Imobiliare</span>
         <h2>Materiale Vizuale pentru Vânzarea Off-Plan</h2>
         <p>Pentru dezvoltatorii imobiliari, randările 3D sunt instrumentul principal de vânzare a proprietăților înainte de finalizarea construcției. Oferim:</p>
         <ul>

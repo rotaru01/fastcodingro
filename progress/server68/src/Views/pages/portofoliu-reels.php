@@ -2,7 +2,7 @@
 /**
  * Pagina Portofoliu Reels
  */
-$metaDescription = 'Portofoliul video Scanbox.ro: o selecție din cele mai recente proiecte video in format scurt (Reels) realizate pentru clienți din imobiliare, HoReCa, sport și retail. Conținut dinamic pentru Instagram, TikTok și Facebook.';
+$metaDescription = 'Portofoliu video Scanbox.ro — cele mai recente proiecte Reels pentru clienți din imobiliare, HoReCa, sport și retail. Conținut dinamic Instagram și TikTok.';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -10,7 +10,7 @@ $schemaJsonLd = '
   "@type": "CollectionPage",
   "name": "Portofoliu Reels — Scanbox.ro",
   "description": "O selecție din cele mai recente proiecte video în format scurt realizate de Scanbox.ro.",
-  "url": "https://scanbox.ro/portofoliu-reels.html",
+  "url": "https://scanbox.ro/portofoliu-reels",
   "publisher": {
     "@type": "Organization",
     "name": "Scanbox.ro",
@@ -24,7 +24,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Portofoliu Reels", "item": "https://scanbox.ro/portofoliu-reels.html"}
+    {"@type": "ListItem", "position": 2, "name": "Portofoliu Reels", "item": "https://scanbox.ro/portofoliu-reels"}
   ]
 }
 </script>

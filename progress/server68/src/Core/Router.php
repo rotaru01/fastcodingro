@@ -248,27 +248,7 @@ class Router
     private function handle404(): void
     {
         http_response_code(404);
-
-        $viewFile = __DIR__ . '/../Views/pages/404.php';
-        if (file_exists($viewFile)) {
-            require_once $viewFile;
-        } else {
-            header('Content-Type: text/html; charset=utf-8');
-            echo '<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">';
-            echo '<title>404 - Pagina nu a fost gasita | ' . SITE_NAME . '</title>';
-            echo '<style>body{font-family:sans-serif;display:flex;justify-content:center;';
-            echo 'align-items:center;min-height:100vh;margin:0;background:#f5f5f5;}';
-            echo '.container{text-align:center;padding:2rem;}';
-            echo 'h1{font-size:6rem;margin:0;color:#1a1a2e;}';
-            echo 'p{font-size:1.2rem;color:#666;margin:1rem 0;}';
-            echo 'a{color:#e94560;text-decoration:none;font-weight:bold;}';
-            echo 'a:hover{text-decoration:underline;}</style></head>';
-            echo '<body><div class="container">';
-            echo '<h1>404</h1>';
-            echo '<p>Ne pare rau, pagina cautata nu a fost gasita.</p>';
-            echo '<a href="/">Inapoi la pagina principala</a>';
-            echo '</div></body></html>';
-        }
+        view('pages/404');
     }
 
     /**

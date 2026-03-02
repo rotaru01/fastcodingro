@@ -2,6 +2,9 @@
 /**
  * Pagina 404 - Not Found
  */
+$title = '404 — Pagina nu a fost găsită | Scanbox.ro';
+$metaDescription = 'Pagina căutată nu există pe Scanbox.ro. Navighează către pagina principală sau contactează-ne pentru ajutor.';
+$robotsMeta = 'noindex, follow';
 ?>
 
 <section style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 24px; position: relative; overflow: hidden;">

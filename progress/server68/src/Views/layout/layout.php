@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=<?= time() ?>">
+<link rel="stylesheet" href="/assets/css/style.css?v=<?= APP_VERSION ?>">
 
 <?php if (!empty($extraCss)): ?>
 <style><?= $extraCss ?></style>
@@ -33,12 +33,14 @@ endif;
 
 <?php include __DIR__ . '/../components/navbar.php'; ?>
 
+<main id="main-content">
 <?= $content ?>
+</main>
 
 <?php include __DIR__ . '/../components/cta-banner.php'; ?>
 <?php include __DIR__ . '/footer.php'; ?>
 
-<script src="/assets/js/main.js?v=<?= time() ?>" defer></script>
+<script src="/assets/js/main.js?v=<?= APP_VERSION ?>" defer></script>
 
 <?php if (!empty($extraJs)): ?>
 <script><?= $extraJs ?></script>

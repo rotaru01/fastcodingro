@@ -11,7 +11,7 @@
  * @var int    $totalPosts  - numarul total de articole
  * @var array  $settings    - setarile site-ului
  */
-$metaDescription = 'Blogul Scanbox.ro: articole și resurse utile despre tururi virtuale 3D Matterport, fotografie profesională, videografie cu dronă și conținut vizual B2B. Ghiduri practice, studii de caz și noutăți din industria vizuală profesională din România.';
+$metaDescription = 'Blogul Scanbox.ro — articole despre tururi virtuale 3D Matterport, fotografie profesională, videografie drone și conținut vizual B2B. Ghiduri și studii de caz.';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -19,7 +19,7 @@ $schemaJsonLd = '
   "@type": "Blog",
   "name": "Blogul Scanbox.ro",
   "description": "Articole și resurse utile despre conținut vizual profesional, tururi virtuale 3D, fotografie și videografie.",
-  "url": "https://scanbox.ro/blog.html",
+  "url": "https://scanbox.ro/blog",
   "publisher": {
     "@type": "Organization",
     "name": "Scanbox.ro",
@@ -34,7 +34,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://scanbox.ro/blog.html"}
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://scanbox.ro/blog"}
   ]
 }
 </script>

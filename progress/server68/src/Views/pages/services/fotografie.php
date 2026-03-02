@@ -10,7 +10,7 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Scanbox.ro oferă servicii foto profesionale B2B în București: fotografie corporate, comercială, culinară și imobiliară HDR. Pachete de la 100 euro, livrare rapidă în 24-48h. Imagini care susțin brandul pe termen lung, realizate cu echipament profesional.';
+$metaDescription = 'Servicii foto profesionale B2B în București: corporate, comercială, culinară, imobiliară HDR. Pachete de la 100€, livrare 24-48h. Scanbox.ro';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -94,7 +94,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Servicii Foto B2B", "item": "https://scanbox.ro/servicii-foto.html"}
+    {"@type": "ListItem", "position": 2, "name": "Servicii Foto B2B", "item": "https://scanbox.ro/servicii/fotografie"}
   ]
 }
 </script>
@@ -136,7 +136,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid">
       <div class="content-text">
-        <h3>Fotografie Corporate & Brand</h3>
+        <span class="section-tag">Fotografie Corporate & Brand</span>
         <h2>Profesionalism vizual la cel mai înalt nivel</h2>
         <p>
           Construim imagini care reflectă profesionalismul, cultura și identitatea companiei tale. De la portrete ale membrilor echipei și imagini cu sediul, la procese interne, detalii de brand sau lifestyle profesional — fiecare fotografie este gândită strategic.
@@ -169,7 +169,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid reversed">
       <div class="content-text">
-        <h3>Fotografie Comercială & Industrială</h3>
+        <span class="section-tag">Fotografie Comercială & Industrială</span>
         <h2>Documentare vizuală pentru businessul tău</h2>
         <p>
           Documentăm vizual procesele, echipamentele și oamenii care susțin performanța businessului tău. Imortalizăm spații de producție, depozite, șantiere sau zone logistice — totul într-un mod profesional, sigur și organizat.
@@ -202,7 +202,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid">
       <div class="content-text">
-        <h3>Fotografie Culinară & Produs</h3>
+        <span class="section-tag">Fotografie Culinară & Produs</span>
         <h2>Imagini care atrag, conving și diferențiază</h2>
         <p>
           Punem în valoare produsele tale prin imagini care atrag, conving și diferențiază. Realizăm fotografii de produs pentru e-commerce, cataloage și campanii vizuale — fiecare imagine fiind optimizată pentru impactul dorit.
@@ -235,7 +235,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid reversed">
       <div class="content-text">
-        <h3>Fotografie Imobiliară și de Arhitectură</h3>
+        <span class="section-tag">Fotografie Imobiliară și de Arhitectură</span>
         <h2>Imaginile potrivite fac orice spațiu memorabil</h2>
         <p>
           Imaginile potrivite fac orice spațiu să fie memorabil! Realizăm fotografie imobiliară pentru proprietăți rezidențiale, comerciale sau proiecte în dezvoltare — fiecare cadru fiind ales pentru a pune în evidență potențialul spațiului.

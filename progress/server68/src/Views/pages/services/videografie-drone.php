@@ -10,7 +10,7 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Scanbox.ro produce conținut video profesional B2B in București: clipuri prezentare companie, interviuri, testimoniale, video imobiliare cu dronă și reels social media. Filmări 4K/6K, editare cinematică, livrare optimizată. Prețuri de la 200 euro.';
+$metaDescription = 'Video profesional B2B în București: prezentări companie, interviuri, video imobiliare cu dronă, reels social media. De la 200€. Scanbox.ro';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -65,7 +65,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Servicii Video B2B", "item": "https://scanbox.ro/servicii-video.html"}
+    {"@type": "ListItem", "position": 2, "name": "Servicii Video B2B", "item": "https://scanbox.ro/servicii/videografie-drone"}
   ]
 }
 </script>
@@ -133,7 +133,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid">
       <div class="content-text">
-        <h3>Video Prezentare Companie</h3>
+        <span class="section-tag">Video Prezentare Companie</span>
         <h2>Povestea companiei tale, spusă profesional</h2>
         <p>
           Un video de prezentare profesional este cartea de vizită a companiei tale în mediul digital. Creăm clipuri care surprind esența businessului — valorile, echipa, procesele și produsele — într-un format captivant și memorabil.
@@ -166,7 +166,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid reversed">
       <div class="content-text">
-        <h3>Video Interviu & Testimonial</h3>
+        <span class="section-tag">Video Interviu & Testimonial</span>
         <h2>Lasă clienții și echipa să vorbească pentru tine</h2>
         <p>
           Interviurile video și testimonialele sunt cele mai puternice instrumente de construcție a încrederii. Filmăm interviuri cu membrii echipei, clienți mulțumiți sau parteneri — într-un cadru profesional, cu sunet clar și imagine de calitate cinematografică.
@@ -199,7 +199,7 @@ include __DIR__ . '/../../components/hero.php';
   <div class="container">
     <div class="content-grid">
       <div class="content-text">
-        <h3>Video Prezentare Imobiliare</h3>
+        <span class="section-tag">Video Prezentare Imobiliare</span>
         <h2>Transformă proprietățile în experiențe vizuale</h2>
         <p>
           Un video imobiliar profesional poate face diferența între o proprietate care stă pe piață și una care se vinde rapid. Filmăm proprietăți rezidențiale și comerciale cu mișcări fluide de cameră, lumină naturală și editare cinematografică.

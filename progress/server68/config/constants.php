@@ -34,6 +34,8 @@ define('ROUTES', [
     'GET|/contact'                   => ['PageController', 'contact'],
     'POST|/contact'                  => ['ContactController', 'submit'],
     'GET|/despre-noi'                => ['PageController', 'despreNoi'],
+    'GET|/legal/prelucrarea-datelor'  => ['PageController', 'legal', ['prelucrarea-datelor']],
+    'GET|/legal/politica-cookies'     => ['PageController', 'legal', ['politica-cookies']],
 
     /** Administrare */
     'GET|/admin'                     => ['AdminController', 'dashboard'],

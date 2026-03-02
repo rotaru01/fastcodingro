@@ -20,7 +20,7 @@
 
 $siteUrl = defined('SITE_URL') ? SITE_URL : 'https://scanbox.ro';
 $title = $title ?? 'Scanbox.ro — Soluții Vizuale Profesionale | Tur Virtual 3D, Fotografie, Video';
-$metaDescription = $metaDescription ?? 'Scanbox.ro oferă servicii profesionale de tur virtual 3D Matterport, fotografie, videografie drone, randare 3D și social media content. Reseller Oficial Matterport România și Republica Moldova. Peste 150 tururi virtuale, 500+ proiecte finalizate.';
+$metaDescription = $metaDescription ?? 'Scanbox.ro — servicii profesionale de tur virtual 3D Matterport, fotografie, videografie drone, randare 3D și social media. Reseller Oficial Matterport.';
 $metaKeywords = $metaKeywords ?? '';
 $ogImage = $ogImage ?? $siteUrl . '/assets/images/og-default.jpg';
 $ogType = $ogType ?? 'website';
@@ -94,6 +94,7 @@ $_seo_sameAs = array_filter([
 <?php if ($ogImage): ?>
 <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
 <?php endif; ?>
+<meta name="twitter:site" content="@scanbox.ro">
 
 <?php if (!empty($schemaOrg)): ?>
 <!-- Schema.org JSON-LD — Custom -->

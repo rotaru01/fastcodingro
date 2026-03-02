@@ -10,7 +10,7 @@
  * @var array  $pricing      - pachetele de pret
  * @var array  $settings     - setarile site-ului
  */
-$metaDescription = 'Scanbox.ro oferă pachete social media lunare in București: administrare platforme de la 250 euro, creare conținut vizual de la 350 euro și soluție completă de la 450 euro. Instagram, Facebook, TikTok, LinkedIn, YouTube — strategie, conținut foto-video și consistență pentru brandul tău.';
+$metaDescription = 'Pachete social media lunare în București: administrare de la 250€, creare conținut de la 350€, soluție completă de la 450€. Scanbox.ro';
 $schemaJsonLd = '
 <script type="application/ld+json">
 {
@@ -68,7 +68,7 @@ $schemaJsonLd = '
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://scanbox.ro"},
-    {"@type": "ListItem", "position": 2, "name": "Social Media", "item": "https://scanbox.ro/social-media.html"}
+    {"@type": "ListItem", "position": 2, "name": "Social Media", "item": "https://scanbox.ro/servicii/social-media"}
   ]
 }
 </script>
