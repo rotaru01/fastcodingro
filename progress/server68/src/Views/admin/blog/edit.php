@@ -105,7 +105,7 @@ ob_start();
                         <?php if (!empty($categories)): ?>
                             <?php foreach ($categories as $cat): ?>
                                 <option value="<?= $cat['id'] ?>" <?= ($post['category_id'] ?? '') == $cat['id'] ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($cat['name']) ?>
+                                    <?= htmlspecialchars($cat['name'] ?? $cat['name_ro'] ?? '') ?>
                                 </option>
                             <?php endforeach; ?>
                         <?php else: ?>

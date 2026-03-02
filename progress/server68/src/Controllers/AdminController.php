@@ -111,7 +111,7 @@ class AdminController
     public function blogNew(): void
     {
         $blogPostModel = new BlogPost();
-        $categoryModel = new Category();
+        $db = Database::getInstance();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();
@@ -153,7 +153,7 @@ class AdminController
             exit;
         }
 
-        $categories = $categoryModel->getAll();
+        $categories = $db->fetchAll("SELECT * FROM blog_categories ORDER BY name ASC");
         $csrfToken = $this->generateCsrf();
 
         view('admin/blog/edit', [
@@ -171,7 +171,7 @@ class AdminController
     public function blogEdit(int $id): void
     {
         $blogPostModel = new BlogPost();
-        $categoryModel = new Category();
+        $db = Database::getInstance();
 
         $post = $blogPostModel->getById($id);
         if ($post === null) {
@@ -224,7 +224,7 @@ class AdminController
             exit;
         }
 
-        $categories = $categoryModel->getAll();
+        $categories = $db->fetchAll("SELECT * FROM blog_categories ORDER BY name ASC");
         $csrfToken = $this->generateCsrf();
 
         view('admin/blog/edit', [
