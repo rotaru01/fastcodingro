@@ -1034,10 +1034,23 @@ class AdminController
         }
         unset($pkg);
 
+        // Editare pachet existent
+        $editing = null;
+        $editId = (int) ($_GET['edit'] ?? 0);
+        if ($editId > 0) {
+            $editing = $pricingModel->getById($editId);
+            if ($editing) {
+                $fJson = $editing['features_json'] ?? '[]';
+                $fArr = json_decode($fJson, true) ?? [];
+                $editing['features_text'] = implode("\n", $fArr);
+            }
+        }
+
         view('admin/pricing/manage', [
             'title' => 'Prețuri - Admin Scanbox.ro',
             'packages' => $packages,
             'current_service' => $currentService,
+            'editing' => $editing,
             'csrf_token' => $this->generateCsrf(),
         ], null);
     }
