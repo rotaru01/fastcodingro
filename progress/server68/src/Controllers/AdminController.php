@@ -343,12 +343,35 @@ class AdminController
                     header("Location: /admin/gallery?action=manage&id={$galleryId}");
                     exit;
 
+                case 'add_link':
+                    $externalUrl = trim($_POST['external_url'] ?? '');
+                    $linkTitle = trim($_POST['title'] ?? '');
+                    if ($galleryId > 0 && !empty($externalUrl)) {
+                        $galleryItemModel = new GalleryItem();
+                        $currentMax = (int) ($db->fetch(
+                            "SELECT MAX(sort_order) as mx FROM gallery_items WHERE gallery_id = ?",
+                            [$galleryId]
+                        )['mx'] ?? 0);
+                        $galleryItemModel->create([
+                            'gallery_id' => $galleryId,
+                            'type' => 'embed',
+                            'external_url' => $externalUrl,
+                            'title' => !empty($linkTitle) ? $linkTitle : $externalUrl,
+                            'sort_order' => $currentMax + 1,
+                        ]);
+                        $_SESSION['flash_success'] = 'Link-ul video a fost adăugat.';
+                    } else {
+                        $_SESSION['flash_error'] = 'URL-ul este obligatoriu.';
+                    }
+                    header("Location: /admin/gallery?action=manage&id={$galleryId}");
+                    exit;
+
                 case 'delete_image':
                     $itemId = (int) ($_POST['item_id'] ?? 0);
                     if ($itemId > 0) {
                         $galleryItemModel = new GalleryItem();
                         $galleryItemModel->delete($itemId);
-                        $_SESSION['flash_success'] = 'Imaginea a fost ștearsă.';
+                        $_SESSION['flash_success'] = 'Elementul a fost șters.';
                     }
                     header("Location: /admin/gallery?action=manage&id={$galleryId}");
                     exit;

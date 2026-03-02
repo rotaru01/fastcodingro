@@ -19,6 +19,29 @@ ob_start();
 </div>
 
 <div class="card" style="margin-bottom:24px">
+    <h3 style="margin-bottom:16px">Adaugă link video</h3>
+    <form method="POST" action="/admin/gallery" id="addLinkForm">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
+        <input type="hidden" name="action" value="add_link">
+        <input type="hidden" name="gallery_id" value="<?= $gallery['id'] ?>">
+
+        <div class="form-group">
+            <label for="external_url">URL Video (YouTube, Instagram, TikTok)</label>
+            <input type="url" id="external_url" name="external_url" placeholder="https://www.youtube.com/watch?v=... sau https://www.instagram.com/reel/..." required>
+            <span class="form-hint">Formate acceptate: YouTube (video, shorts), Instagram (reel, post), TikTok</span>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="link_title">Titlu (opțional)</label>
+                <input type="text" id="link_title" name="title" placeholder="Titlul videoului">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Adaugă link</button>
+    </form>
+</div>
+
+<div class="card" style="margin-bottom:24px">
     <h3 style="margin-bottom:16px">Încarcă imagini</h3>
     <form method="POST" action="/admin/gallery" enctype="multipart/form-data" id="uploadForm">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
@@ -51,7 +74,7 @@ ob_start();
 
 <div class="card">
     <div class="table-card-header">
-        <h3>Imagini în galerie</h3>
+        <h3>Elemente în galerie</h3>
         <span class="text-muted"><?= count($items ?? []) ?> elemente</span>
     </div>
 
@@ -62,29 +85,39 @@ ob_start();
                     <div class="drag-handle" title="Trage pentru reordonare">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
                     </div>
-                    <?php
-                    $imgSrc = $item['thumbnail_path'] ?? $item['file_path'] ?? $item['url'] ?? '';
-                    if (!empty($imgSrc) && !str_starts_with($imgSrc, 'http') && !str_starts_with($imgSrc, '/')) {
-                        $imgSrc = '/uploads/' . $imgSrc;
-                    }
-                    ?>
-                    <?php if (!empty($imgSrc)): ?>
-                        <img src="<?= htmlspecialchars($imgSrc) ?>" alt="<?= htmlspecialchars($item['alt_text'] ?? $item['title'] ?? '') ?>" class="gallery-manage-thumb">
-                    <?php else: ?>
-                        <div class="gallery-manage-thumb gallery-manage-no-img">
-                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="#94A3B8" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <?php if (($item['type'] ?? 'image') === 'embed' && !empty($item['external_url'])): ?>
+                        <div class="gallery-manage-thumb" style="display:flex;align-items:center;justify-content:center;background:#0D1B2A;">
+                            <svg viewBox="0 0 24 24" width="28" height="28" stroke="#04B494" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                         </div>
+                    <?php else: ?>
+                        <?php
+                        $imgSrc = $item['thumbnail_path'] ?? $item['file_path'] ?? '';
+                        if (!empty($imgSrc) && !str_starts_with($imgSrc, 'http') && !str_starts_with($imgSrc, '/')) {
+                            $imgSrc = '/uploads/' . $imgSrc;
+                        }
+                        ?>
+                        <?php if (!empty($imgSrc)): ?>
+                            <img src="<?= htmlspecialchars($imgSrc) ?>" alt="<?= htmlspecialchars($item['alt_text'] ?? $item['title'] ?? '') ?>" class="gallery-manage-thumb">
+                        <?php else: ?>
+                            <div class="gallery-manage-thumb gallery-manage-no-img">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#94A3B8" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <div class="gallery-manage-info">
-                        <p class="gallery-manage-title"><?= htmlspecialchars($item['title'] ?? $item['original_filename'] ?? 'Fără titlu') ?></p>
-                        <small class="text-muted"><?= htmlspecialchars($item['alt_text'] ?? '') ?></small>
+                        <p class="gallery-manage-title"><?= htmlspecialchars($item['title'] ?? 'Fără titlu') ?></p>
+                        <?php if (($item['type'] ?? 'image') === 'embed'): ?>
+                            <small class="text-muted" style="word-break:break-all"><?= htmlspecialchars($item['external_url'] ?? '') ?></small>
+                        <?php else: ?>
+                            <small class="text-muted"><?= htmlspecialchars($item['alt_text'] ?? '') ?></small>
+                        <?php endif; ?>
                     </div>
-                    <form method="POST" action="/admin/gallery" style="display:inline" onsubmit="return confirm('Sigur vrei să ștergi această imagine?')">
+                    <form method="POST" action="/admin/gallery" style="display:inline" onsubmit="return confirm('Sigur vrei să ștergi acest element?')">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
                         <input type="hidden" name="action" value="delete_image">
                         <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
                         <input type="hidden" name="gallery_id" value="<?= $gallery['id'] ?>">
-                        <button type="submit" class="btn btn-xs btn-danger" title="Șterge imaginea">
+                        <button type="submit" class="btn btn-xs btn-danger" title="Șterge">
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                         </button>
                     </form>
@@ -92,8 +125,8 @@ ob_start();
             <?php endforeach; ?>
         <?php else: ?>
             <div class="empty-state-card" style="grid-column:1/-1">
-                <p>Nicio imagine în galerie</p>
-                <small class="text-muted">Folosește zona de upload de mai sus pentru a adăuga imagini</small>
+                <p>Niciun element în galerie</p>
+                <small class="text-muted">Folosește formularele de mai sus pentru a adăuga linkuri video sau imagini</small>
             </div>
         <?php endif; ?>
     </div>

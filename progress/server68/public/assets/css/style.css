@@ -1983,6 +1983,19 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
 }
 
+.gallery-item:has(.gallery-embed) {
+  aspect-ratio: auto;
+}
+
+.gallery-embed {
+  width: 100%;
+}
+
+.gallery-embed iframe {
+  display: block;
+  width: 100%;
+}
+
 /* Reels grid */
 .reels-grid {
   display: grid;
