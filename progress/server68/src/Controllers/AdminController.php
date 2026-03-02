@@ -947,6 +947,7 @@ class AdminController
                         'service_page' => trim($_POST['service_page'] ?? ''),
                         'price' => (float) ($_POST['price'] ?? 0),
                         'currency' => $_POST['currency'] ?? 'RON',
+                        'price_note' => trim($_POST['price_note'] ?? ''),
                         'features_json' => json_encode($featuresArray, JSON_UNESCAPED_UNICODE),
                         'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
                         'is_active' => 1,
@@ -977,6 +978,32 @@ class AdminController
                         $this->logActivity('pricing_update', "Toggle activ pachet (ID: {$pkgId})");
                     }
                     header('Location: /admin/pricing');
+                    exit;
+
+                case 'update':
+                    if ($pkgId > 0) {
+                        $featuresText = trim($_POST['features'] ?? '');
+                        $featuresArray = array_values(array_filter(
+                            array_map('trim', explode("\n", $featuresText)),
+                            fn($f) => $f !== ''
+                        ));
+
+                        $data = [
+                            'name' => trim($_POST['name'] ?? ''),
+                            'service_page' => trim($_POST['service_page'] ?? ''),
+                            'price' => (float) ($_POST['price'] ?? 0),
+                            'currency' => $_POST['currency'] ?? 'RON',
+                            'price_note' => trim($_POST['price_note'] ?? ''),
+                            'features_json' => json_encode($featuresArray, JSON_UNESCAPED_UNICODE),
+                            'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
+                        ];
+
+                        $pricingModel->update($pkgId, $data);
+                        $this->logActivity('pricing_update', "Pachet actualizat: {$data['name']} (ID: {$pkgId})");
+                        $_SESSION['flash_success'] = 'Pachetul a fost actualizat.';
+                    }
+                    $redirect = !empty($_POST['service_page']) ? '?service=' . urlencode($_POST['service_page']) : '';
+                    header('Location: /admin/pricing' . $redirect);
                     exit;
 
                 case 'delete':
