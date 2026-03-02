@@ -65,16 +65,15 @@ include __DIR__ . '/../components/hero.php';
   </div>
 </section>
 
-<?php $extraScripts = '<script async src="//www.instagram.com/embed.js"></script>
+<script async src="https://www.instagram.com/embed.js"></script>
 <script>
-window.addEventListener("load", function() {
-  if (window.instgrm) {
-    window.instgrm.Embeds.process();
-  } else {
-    var s = document.createElement("script");
-    s.src = "https://www.instagram.com/embed.js";
-    s.onload = function() { window.instgrm.Embeds.process(); };
-    document.body.appendChild(s);
-  }
+document.addEventListener("DOMContentLoaded", function() {
+  var check = setInterval(function() {
+    if (window.instgrm && window.instgrm.Embeds) {
+      clearInterval(check);
+      window.instgrm.Embeds.process();
+    }
+  }, 300);
+  setTimeout(function() { clearInterval(check); }, 10000);
 });
-</script>'; ?>
+</script>
