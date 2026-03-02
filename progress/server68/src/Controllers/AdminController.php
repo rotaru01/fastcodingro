@@ -271,6 +271,89 @@ class AdminController
         $galleryModel = new Gallery();
         $db = Database::getInstance();
 
+        // Handle POST actions
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCsrf();
+            $postAction = $_POST['action'] ?? '';
+            $galleryId = (int) ($_POST['gallery_id'] ?? $_POST['id'] ?? 0);
+
+            switch ($postAction) {
+                case 'create_gallery':
+                    $name = trim($_POST['name'] ?? '');
+                    $slug = trim($_POST['slug'] ?? '') ?: $this->generateSlug($name);
+                    $page = $_POST['page'] ?? null;
+                    if (!empty($name)) {
+                        $galleryModel->create(['name' => $name, 'slug' => $slug, 'page' => $page]);
+                        $this->logActivity('gallery_create', "Galerie creată: {$name}");
+                        $_SESSION['flash_success'] = 'Galeria a fost creată.';
+                    }
+                    header('Location: /admin/gallery');
+                    exit;
+
+                case 'delete_gallery':
+                    if ($galleryId > 0) {
+                        $gallery = $galleryModel->getById($galleryId);
+                        if ($gallery) {
+                            $db->delete('gallery_items', 'gallery_id = ?', [$galleryId]);
+                            $galleryModel->delete($galleryId);
+                            $this->logActivity('gallery_delete', "Galerie ștearsă: " . ($gallery['name'] ?? ''));
+                            $_SESSION['flash_success'] = 'Galeria a fost ștearsă.';
+                        }
+                    }
+                    header('Location: /admin/gallery');
+                    exit;
+
+                case 'upload_image':
+                    if ($galleryId > 0 && !empty($_FILES['images']['name'][0])) {
+                        $imageHandler = new ImageHandler();
+                        $galleryItemModel = new GalleryItem();
+                        $uploadCount = 0;
+                        $currentMax = (int) ($db->fetch(
+                            "SELECT MAX(sort_order) as mx FROM gallery_items WHERE gallery_id = ?",
+                            [$galleryId]
+                        )['mx'] ?? 0);
+
+                        $fileCount = count($_FILES['images']['name']);
+                        for ($i = 0; $i < $fileCount; $i++) {
+                            if ($_FILES['images']['error'][$i] !== UPLOAD_ERR_OK) continue;
+                            $file = [
+                                'name' => $_FILES['images']['name'][$i],
+                                'type' => $_FILES['images']['type'][$i],
+                                'tmp_name' => $_FILES['images']['tmp_name'][$i],
+                                'error' => $_FILES['images']['error'][$i],
+                                'size' => $_FILES['images']['size'][$i],
+                            ];
+                            $uploadPath = $imageHandler->upload($file, 'gallery');
+                            if ($uploadPath !== null) {
+                                $currentMax++;
+                                $galleryItemModel->create([
+                                    'gallery_id' => $galleryId,
+                                    'file_path' => $uploadPath,
+                                    'alt_text' => pathinfo($file['name'], PATHINFO_FILENAME),
+                                    'sort_order' => $currentMax,
+                                ]);
+                                $uploadCount++;
+                            }
+                        }
+                        $_SESSION['flash_success'] = "{$uploadCount} imagine/imagini încărcate.";
+                    } else {
+                        $_SESSION['flash_error'] = 'Nu ați selectat nicio imagine.';
+                    }
+                    header("Location: /admin/gallery?action=manage&id={$galleryId}");
+                    exit;
+
+                case 'delete_image':
+                    $itemId = (int) ($_POST['item_id'] ?? 0);
+                    if ($itemId > 0) {
+                        $galleryItemModel = new GalleryItem();
+                        $galleryItemModel->delete($itemId);
+                        $_SESSION['flash_success'] = 'Imaginea a fost ștearsă.';
+                    }
+                    header("Location: /admin/gallery?action=manage&id={$galleryId}");
+                    exit;
+            }
+        }
+
         // Gestionare galerie individuala
         $action = $_GET['action'] ?? '';
         if ($action === 'manage' && !empty($_GET['id'])) {
