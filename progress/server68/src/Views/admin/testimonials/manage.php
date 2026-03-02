@@ -71,8 +71,8 @@ ob_start();
 
                 <div class="testimonial-manage-content">
                     <div class="testimonial-manage-header">
-                        <?php if (!empty($testimonial['photo_url'])): ?>
-                            <img src="<?= htmlspecialchars($testimonial['photo_url']) ?>" alt="" class="testimonial-avatar">
+                        <?php if (!empty($testimonial['author_photo'])): ?>
+                            <img src="<?= htmlspecialchars($testimonial['author_photo']) ?>" alt="" class="testimonial-avatar">
                         <?php else: ?>
                             <div class="testimonial-avatar testimonial-avatar-placeholder">
                                 <?= strtoupper(mb_substr($testimonial['author_name'] ?? 'A', 0, 1)) ?>
@@ -82,8 +82,8 @@ ob_start();
                             <strong><?= htmlspecialchars($testimonial['author_name'] ?? '') ?></strong>
                             <span class="text-muted">
                                 <?= htmlspecialchars($testimonial['author_role'] ?? '') ?>
-                                <?php if (!empty($testimonial['company'])): ?>
-                                    la <?= htmlspecialchars($testimonial['company']) ?>
+                                <?php if (!empty($testimonial['author_company'])): ?>
+                                    la <?= htmlspecialchars($testimonial['author_company']) ?>
                                 <?php endif; ?>
                             </span>
                         </div>

@@ -692,49 +692,41 @@ class AdminController
             switch ($action) {
                 case 'create':
                     $data = [
-                        'name' => trim($_POST['name'] ?? ''),
-                        'position' => trim($_POST['position'] ?? ''),
-                        'company' => trim($_POST['company'] ?? ''),
-                        'content' => trim($_POST['content'] ?? ''),
+                        'author_name' => trim($_POST['author_name'] ?? ''),
+                        'author_role' => trim($_POST['author_role'] ?? ''),
+                        'author_company' => trim($_POST['company'] ?? ''),
+                        'quote' => trim($_POST['quote'] ?? ''),
+                        'author_photo' => trim($_POST['photo_url'] ?? ''),
                         'rating' => (int) ($_POST['rating'] ?? 5),
-                        'is_active' => isset($_POST['is_active']) ? 1 : 0,
+                        'is_active' => 1,
                     ];
 
-                    if (!empty($_FILES['avatar']['name'])) {
-                        $imageHandler = new ImageHandler();
-                        $uploadResult = $imageHandler->upload($_FILES['avatar'], 'testimonials');
-                        if ($uploadResult !== false) {
-                            $data['avatar'] = $uploadResult['file_path'];
-                        }
-                    }
-
                     $testimonialModel->create($data);
-                    $this->logActivity('testimonial_create', "Testimonial creat: {$data['name']}");
+                    $this->logActivity('testimonial_create', "Testimonial creat: {$data['author_name']}");
                     $_SESSION['flash_success'] = 'Testimonialul a fost adăugat.';
                     break;
 
                 case 'update':
                     $id = (int) ($_POST['id'] ?? 0);
                     $data = [
-                        'name' => trim($_POST['name'] ?? ''),
-                        'position' => trim($_POST['position'] ?? ''),
-                        'company' => trim($_POST['company'] ?? ''),
-                        'content' => trim($_POST['content'] ?? ''),
+                        'author_name' => trim($_POST['author_name'] ?? ''),
+                        'author_role' => trim($_POST['author_role'] ?? ''),
+                        'author_company' => trim($_POST['company'] ?? ''),
+                        'quote' => trim($_POST['quote'] ?? ''),
+                        'author_photo' => trim($_POST['photo_url'] ?? ''),
                         'rating' => (int) ($_POST['rating'] ?? 5),
-                        'is_active' => isset($_POST['is_active']) ? 1 : 0,
                     ];
-
-                    if (!empty($_FILES['avatar']['name'])) {
-                        $imageHandler = new ImageHandler();
-                        $uploadResult = $imageHandler->upload($_FILES['avatar'], 'testimonials');
-                        if ($uploadResult !== false) {
-                            $data['avatar'] = $uploadResult['file_path'];
-                        }
-                    }
 
                     $testimonialModel->update($id, $data);
                     $this->logActivity('testimonial_update', "Testimonial actualizat (ID: {$id})");
                     $_SESSION['flash_success'] = 'Testimonialul a fost actualizat.';
+                    break;
+
+                case 'toggle_active':
+                    $id = (int) ($_POST['id'] ?? 0);
+                    $testimonialModel->toggleActive($id);
+                    $this->logActivity('testimonial_update', "Testimonial toggled (ID: {$id})");
+                    $_SESSION['flash_success'] = 'Statusul a fost schimbat.';
                     break;
 
                 case 'delete':
