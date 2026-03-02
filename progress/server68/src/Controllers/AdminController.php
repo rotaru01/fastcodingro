@@ -841,11 +841,11 @@ class AdminController
         try {
             $db = Database::getInstance();
             $db->insert('activity_log', [
-                'user_id' => $_SESSION['user_id'],
+                'admin_id' => $_SESSION['user_id'],
                 'action' => $action,
-                'description' => $description,
+                'entity_type' => 'admin',
+                'details' => $description,
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
-                'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
         } catch (\Exception $e) {

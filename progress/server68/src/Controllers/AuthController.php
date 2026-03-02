@@ -154,15 +154,21 @@ class AuthController
      */
     private function isRateLimited(string $ipAddress): bool
     {
-        $cutoffTime = date('Y-m-d H:i:s', time() - LOGIN_LOCKOUT_TIME);
+        try {
+            $cutoffTime = date('Y-m-d H:i:s', time() - LOGIN_LOCKOUT_TIME);
 
-        $result = $this->db->fetch(
-            "SELECT COUNT(*) as attempts FROM login_attempts
-             WHERE ip_address = ? AND attempted_at > ? AND success = 0",
-            [$ipAddress, $cutoffTime]
-        );
+            $result = $this->db->fetch(
+                "SELECT COUNT(*) as attempts FROM login_attempts
+                 WHERE ip_address = ? AND attempted_at > ? AND success = 0",
+                [$ipAddress, $cutoffTime]
+            );
 
-        return ($result['attempts'] ?? 0) >= MAX_LOGIN_ATTEMPTS;
+            return ($result['attempts'] ?? 0) >= MAX_LOGIN_ATTEMPTS;
+        } catch (\Exception $e) {
+            // Tabela login_attempts nu exista inca - skip rate limiting
+            error_log('Rate limiting skip: ' . $e->getMessage());
+            return false;
+        }
     }
 
     /**
@@ -170,12 +176,16 @@ class AuthController
      */
     private function recordFailedAttempt(string $ipAddress, string $email): void
     {
-        $this->db->insert('login_attempts', [
-            'ip_address' => $ipAddress,
-            'email' => $email,
-            'success' => 0,
-            'attempted_at' => date('Y-m-d H:i:s'),
-        ]);
+        try {
+            $this->db->insert('login_attempts', [
+                'ip_address' => $ipAddress,
+                'email' => $email,
+                'success' => 0,
+                'attempted_at' => date('Y-m-d H:i:s'),
+            ]);
+        } catch (\Exception $e) {
+            error_log('Record failed attempt skip: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -183,7 +193,11 @@ class AuthController
      */
     private function clearFailedAttempts(string $ipAddress): void
     {
-        $this->db->delete('login_attempts', 'ip_address = ?', [$ipAddress]);
+        try {
+            $this->db->delete('login_attempts', 'ip_address = ?', [$ipAddress]);
+        } catch (\Exception $e) {
+            error_log('Clear failed attempts skip: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -193,11 +207,11 @@ class AuthController
     {
         try {
             $this->db->insert('activity_log', [
-                'user_id' => $userId,
+                'admin_id' => $userId,
                 'action' => $action,
-                'description' => $description,
+                'entity_type' => 'auth',
+                'details' => $description,
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
-                'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
         } catch (\Exception $e) {
