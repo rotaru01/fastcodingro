@@ -98,6 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Active nav link
   setActiveNavLink();
 
+  // Email protection — decode obfuscated emails
+  document.querySelectorAll('.email-protect').forEach(el => {
+    const u = el.dataset.u, d = el.dataset.d;
+    if (u && d) {
+      const addr = u + '@' + d;
+      el.innerHTML = '<a href="ma' + 'ilto:' + addr + '">' + addr + '</a>';
+    }
+  });
+
   // FAQ accordion
   initFaq();
 });

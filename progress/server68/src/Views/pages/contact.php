@@ -84,7 +84,7 @@ include __DIR__ . '/../components/hero.php';
 <section class="contact-section" lang="ro">
   <div class="container">
     <p style="border-left: 3px solid #04B494; padding-left: 16px; color: #CBD5E1; font-size: 15px; line-height: 1.8; margin: 0 0 40px 0;">
-      Sediul Scanbox este in <?= htmlspecialchars($_address) ?>, România. Compania oferă servicii in toată România și Republica Moldova. Program de lucru: <?= htmlspecialchars($_hours) ?>. Contact: <?= htmlspecialchars($_email) ?>, telefon <?= htmlspecialchars($_phone) ?>.
+      Sediul Scanbox este in <?= htmlspecialchars($_address) ?>, România. Compania oferă servicii in toată România și Republica Moldova. Program de lucru: <?= htmlspecialchars($_hours) ?>. Contact: <span class="email-protect" data-u="office" data-d="scanbox.ro"></span>, telefon <?= htmlspecialchars($_phone) ?>.
     </p>
     <div class="contact-grid">
 
@@ -99,7 +99,7 @@ include __DIR__ . '/../components/hero.php';
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 9L2 4"/></svg>
           </div>
           <div>
-            <span><?= htmlspecialchars($_email) ?></span>
+            <span class="email-protect" data-u="office" data-d="scanbox.ro"></span>
             <small>E-mail</small>
           </div>
         </div>

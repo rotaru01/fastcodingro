@@ -16,7 +16,7 @@
 <?php
 $heroBadge = 'Reseller Oficial Matterport România';
 $heroBadgeIcon = '<svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>';
-$heroTitle = 'Soluții Vizuale pentru Afacerea Ta';
+$heroTitle = 'Servicii Vizuale Profesionale pentru Afacerea Ta';
 $heroType = 'full';
 $heroServices = [
     ['text' => 'Tur Virtual 3D Matterport', 'href' => '/servicii/tur-virtual-3d'],
@@ -63,8 +63,8 @@ include __DIR__ . '/../components/counter.php';
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Servicii</span>
-      <h2 class="section-title">Ce Facem pentru Afacerea Ta</h2>
-      <p class="section-subtitle">Soluții complete de conținut vizual, de la scanări 3D la strategii de social media.</p>
+      <h2 class="section-title">Serviciile Scanbox pentru Afacerea Ta</h2>
+      <p class="section-subtitle">Soluții complete de conținut vizual, de la tur virtual 3D la strategii de social media.</p>
     </div>
 
     <div class="services-grid">
@@ -188,7 +188,7 @@ include __DIR__ . '/../components/counter.php';
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Proiecte Speciale</span>
-      <h2 class="section-title">Proiecte Unice</h2>
+      <h2 class="section-title">Proiecte Unice Scanbox</h2>
       <p class="section-subtitle">Proiecte care depășesc limitele conținutului vizual tradițional.</p>
     </div>
 
@@ -340,7 +340,7 @@ include __DIR__ . '/../components/counter.php';
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 9L2 4"/></svg>
           </div>
           <div>
-            <span><?= htmlspecialchars(setting($settings ?? [], 'contact_email', 'office@scanbox.ro')) ?></span>
+            <span class="email-protect" data-u="office" data-d="scanbox.ro"></span>
             <small>E-mail</small>
           </div>
         </div>
@@ -451,7 +451,7 @@ include __DIR__ . '/../components/counter.php';
         </button>
         <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
           <div itemprop="text" style="padding: 0 24px 20px; color: #94A3B8; font-size: 15px; line-height: 1.8;">
-            Sediul Scanbox este în Str. Moroeni 60D, Sector 2, București, România. Compania oferă servicii în toată România și Republica Moldova. Program de lucru: Luni-Vineri, 09:00-18:00. Contact: office@scanbox.ro, telefon 0740 233 353.
+            Sediul Scanbox este în Str. Moroeni 60D, Sector 2, București, România. Compania oferă servicii în toată România și Republica Moldova. Program de lucru: Luni-Vineri, 09:00-18:00. Contact: <span class="email-protect" data-u="office" data-d="scanbox.ro"></span>, telefon 0740 233 353.
           </div>
         </div>
       </div>
